@@ -1,0 +1,467 @@
+<!--#############
+    Welcome Page
+    #############-->
+<div data-role="page" id="welcome">
+    <div data-role="content">
+        <center><h1>Lichen App</h1></center>
+        <br />
+        <ul data-role="listview" data-inset="true">
+            <li>
+                <a href='info' data-role="button" data-icon="info">Info</a>
+            </li>
+            <li>
+                <a href='guide' data-role="button" data-icon="star">Guide</a>
+            </li>
+            <li>
+                <a href='#list' data-role="button" data-icon="eye">Lichen IDs</a>
+            </li>
+            <li>
+                <a href='#record' id="record-button" data-role="button" data-icon="plus">Record</a>
+            </li>
+        </ul>
+        <br />
+        <br />
+        <center><h3>Logos go here</h3></center>
+    </div>
+</div>
+
+<!--#############
+    List Page
+    #############-->
+<div data-role="page" id="list" data-update-page-padding="false">
+    <div data-role="header" id="list-header" data-position="fixed" data-tap-toggle="false">
+        <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>
+            <a href='#' data-rel='back' data-role="button" data-icon="arrow-l" data-iconpos="notext">Back</a>
+        </div>
+        <h1 id='list_heading'></h1>
+    </div>
+    <div data-role="content" >
+        <div id="list-placeholder"></div>
+        <script id="list-template" type="text/x-handlebars-template">
+            <ul data-role="listview" id="species-list" data-split-icon="gear" data-split-theme="d">
+                {{#each species}}
+                <li data-corners="false" data-shadow="false" data-iconshadow="true"
+                    data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="c">
+                    <a href="#species" data-speciesid="{{id}}" class="species-list-button">
+                        <img src="{{profile_pic}}" />
+                        <p class="species-list-taxon">{{taxon}}</p>
+                    </a>
+                </li>
+                {{/each}}
+            </ul>
+        </script>
+
+        <script id="list-record-template" type="text/x-handlebars-template">
+            <ul data-role="listview" id="species-list" class="list-record" data-split-icon="gear" data-split-theme="d">
+                {{#each species}}
+                <li>
+                    <a href="#" class="species-list-checkbox-button">
+                        <label style="border-top-width: 0px;margin-top: 0px;border-bottom-width: 0px;margin-bottom: 0px;border-left-width: 0px;border-right-width: 0px;" data-corners="false">
+                            <input type="checkbox" name="checkbox-2b" id="checkbox-2b" data-theme="c" data-speciesid="{{id}}" {{checked}}/>
+                            <div>
+                                <img src="{{profile_pic}}"/>
+                                <p class="species-list-taxon">{{taxon}}</p>
+                            </div>
+                        </label>
+                    </a>
+                    <a href="#species" data-speciesid="{{id}}" class="species-list-button" data-icon="info">Species</a>
+                </li>
+                {{/each}}
+            </ul>
+        </script>
+    </div>
+</div>
+
+<div data-role="page" id="species">
+    <div data-role="header" data-position="fixed" data-tap-toggle="false">
+        <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>
+            <a href='#' data-rel='back' data-role="button" data-icon="arrow-l" data-iconpos="notext">Back</a>
+        </div>
+        <h1 id='species_heading'></h1>
+    </div>
+
+    <div data-role="content">
+        <div id="species-placeholder"></div>
+        <script id="species-template" type="text/x-handlebars-template">
+            <center>
+                <img src="{{profile_pic}}">
+
+                <ul data-role="listview" data-inset="true" style="max-width:800px;">
+                    <li>
+                        <div class="taxon">{{taxon}}</div>
+                    </li>
+                    <li>
+                        <p>{{description}}</p>
+                    </li>
+                </ul>
+            </center>
+        </script>
+    </div>
+</div>
+
+<!--#############
+    Record page
+    #############-->
+<div data-role="page" id="record">
+    <div data-role="header" data-position="fixed" data-tap-toggle="false">
+        <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>
+            <a href='#' data-rel='back' data-role="button" data-icon="arrow-l" data-iconpos="notext">Back</a>
+        </div>
+        <h1 id='record_heading'>Record</h1>
+        <div class='ui-btn-right' data-role='controlgroup' data-type='horizontal'>
+            <a href="#date" id="date-top-button" data-role="button"
+               data-icon="calendar" data-iconpos="notext" >Date</a>
+        </div>
+    </div>
+
+    <div data-role="content">
+        <div data-role="tabs">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#general" class="ui-btn-active">General</a></li>
+                    <li><a href="#trunks">Trunks</a></li>
+                    <li><a href="#branches">Branches</a></li>
+                </ul>
+            </div>
+            <div id="general">
+                <ul data-role="listview" data-inset="true">
+                    <li>
+                        <fieldset class="tree-type" data-role="controlgroup" data-type="horizontal">
+                            <legend>Tree type: </legend>
+                            <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2a" value="on" checked="checked">
+                            <label for="radio-choice-h-2a">Birch</label>
+                            <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2b" value="off">
+                            <label for="radio-choice-h-2b">Oak</label>
+                        </fieldset>
+                    </li>
+                    <li>
+                        <a href="#sref" id="sref-top-button" class="none" data-role="button"
+                           data-icon="arrow-r" data-iconpos="right">Location</a>
+                    </li>
+                    <li>
+                        <a href="#comment" id="comment-button" class="record-button" data-role="button"
+                           data-icon="arrow-r" data-iconpos="right"> Comment </a>
+                    </li>
+                </ul>
+            </div>
+            <script id="type-template" type="text/x-handlebars-template">
+                <ul data-role="listview" data-inset="true">
+                    {{#each this}}
+                    <li>
+                        <a href="#tree_part" class="record-button" data-type="{{type}}" data-part="{{part}}"
+                           data-role="button">
+                            <h1>{{title}}</h1>
+                            {{#if results}}
+                            <p>{{results}}%</p>
+                            {{/if}}
+                        </a>
+                    </li>
+                    {{/each}}
+                </ul>
+            </script>
+            <div id="trunks">
+                <div id="trunk-placeholder"></div>
+            </div>
+            <div id="branches">
+                <div id="branch-placeholder"></div>
+            </div>
+        </div>
+    </div>
+    <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+        <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>
+            <a href='#user' id="user-button" data-role="button"
+               data-icon="user" data-iconpos="left" data-theme="b">Saved</a>
+        </div>
+        <h1 id='record_footer'></h1>
+        <div class='ui-btn-right' data-role='controlgroup' data-type='horizontal'>
+            <button id="results-button" data-icon="check" data-iconpos="right" data-theme="b">Results</button>
+        </div>
+    </div>
+</div>
+<!-- Comment -->
+<div data-role="page" id="comment">
+    <div data-role="header" data-position="fixed"data-tap-toggle="false">
+        <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>
+            <a href='#' data-rel="back" data-role="button" data-iconpos="left"
+               data-icon="delete">Cancel</a>
+        </div>
+        <h1>Comment</h1>
+        <div class='ui-btn-right' data-role='controlgroup' data-type='horizontal'>
+            <a href='#' data-rel="back" data-role="button" data-iconpos="right"
+               data-icon="check" data-theme="b"
+               onclick="app.controller.record.saveInput('sample:comment')" >Save</a>
+        </div>
+    </div>
+    <div data-role="content" >
+        <textarea id="sample:comment" name="sample:comment" class=" "  cols="80" rows="4" ></textarea>
+    </div>
+    <div data-role="footer" data-position="fixed"data-tap-toggle="false"></div>
+</div>
+<!-- Date -->
+<div data-role="page" id="date">
+    <div data-role="header" data-position="fixed" data-tap-toggle="false">
+        <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>
+            <a href='#' data-rel="back" data-role="button" data-iconpos="left"
+               data-icon="delete">Cancel</a>
+        </div>
+        <h1>Date</h1>
+        <div class='ui-btn-right' data-role='controlgroup' data-type='horizontal'>
+            <a href='#' data-rel="back" data-role="button" data-iconpos="right"
+               onclick="app.controller.record.saveInput('sample:date')"
+               data-theme="b" data-icon="check" >Save</a>
+        </div>
+    </div>
+    <div data-role="content" >
+        <div class="info-message"><p>Please enter the date of the recording.</p></div>
+        <input id="sample:date" name="sample:date" type="date" required>
+    </div>
+</div>
+<!-- Tree Part -->
+<div data-role="page" id="tree_part">
+    <div data-role="header" data-position="fixed" data-tap-toggle="false">
+        <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>
+            <a href='#' data-rel='back' data-role="button" data-icon="arrow-l" data-iconpos="notext">Back</a>
+        </div>
+        <h1 id='tree_part_heading'></h1>
+        <div class="ui-btn-right" data-role="controlgroup" data-type="horizontal">
+        </div>
+    </div>
+
+    <div data-role="content">
+        <script id="part-template" type="text/x-handlebars-template">
+            {{#if trunk}}
+            <input type="text" id="circumference" placeholder="Trunk circumference in cm"/>
+            <br/>
+            {{/if}}
+
+            <ul data-role="listview" data-inset="true">
+                {{#each zone}}
+                <li>
+                    <a href="#list" class="zone" data-zone="{{zone}}" data-role="button">
+                        <h1>{{title}}</h1>
+                        {{#if results}}
+                        <p>{{results.tolerant}}</p>
+                        <p class="second">{{results.sensitive}}</p>
+                        {{/if}}
+                    </a>
+                </li>
+                {{/each}}
+            </ul>
+
+            {{#if trunk}}
+            </br>
+            <a href="#compass" data-role="button" data-theme="b">Compass</a>
+            {{/if}}
+        </script>
+        <div id="part-placeholder"></div>
+    </div>
+</div>
+<!-- Compass -->
+<div data-role="page" id="compass">
+    <div data-role="header" data-position="fixed" data-tap-toggle="false">
+        <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>
+            <a href='#' data-rel='back' data-role="button" data-icon="arrow-l" data-iconpos="notext">Back</a>
+        </div>
+        <h1 id='compass_heading'>Compass</h1>
+        <div class="ui-btn-right" data-role="controlgroup" data-type="horizontal">
+        </div>
+    </div>
+
+    <div data-role="content">
+        <div id="compassContainer">
+            <div id="windrose"></div>
+        </div>
+    </div>
+</div>
+
+<!--#############
+    Location Page
+    #############-->
+<div data-role="page" id="sref">
+    <div data-role="header" data-position="fixed" data-tap-toggle="false">
+        <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>
+            <a href='#' data-rel="back" data-role="button" data-iconpos="left"
+               data-icon="delete">Cancel</a>
+        </div>
+        <h1>Location</h1>
+        <div class='ui-btn-right' data-role='controlgroup' data-type='horizontal'>
+            <a href='#' data-rel="back" data-role="button" data-iconpos="right"
+               data-theme="b" data-icon="check" onclick="app.controller.sref.save()">Save</a>
+        </div>
+    </div>
+    <div data-role="content" >
+        <div data-role="tabs" id="sref-opts">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#gps" data-ajax="false" class="ui-btn-active">GPS</a></li>
+                    <li><a href="#map" data-ajax="false">Map</a></li>
+                    <li><a href="#gref" data-ajax="false">Grid Ref</a></li>
+                </ul>
+            </div>
+            <div id="gps" class="ui-body-d ui-content">
+                <script id="sref-gps" type="text/x-handlebars-template">
+                    <div class="info-message">
+                        <p>We will try to determine your location
+                            using the inbuilt phone GPS.</p><p> Please make sure you have turned the phone's
+                        geolocation on and are well away from large objects.<br/> e.g. <i>trees, buildings </i></p>
+                    </div>
+                    {{#if location}}
+                    <div class="success-message">
+                        <p> Grid Ref: {{location.gref}} <br/><br/>
+                            Lat: {{location.lat}} <br/>
+                            Lon: {{location.lon}} <br/><br/>
+                            Accuracy: {{location.acc}} meters
+                        </p>
+                    </div>
+                    <input type="button" id="gps-improve-button" value="Improve">
+                    {{else}}
+                    <input type="button" id="gps-start-button" value="Locate">
+                    {{/if}}
+                </script>
+                <script id="sref-gps-running" type="text/x-handlebars-template">
+                    <div class="info-message">
+                        <p>We are trying to get your location. This might take a
+                            few minutes...</p>
+                    </div>
+                    {{#if location}}
+                    <div class="success-message">
+                        <p> Grid Ref: {{location.gref}} <br/><br/>
+                            Lat: {{location.lat}} <br/>
+                            Lon: {{location.lon}} <br/><br/>
+                            Accuracy: {{location.acc}} meters
+                        </p>
+                    </div>
+                    {{/if}}
+
+                    <input type="button" id="gps-stop-button" value="Stop">
+                </script>
+                <script id="sref-gps-finished" type="text/x-handlebars-template">
+                    <div class="success-message">
+                        <p>Success!</p>
+                        <p> Grid Ref: {{location.gref}} <br/><br/>
+                            Lat: {{location.lat}} <br/>
+                            Lon: {{location.lon}} <br/><br/>
+                            Accuracy: {{location.acc}} meters
+                        </p>
+                    </div>
+                    <input type="button" id="gps-improve-button" value="Improve">
+                </script>
+                <div id="sref-gps-placeholder"></div>
+            </div>
+            <div id="map" class="ui-body-d ui-content">
+                <div class="info-message" id="map-message">
+                    <p>Please tap on the map to select your location. </p>
+                </div>
+                <div id="map-canvas" style="width:100%; height: 60vh;"></div>
+            </div>
+            <div id="gref" class="ui-body-d ui-content">
+                <div class="info-message" id="gref-message">
+                    <p>Please provide a GB Grid Reference.
+                        <br/> e.g. <i>"TQ 28170 77103"</i></p>
+                </div>
+                <input type="text" id="grid-ref" placeholder="Grid Reference"/>
+                <input type="text" id="location-name" placeholder="Location Name"/>
+                <input type="button" onclick="app.controller.sref.gridRefConvert()"
+                       value="Set"/>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--#############
+    User Page
+    #############-->
+<div data-role="page" id="user">
+    <div data-role="header" data-position="fixed" data-tap-toggle="false">
+        <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>
+            <a href='#' data-rel='back' data-role="button" data-icon="arrow-l" data-iconpos="notext">Back</a>
+        </div>
+        <h1 id='user_heading'></h1>
+        <div class='ui-btn-right' data-role='controlgroup' data-type='horizontal'>
+            <a href="#sref" data-role="button" data-icon="location"
+               data-theme="b" data-iconpos="notext">Set your location</a>
+        </div>
+    </div>
+
+    <div data-role="content">
+        <div id="user-placeholder"></div>
+        <script id="user-template" type="text/x-handlebars-template">
+            {{#if user.loggedout}}
+            <div class="warning-message">Looks like you have not Signed in yet. Please
+                do so, as otherwise all the records will be submitted anonymously.
+                <a href='login' data-role="button" data-icon="arrow-r" data-iconpos="user">Log in</a>
+            </div>
+            {{else}}
+            <a href='#' id="logout-button" data-role="button" data-icon="user"
+               data-theme="b" onclick="app.controller.login.logout()">Log out</a>
+            {{/if}}
+        </script>
+
+        <div id="saved-list-placeholder"></div>
+        <script id="saved-list-template" type="text/x-handlebars-template">
+            {{#if records.length}}
+            <div class="info-message">Saved recordings.</div>
+
+            <ul data-role="listview" id="saved-list" data-split-icon="gear"
+                data-inset="true" data-split-theme="d">
+                <li data-corners="false" data-shadow="false" data-iconshadow="true"
+                    data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="b">
+                    <a href="#" id="sendall-button" data-role="button" onclick="app.controller.user.sendAllSavedRecords()" >
+                        <center>Send All</center></a>
+                </li>
+                {{#each records}}
+                <li data-corners="false" data-shadow="false" data-iconshadow="true"
+                    data-wrapperels="div" data-icon="arrow-r" data-iconpos="right">
+                    <a href="#" onclick="app.controller.user.sendSavedRecord({{id}})">
+                        <!--<img src="" />-->
+                        <h3>{{common_name}}</h3>
+                        <p>{{date}}</p>
+                    </a>
+                    <a href="#" data-icon="delete" data-ajax="false"
+                       onclick="app.controller.user.deleteSavedRecord({{id}})">Send</a>
+                </li>
+                {{/each}}
+            </ul>
+            {{else}}
+            <div class="info-message">No saved recordings.</div>
+            {{/if}}
+        </script>
+    </div>
+</div>
+
+<!--#############
+    Results Page
+    #############-->
+<div data-role="page" id="results">
+    <div data-role="header" data-position="fixed" data-tap-toggle="false">
+        <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>
+        </div>
+        <h1 id='results_heading'>Results</h1>
+        <div class="ui-btn-right" data-role="controlgroup" data-type="horizontal">
+        </div>
+    </div>
+
+    <div data-role="content">
+        <div class="info-message">
+            <p>Below is your results graph.</p>
+            <p style="text-align: left">
+                Branch LIS: <em id="results-branch-lis">N/A</em>
+                <br/>Trunk LIS: <em id="results-trunk-lis">N/A</em>
+            </p>
+            <p style="text-align: left">
+                <br/>Branch NAQI: <em id="results-branch-naqi">N/A</em>
+                <br/>Trunk NAQI: <em id="results-trunk-naqi">N/A</em>
+            </p>
+        </div>
+        <div id="graph-container" class="graph-container"></div>
+    </div>
+    <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+        <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>
+            <button id="save-button" data-icon="plus" data-iconpos="left" data-theme="b">Save</button>
+        </div>
+        <h1 id='results_footer'></h1>
+        <div class='ui-btn-right' data-role='controlgroup' data-type='horizontal'>
+            <button id="send-button" data-icon="mail" data-iconpos="right" data-theme="b">Send</button>
+        </div>
+    </div>
+</div>
