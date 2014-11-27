@@ -11,7 +11,7 @@ modules for interacting with Indicia Biological Records database (default iRecor
 
 App configuration hosted in `THEME_SOURCE/scripts/conf.js`.
 
-Note: it should be done *before* building the code.
+**Note:** it should be done *before* building the code.
 
 ## Building
 
@@ -20,7 +20,7 @@ Note: it should be done *before* building the code.
 - `npm install`
 - `grunt`
 
-This will create a scripts folder with the javascript code (theme.js) used by the theme.
+This will create a `scripts` folder with the javascript code (`theme.js`) used by the theme.
 
 
 ## Bugs and feature requests
