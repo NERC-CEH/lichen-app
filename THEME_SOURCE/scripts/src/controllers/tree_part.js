@@ -99,8 +99,7 @@
 
                 //set button listener to refresh the page
                 tree_part_next.on('click', function(event){
-                    $.mobile.navigate.history.stack.pop(); //remove last entry
-                    $('body').pagecontainer( "change", "#record");
+                    history.back();
                 });
             }
         },

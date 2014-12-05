@@ -114,8 +114,7 @@
 
                 //set button listener to refresh the page
                 zone_next.on('click', function(event){
-                    $.mobile.navigate.history.stack.pop(); //remove last entry
-                    $('body').pagecontainer( "change", "#tree_part");
+                    history.back();
                 });
             }
         },
