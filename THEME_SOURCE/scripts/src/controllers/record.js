@@ -76,6 +76,8 @@
 
             this.saveDate();
 
+            app.controller.list.loadSpeciesData();
+
             //attach button listeners
             $('#results-button').on('click', function(){
                 var valid = app.controller.record.valid();

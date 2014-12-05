@@ -31,9 +31,14 @@
 <div data-role="page" id="list" data-update-page-padding="false">
     <div data-role="header" id="list-header" data-position="fixed" data-tap-toggle="false">
         <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>
-            <a href='#' data-rel='back' data-role="button" data-icon="arrow-l" data-iconpos="notext">Back</a>
+            <a href='#' data-rel='back' data-role="button" data-icon="arrow-l" >Back</a>
         </div>
         <h1 id='list_heading'></h1>
+        <div class='ui-btn-right' data-role='controlgroup' data-type='horizontal'>
+            <a href="#" id="zone-next-button" class="zone" style="dislay: none"
+               data-role="button" data-iconpos="right" data-theme="b"
+               data-icon="arrow-r">Zone</a>
+        </div>
     </div>
     <div data-role="content" >
         <div id="list-placeholder"></div>
@@ -75,7 +80,7 @@
 <div data-role="page" id="species">
     <div data-role="header" data-position="fixed" data-tap-toggle="false">
         <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>
-            <a href='#' data-rel='back' data-role="button" data-icon="arrow-l" data-iconpos="notext">Back</a>
+            <a href='#' data-rel='back' data-role="button" data-icon="arrow-l" >Back</a>
         </div>
         <h1 id='species_heading'></h1>
     </div>
@@ -105,15 +110,14 @@
 <div data-role="page" id="record">
     <div data-role="header" data-position="fixed" data-tap-toggle="false">
         <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>
-            <a href='#' data-rel='back' data-role="button" data-icon="arrow-l" data-iconpos="notext">Back</a>
+            <a href='#' data-rel='back' data-role="button" data-icon="arrow-l">Back</a>
         </div>
         <h1 id='record_heading'>Record</h1>
         <div class='ui-btn-right' data-role='controlgroup' data-type='horizontal'>
-            <a href="#date" id="date-top-button" data-role="button"
-               data-icon="calendar" data-iconpos="notext" >Date</a>
+            <a href="#date" id="date-top-button" data-role="button" data-iconpos="right"
+               data-icon="calendar">Date</a>
         </div>
     </div>
-
     <div data-role="content">
         <div data-role="tabs">
             <div data-role="navbar">
@@ -208,7 +212,7 @@
         <div class='ui-btn-right' data-role='controlgroup' data-type='horizontal'>
             <a href='#' data-rel="back" data-role="button" data-iconpos="right"
                onclick="app.controller.record.saveInput('sample:date')"
-               data-theme="b" data-icon="check" >Save</a>
+               data-theme="b" data-icon="check">Save</a>
         </div>
     </div>
     <div data-role="content" >
@@ -220,10 +224,13 @@
 <div data-role="page" id="tree_part">
     <div data-role="header" data-position="fixed" data-tap-toggle="false">
         <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>
-            <a href='#' data-rel='back' data-role="button" data-icon="arrow-l" data-iconpos="notext">Back</a>
+            <a href='#' data-rel='back' data-role="button" data-icon="arrow-l">Back</a>
         </div>
         <h1 id='tree_part_heading'></h1>
-        <div class="ui-btn-right" data-role="controlgroup" data-type="horizontal">
+        <div class='ui-btn-right' data-role='controlgroup' data-type='horizontal'>
+            <a href="#" id="tree-part-next-button" class="record-button"
+               data-role="button" data-iconpos="right" data-theme="b"
+               data-icon="arrow-r">Tree Part</a>
         </div>
     </div>
 
@@ -260,7 +267,7 @@
 <div data-role="page" id="compass">
     <div data-role="header" data-position="fixed" data-tap-toggle="false">
         <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>
-            <a href='#' data-rel='back' data-role="button" data-icon="arrow-l" data-iconpos="notext">Back</a>
+            <a href='#' data-rel='back' data-role="button" data-icon="arrow-l">Back</a>
         </div>
         <h1 id='compass_heading'>Compass</h1>
         <div class="ui-btn-right" data-role="controlgroup" data-type="horizontal">
@@ -374,12 +381,12 @@
 <div data-role="page" id="user">
     <div data-role="header" data-position="fixed" data-tap-toggle="false">
         <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>
-            <a href='#' data-rel='back' data-role="button" data-icon="arrow-l" data-iconpos="notext">Back</a>
+            <a href='#' data-rel='back' data-role="button" data-icon="arrow-l">Back</a>
         </div>
         <h1 id='user_heading'></h1>
         <div class='ui-btn-right' data-role='controlgroup' data-type='horizontal'>
             <a href="#sref" data-role="button" data-icon="location"
-               data-theme="b" data-iconpos="notext">Set your location</a>
+               data-theme="b" >Set your location</a>
         </div>
     </div>
 

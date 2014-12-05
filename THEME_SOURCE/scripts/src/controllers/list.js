@@ -19,27 +19,7 @@
         pagecreate : function(){
             _log('list: pagecreate.');
 
-            //load species data
-            if(!app.storage.is('species')) {
-                app.navigation.message('Loading IDs data for the first time..');
-                $.ajax({
-                    url: Drupal.settings.basePath + this.CONF.SPECIES_DATA_SRC,
-                    dataType: 'jsonp',
-                    async: false,
-                    success: function (species) {
-                        app.navigation.message('Done loading IDs data');
-                        app.data.species = species;
-
-                        //saves for quicker loading
-                        app.storage.set('species', species);
-
-                        //todo: what if data comes first before pagecontainershow
-                        app.controller.list.renderList();
-                    }
-                });
-            } else {
-                app.data.species = app.storage.get('species');
-            }
+            this.loadSpeciesData();
 
             //ask user to appcache
             //setTimeout(app.controller.list.download, 1000);
@@ -56,32 +36,28 @@
             var recording = app.storage.tmpGet(app.controller.record.RECORDING);
             if (recording){
                 var zone = app.storage.tmpGet(app.controller.record.ZONE);
-                switch (zone){
-                    case 'one':
-                        heading = 'Zone 1';
+                var type = app.storage.tmpGet(app.controller.record.TYPE);
+
+                var zones = app.controller.tree_part.zones[type];
+                var zoneId = null;
+                for (var i= 0; i < zones.length; i++){
+                    if(zones[i].zone == zone){
+                        heading = zones[i].title;
+                        zoneId = i;
                         break;
-                    case 'two':
-                        heading = 'Zone 2';
-                        break;
-                    case 'three':
-                        heading = 'Zone 3';
-                        break;
-                    case 'e':
-                        heading = 'East';
-                        break;
-                    case 's':
-                        heading = 'South';
-                        break;
-                    case 'w':
-                        heading = 'West';
-                        break;
-                    default:
-                        heading = 'ERROR';
+                    }
                 }
+
+                //set Next button
+                $('#zone-next-button').show();
+                app.controller.list.setNextButton(zones, zoneId);
+            } else {
+                //turn off Next button
+                $('#zone-next-button').hide();
             }
             $('#list_heading').text(heading);
 
-            this.renderList(function(){
+            app.controller.list.renderList(function(){
                 $('.species-list-button').each(function(index, value){
                     var id = $(this).data('speciesid');
                     $(this).on('click', function(){
@@ -107,6 +83,68 @@
                     });
                 }
             });
+        },
+
+        /**
+         * Sets the next part button.
+         * @param heading
+         * @param type
+         * @param part
+         */
+        setNextButton: function(zones, zoneId){
+            //set next button
+            var zone_next = $('#zone-next-button');
+
+            zone_next.unbind('click'); //remove previous handlers
+            //set the state update upon click
+            zone_next.on('click', function(){
+                //change the state of the recording: what tree and part of it we are now recording
+                var zone = $(this).data('zone');
+                app.storage.tmpSet(app.controller.record.ZONE, zone);
+            });
+
+            if (++zoneId < zones.length) {
+                zone_next.data('zone', zones[zoneId].zone);
+                zone_next.text(zones[zoneId].title);
+
+                //set button listener to refresh the page
+                zone_next.on('click', app.controller.list.pagecontainershow); //refresh page
+            } else {
+                zone_next.text('Finish');
+
+                //set button listener to refresh the page
+                zone_next.on('click', function(event){
+                    $.mobile.navigate.history.stack.pop(); //remove last entry
+                    $('body').pagecontainer( "change", "#tree_part");
+                });
+            }
+        },
+
+        /**
+         * Loads the species data to app.data.species.
+         */
+        loadSpeciesData: function(){
+            //load species data
+            if(!app.storage.is('species')) {
+                app.navigation.message('Loading IDs data for the first time..');
+                $.ajax({
+                    url: Drupal.settings.basePath + this.CONF.SPECIES_DATA_SRC,
+                    dataType: 'jsonp',
+                    async: false,
+                    success: function (species) {
+                        app.navigation.message('Done loading IDs data');
+                        app.data.species = species;
+
+                        //saves for quicker loading
+                        app.storage.set('species', species);
+
+                        //todo: what if data comes first before pagecontainershow
+                        app.controller.list.renderList();
+                    }
+                });
+            } else {
+                app.data.species = app.storage.get('species');
+            }
         },
 
         /**

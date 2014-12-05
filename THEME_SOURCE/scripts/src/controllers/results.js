@@ -27,7 +27,6 @@
         pagecontainershow: function ()
         {
             _log('results: pagecontaintershow', app.LOG_DEBUG);
-            app.data.species = app.storage.get('species');
             // draw the graph
             this.drawgraph();
 
@@ -307,7 +306,6 @@
                 .text("(LIS)");
 
             graph.append("text")
-
                 .attr("y", h + m[3])
                 .attr("x", w - m[0])
                 .attr("dy", "1em")

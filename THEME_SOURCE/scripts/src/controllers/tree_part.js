@@ -38,7 +38,8 @@
 
         pagecreate : function(){
             _log('tree_part: pagecreate.');
-                    },
+
+        },
 
         pagecontainershow: function() {
             _log('tree_part: pagecontainershow.');
@@ -49,17 +50,59 @@
             var part = app.storage.tmpGet(app.controller.record.PART);
             switch (type){
                 case 'trunk':
-                    heading = 'Trunk ' + part;
+                    heading = 'Trunk ';
                     break;
                 case 'branch':
-                    heading = 'Branch ' + part;
+                    heading = 'Branch ';
                     break;
                 default:
                     heading = 'ERROR';
             }
-            $('#tree_part_heading').text(heading);
+            $('#tree_part_heading').text(heading + part);
 
-            this.renderButtons(type);
+            app.controller.tree_part.setNextButton(heading, type, part);
+
+            //render Zone buttons
+            app.controller.tree_part.renderButtons(type);
+        },
+
+        /**
+         * Sets the next part button.
+         * @param heading
+         * @param type
+         * @param part
+         */
+        setNextButton: function(heading, type, part){
+            //set next button
+            var tree_part_next = $('#tree-part-next-button');
+
+            tree_part_next.unbind('click'); //remove previous handlers
+            //set the state update upon click
+            tree_part_next.on('click', function(){
+                //change the state of the recording: what tree and part of it we are now recording
+                var type = $(this).data('type');
+                var part = $(this).data('part');
+
+                app.storage.tmpSet(app.controller.record.TYPE, type);
+                app.storage.tmpSet(app.controller.record.PART, part);
+            });
+
+            if (part++ < app.controller.record.types[type].length) {
+                tree_part_next.data('type', type);
+                tree_part_next.data('part', part);
+                tree_part_next.text(heading + part);
+
+                //set button listener to refresh the page
+                tree_part_next.on('click', app.controller.tree_part.pagecontainershow); //refresh page
+            } else {
+                tree_part_next.text('Finish');
+
+                //set button listener to refresh the page
+                tree_part_next.on('click', function(event){
+                    $.mobile.navigate.history.stack.pop(); //remove last entry
+                    $('body').pagecontainer( "change", "#record");
+                });
+            }
         },
 
         /**
