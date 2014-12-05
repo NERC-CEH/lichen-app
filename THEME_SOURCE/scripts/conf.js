@@ -23,7 +23,7 @@ app.io.CONF.RECORD_URL = "mobile/submit";
 
 //controllers
 var c = app.controller;
-c.list.CONF.SPECIES_DATA_SRC = "serv/species";
+c.list.CONF.SPECIES_DATA_SRC = "http://192.171.199.230/lichen/serv/species";
 
 c.login.CONF.URL = Drupal.settings.basePath + "user/mobile/register";
 c.register.CONF.URL = c.login.CONF.URL;

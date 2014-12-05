@@ -128,7 +128,7 @@
             if(!app.storage.is('species')) {
                 app.navigation.message('Loading IDs data for the first time..');
                 $.ajax({
-                    url: Drupal.settings.basePath + this.CONF.SPECIES_DATA_SRC,
+                    url: this.CONF.SPECIES_DATA_SRC,
                     dataType: 'jsonp',
                     async: false,
                     success: function (species) {
@@ -195,17 +195,6 @@
                 if (index != -1){
                     species.splice(index);
                 }
-//            }
-//
-//            var type = app.storage.tmpGet(app.controller.record.TYPE);
-//            var part = app.storage.tmpGet(app.controller.record.PART);
-//            var elem = type + '_' + part;
-//
-//            var allSpecies = this.getAllSpecies();
-//            if (allSpecies[elem] == null){
-//                allSpecies[elem] = {};
-//            }
-//            allSpecies[elem][zone] = species;
 
             }
 
@@ -255,11 +244,10 @@
          *
          */
         renderList : function(callback){
-            var filters = {}; //this.getCurrentFilters();
             var sort = this.DEFAULT_SORT;
             var species = app.data.species;
             if (species != null){
-                this.renderListCore(species, sort, filters, callback);
+                this.renderListCore(species, sort, callback);
             }
         },
 
@@ -269,33 +257,37 @@
          * @param sort
          * @param filters
          */
-        renderListCore: function(list, sort, filters, callback){
-            //todo: might need to move UI functionality to higher grounds
-            $.mobile.loading("show");
-            //filter list
-            if(filters.length > 0){
-                var filter = filters.pop();
+        renderListCore: function(list, sort, callback){
+            //sort
+            var list_form_categorised = {
+                'bushy': [],
+                'leafy': [],
+                'granular': []
+            };
 
-                function onFilterSuccess (species){
-                    app.controller.list.renderListCore(species, sort, filters);
-                }
-
-                list = this.filterList(list, filter, onFilterSuccess);
-                return;
+            for ( var i = 0; i < list.length; i++){
+                list_form_categorised[list[i].growth_form].push(list[i]);
             }
 
-            function onSortSuccess(){
-                if (list != null){
-                    app.controller.list.printList(list);
-                    $.mobile.loading("hide");
-
-                    if (callback != null){
-                        callback();
-                    }
-                }
+            function sorter (a, b){
+                return a.taxon > b.taxon;
             }
 
-            list = this.sortList(list, sort, onSortSuccess);
+            list_form_categorised['bushy'].sort(sorter);
+            list_form_categorised['leafy'].sort(sorter);
+            list_form_categorised['granular'].sort(sorter);
+
+            var sorted_list  =  list_form_categorised['bushy'];
+            sorted_list = sorted_list.concat(list_form_categorised['leafy']);
+            sorted_list = sorted_list.concat(list_form_categorised['granular']);
+
+            if (list != null){
+                app.controller.list.printList(sorted_list);
+
+                if (callback != null){
+                    callback();
+                }
+            }
         },
 
         /**

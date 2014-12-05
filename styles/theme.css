@@ -296,3 +296,11 @@ path {
     fill: none;
     stroke: grey;
 }
+
+.leafy{
+    background-color: #EDEDED !important;
+}
+.granular{
+    background-color: #D7D7D7 !important;
+}
+
