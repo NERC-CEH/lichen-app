@@ -111,8 +111,6 @@
             //branches
             var template_data = this.types.branch;
 
-            this.addSelectedResults(template_data);
-
             var placeholder = $('#branch-placeholder');
             var compiled_template = Handlebars.compile(template);
 
@@ -121,8 +119,6 @@
 
             //trunks
             template_data = this.types.trunk;
-
-            this.addSelectedResults(template_data);
 
             placeholder = $('#trunk-placeholder');
             compiled_template = Handlebars.compile(template);
@@ -139,36 +135,65 @@
                 app.storage.tmpSet(app.controller.record.TYPE, type);
                 app.storage.tmpSet(app.controller.record.PART, part);
             });
+
+            //light up results
+            this.setResultsOnButtons(this.types.branch);
+            this.setResultsOnButtons(this.types.trunk);
+
         },
 
         /**
-         * Appends progress info to the template data.
+         * Sets up the results as circles to be shown on the buttons.
          */
-        addSelectedResults: function(data){
+        setResultsOnButtons: function(data){
             var species = app.controller.list.getAllSpecies();
 
-            for (var i = 0; i < data.length; i++){
-                var type = species[data[i].type];
-                var part = type[data[i].part];
+            //go through every part of the type
+            for (var tree_part = 0; tree_part < data.length; tree_part++){
+                var type = data[tree_part].type;
+                var speciesOfType = species[type];
+                var part = speciesOfType[data[tree_part].part];
 
                 if(part != null){
                     var keys = Object.keys(part);
                     var modified = 0;
 
-                    //cuunt how many have entries
-                    for (var j = 0; j < keys.length; j++){
-                        if (part[keys[j]].length > 0){
+                    //count how many have entries
+                    for (var speciesSelected = 0; speciesSelected < keys.length; speciesSelected++){
+                        if (part[keys[speciesSelected]].length > 0){
                             modified++;
                         }
                     }
 
-                    data[i].results = Math.round((modified / 3) * 100);
-                } else {
-                    //if part not recorded or empty (0%), don't display
-                    delete data[i].results;
+                    var button = $('a[data-type="' + type + '"][data-part="' + (tree_part + 1) + '"]');
+                    switch (modified){
+                        case 1:
+                            button.find('.first-progress').addClass('progress');
+                            button.find('.half-progress').removeClass('progress');
+                            button.find('.full-progress').removeClass('progress');
+                            break;
+                        case 2:
+                            button.find('.first-progress').addClass('progress');
+                            button.find('.half-progress').addClass('progress');
+                            button.find('.full-progress').removeClass('progress');
+                            break;
+                        case 3:
+                            button.find('.first-progress').addClass('progress');
+                            button.find('.half-progress').addClass('progress');
+                            button.find('.full-progress').addClass('progress');
+                            break;
+                        default:
+                            //no modified ones
+                            if (modified > 3){
+                                _log('record: Too many modified ones.', app.LOG_ERROR);
+                            }
+                            button.find('.first-progress').removeClass('progress');
+                            button.find('.half-progress').removeClass('progress');
+                            button.find('.full-progress').removeClass('progress');
+                    }
+
                 }
             }
-
         },
 
         /**

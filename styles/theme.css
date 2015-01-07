@@ -244,7 +244,7 @@ textarea{
 }
 
 p.second {
-    margin-right: 50px !important
+    margin-right: 10px !important;
 }
 
 p.tolerant,
@@ -389,4 +389,21 @@ label.granular {
 
 .species-list-taxon{
     white-space: normal !important;
+}
+
+/* Progress meter */
+
+.circle {
+    float: right;
+
+    width: 20px;
+    height: 20px;
+    background: lightgrey;
+    -moz-border-radius: 70px;
+    -webkit-border-radius: 70px;
+    border-radius: 70px;
+}
+
+.progress{
+    background: rgb(71, 71, 71);
 }

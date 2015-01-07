@@ -159,9 +159,9 @@
                         <a href="#tree_part" class="record-button" data-type="{{type}}" data-part="{{part}}"
                            data-role="button">
                             <h1>{{title}}</h1>
-                            {{#if results}}
-                            <p>{{results}}%</p>
-                            {{/if}}
+                            <div class="circle full-progress"></div>
+                            <div class="circle half-progress"></div>
+                            <div class="circle first-progress"></div>
                         </a>
                     </li>
                     {{/each}}
@@ -251,8 +251,8 @@
                     <a href="#list" class="zone" data-zone="{{zone}}" data-role="button">
                         <h1>{{title}}</h1>
                         {{#if results}}
-                        <p class="tolerant">{{results.tolerant}}</p>
-                        <p class="second sensitive">{{results.sensitive}}</p>
+                        <p class="tolerant"><b>Tolerant:</b> {{results.tolerant}}</p>
+                        <p class="second sensitive"><b>Sensitive:</b> {{results.sensitive}}</p>
                         {{/if}}
                     </a>
                 </li>
