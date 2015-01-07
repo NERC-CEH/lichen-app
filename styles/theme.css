@@ -220,8 +220,8 @@ textarea{
 #windrose{
     height: 70vh;
     background: url("../images/compass.png") center center no-repeat;
+    background-size: contain;
 }
-
 
 /* Buttons */
 .zone  > h1,
