@@ -96,8 +96,8 @@
                         <div class="taxon">{{taxon}}</div>
                     </li>
                     <li>
-                        <p><strong>Growth form</strong>: {{growth_form}}</p>
-                        <p><strong>Nitrogen</strong>: {{type}}</p>
+                        <p><strong>Growth form</strong>: <i>{{growth_form}}</i></p>
+                        <p><strong>Nitrogen</strong>: <i class="{{type}}">{{type}}</i></p>
                     </li>
                     <li>
                         <p>{{{description}}}</p>
@@ -251,8 +251,8 @@
                     <a href="#list" class="zone" data-zone="{{zone}}" data-role="button">
                         <h1>{{title}}</h1>
                         {{#if results}}
-                        <p>{{results.tolerant}}</p>
-                        <p class="second">{{results.sensitive}}</p>
+                        <p class="tolerant">{{results.tolerant}}</p>
+                        <p class="second sensitive">{{results.sensitive}}</p>
                         {{/if}}
                     </a>
                 </li>

@@ -238,16 +238,22 @@ textarea{
 }
 
 .zone > p{
-    background-color: lightblue;
     float: right;
     margin: 0 !important;
     padding: 5px;
 }
 
 p.second {
-    background-color: lightyellow;
-
     margin-right: 50px !important
+}
+
+p.tolerant,
+i.tolerant{
+    background-color: yellow;
+}
+p.sensitive,
+i.sensitive{
+    background-color: lightblue;
 }
 
 /* Tree type */
