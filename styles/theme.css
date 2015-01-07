@@ -145,12 +145,12 @@ body {
 }
 
 .ui-page {
-    background: #DCFFCA;
+    background: #F8FFF4;
 }
 
 .ui-header-fixed, 
 .ui-footer-fixed {
-    background-color: #A8BD9E !important;
+    background-color: #85BB6B !important;
 }
 
 .brc-approved-logo{
@@ -300,7 +300,87 @@ path {
 .leafy{
     background-color: #EDEDED !important;
 }
+
 .granular{
-    background-color: #D7D7D7 !important;
+    background-color: #DFDFDF !important;
 }
 
+/* Lichen key icons on list */
+li.list > .bushy,
+label.bushy {
+    background-position: right 60px center;
+    background-repeat: no-repeat;
+    background-size: 50px 30px;
+    background-image: url('../images/bushy.png');
+}
+li.list > .leafy,
+label.leafy {
+    background-position: right 50px center;
+    background-repeat: no-repeat;
+    background-size: 70px 20px;
+    background-image: url('../images/leafy.png');
+}
+li.list > .granular,
+label.granular {
+    background-position: right 50px center;
+    background-repeat: no-repeat;
+    background-size: 70px 20px;
+    background-image: url('../images/granular.png');
+}
+
+@media only screen and (max-width: 400px) {
+    li.list > .bushy {
+        background-position: 80% 90%;
+        background-repeat: no-repeat;
+        background-size: 50px 30px;
+        background-image: url('../images/bushy.png');
+    }
+    li.list > .leafy {
+        background-position: 80% 80%;
+        background-repeat: no-repeat;
+        background-size: 70px 20px;
+        background-image: url('../images/leafy.png');
+    }
+    li.list > .granular {
+        background-position: 80% 80%;
+        background-repeat: no-repeat;
+        background-size: 70px 20px;
+        background-image: url('../images/granular.png');
+    }
+
+    label.bushy {
+        min-height: 80px;
+        padding-top: 0;
+        padding-bottom: 0;
+        background-position: 90% 100%;
+        background-repeat: no-repeat;
+        background-size: 50px 30px;
+        background-image: url('../images/bushy.png');
+    }
+    label.leafy {
+        min-height: 80px;
+        padding-top: 0;
+        padding-bottom: 0;
+        background-position: 90% 90%;
+        background-repeat: no-repeat;
+        background-size: 70px 20px;
+        background-image: url('../images/leafy.png');
+    }
+    label.granular {
+        min-height: 80px;
+        padding-top: 0;
+        padding-bottom: 0;
+        background-position: 90% 90%;
+        background-repeat: no-repeat;
+        background-size: 70px 20px;
+        background-image: url('../images/granular.png');
+    }
+
+    .species-list-checkbox-button{
+        padding: .1em 0em;
+    }
+}
+
+.species-list-taxon{
+    white-space: normal !important;
+}

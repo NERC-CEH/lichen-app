@@ -45,7 +45,7 @@
         <script id="list-template" type="text/x-handlebars-template">
             <ul data-role="listview" id="species-list" data-split-icon="gear" data-split-theme="d">
                 {{#each species}}
-                <li data-corners="false" data-shadow="false" data-iconshadow="true"
+                <li class="list" data-corners="false" data-shadow="false" data-iconshadow="true"
                     data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="c">
                     <a href="#species" data-speciesid="{{id}}" class="species-list-button {{growth_form}}">
                         <img src="{{profile_pic}}" />
@@ -59,7 +59,7 @@
         <script id="list-record-template" type="text/x-handlebars-template">
             <ul data-role="listview" id="species-list" class="list-record" data-split-icon="gear" data-split-theme="d">
                 {{#each species}}
-                <li>
+                <li class="list-record">
                     <a href="#" class="species-list-checkbox-button {{growth_form}}">
                         <label class="{{growth_form}}" style="border-top-width: 0px;margin-top: 0px;border-bottom-width: 0px;margin-bottom: 0px;border-left-width: 0px;border-right-width: 0px;" data-corners="false">
                             <input type="checkbox" name="checkbox-2b" id="checkbox-2b" data-theme="c" data-speciesid="{{id}}" {{checked}}/>
