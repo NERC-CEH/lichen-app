@@ -4,8 +4,8 @@
  * could also be done on the website UI.
  */
 
-app.version = '0'; //application controllers version
-app.name = '';
+app.controller.version = '0'; //application controllers version
+app.name = 'app';
 
 //app wide settings
 app.CONF.NAME = "lichen_app";
