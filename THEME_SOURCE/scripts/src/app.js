@@ -3,7 +3,7 @@
  */
 
 (function($){
-    //When leaving a page with a form
+    checkForUpdates();
     app.initialise();
 
     //Fixing back buttons for Mac 7.* History bug.
@@ -61,3 +61,25 @@
     };
 
 }(app.$ || jQuery));
+
+/**
+ * Updates the app's data if the source code version mismatches the
+ * stored data's version.
+ */
+function checkForUpdates(){
+    var CONTROLLER_VERSION_KEY = 'controllerVersion';
+    var controllerVersion = app.settings(CONTROLLER_VERSION_KEY);
+    //set for the first time
+    if (controllerVersion == null){
+        app.settings(CONTROLLER_VERSION_KEY, app.controller.version);
+        return;
+    }
+
+    if (controllerVersion != app.controller.version){
+        _log('app: controller version differs. Updating the app.', app.LOG_INFO);
+
+        app.storage.remove('species');
+        app.storage.tmpClear();
+    }
+
+}
