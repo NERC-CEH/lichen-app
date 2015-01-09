@@ -71,15 +71,18 @@ function checkForUpdates(){
     var controllerVersion = app.settings(CONTROLLER_VERSION_KEY);
     //set for the first time
     if (controllerVersion == null){
-        app.settings(CONTROLLER_VERSION_KEY, app.controller.version);
+        app.settings(CONTROLLER_VERSION_KEY, app.CONF.VERSION);
         return;
     }
 
-    if (controllerVersion != app.controller.version){
+    if (controllerVersion != app.CONF.VERSION){
         _log('app: controller version differs. Updating the app.', app.LOG_INFO);
 
+        //TODO: add try catch for any problems
         app.storage.remove('species');
         app.storage.tmpClear();
-    }
 
+        //set new version
+        app.settings(CONTROLLER_VERSION_KEY, app.CONF.VERSION);
+    }
 }

@@ -4,11 +4,10 @@
  * could also be done on the website UI.
  */
 
-app.controller.version = '0'; //application controllers version
-app.name = 'app';
-
 //app wide settings
-app.CONF.NAME = "lichen_app";
+app.CONF.VERSION = '0'; //grunt replaced. Application (controllers and data) version
+app.CONF.NAME = 'app'; //grunt replaced.
+
 app.CONF.HOME = "lichen/";
 app.CONF.LOG = app.LOG_DEBUG;
 
