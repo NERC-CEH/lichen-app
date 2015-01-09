@@ -11,7 +11,7 @@
 
             var compiled_template = Handlebars.compile(template);
 
-            placeholder.html(compiled_template({'version' : app.controller.version}));
+            placeholder.html(compiled_template({'version' : app.CONF.VERSION}));
             placeholder.trigger('create');
         }
 
