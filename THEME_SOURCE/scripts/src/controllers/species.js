@@ -1,25 +1,25 @@
-(function($){
-    app.controller = app.controller || {};
-    app.controller.species = {
-        pagecreate: function(){
+(function ($) {
+  app.controller = app.controller || {};
+  app.controller.species = {
+    pagecreate: function () {
 
-        },
+    },
 
-        pagecontainershow: function(event, ui){
-            _log('species: pagecontainershow.');
-            //var id = app.controller.list.getCurrentSpecies().id;
+    pagecontainershow: function (event, ui) {
+      _log('species: pagecontainershow.');
+      //var id = app.controller.list.getCurrentSpecies().id;
 
-            var template = $('#species-template').html();
-            var placeholder = $('#species-placeholder');
+      var template = $('#species-template').html();
+      var placeholder = $('#species-placeholder');
 
-            var compiled_template = Handlebars.compile(template);
+      var compiled_template = Handlebars.compile(template);
 
-            var species = app.controller.list.getCurrentSpecies();
+      var species = app.controller.list.getCurrentSpecies();
 
-            placeholder.html(compiled_template(species));
-            placeholder.trigger('create');
-        }
+      placeholder.html(compiled_template(species));
+      placeholder.trigger('create');
+    }
 
-    };
+  };
 }(jQuery));
 
