@@ -1,13 +1,12 @@
 module.exports = function(grunt) {
     var DEST = '../../scripts/';
     var APP_NAME = 'app.js';
-    var LIB_NAME = 'libs.js';
+    var LIBS_NAME = 'libs.js';
     
     var  banner = "/*!\n" +
         " * <%= pkg.title %>. \n" +
         " * Version: <%= pkg.version %>\n" +
-        " *\n" +
-        " * <%= pkg.homepage %>\n" +
+        " *\n" +        " * <%= pkg.homepage %>\n" +
         " *\n" +
         " * Author <%= grunt.template.today('yyyy') %> <%= pkg.author.name %>\n" +
         " * Released under the <%= _.pluck(pkg.licenses, 'type').join(', ') %> license.\n" +
@@ -46,7 +45,7 @@ module.exports = function(grunt) {
                 // the location of the resulting JS file
                 dest: DEST + APP_NAME
             },
-	    lib: {
+	    libs: {
                 // the files to concatenate
                 src: [
 		    'src/lib/IndexedDBShim/IndexedDBShim.js',
@@ -60,7 +59,7 @@ module.exports = function(grunt) {
 		    'src/lib/morel/morel.js'
                 ],
                 // the location of the resulting JS file
-                dest: DEST + LIB_NAME
+                dest: DEST + LIBS_NAME
             }
         },
         replace: {
@@ -74,6 +73,15 @@ module.exports = function(grunt) {
                     {
                         from: /(app\.CONF\.NAME =) \'app\';/g,  // string replacement
                         to: '$1 \'<%= pkg.name %>\';'
+                    }
+                ]
+            },
+	    libs: {
+                src: ['../../scripts/' + LIBS_NAME],
+                overwrite: true, // Fix klass.js no ';' problem
+                replacements: [{
+                    from: '\/\/ PhotoSwipe',
+                    to: ';\/\/ photoswipe'
                     }
                 ]
             }
