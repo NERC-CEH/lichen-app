@@ -1,7 +1,8 @@
 module.exports = function(grunt) {
     var DEST = '../../scripts/';
-    var NAME = 'theme.js';
-
+    var APP_NAME = 'app.js';
+    var LIB_NAME = 'libs.js';
+    
     var  banner = "/*!\n" +
         " * <%= pkg.title %>. \n" +
         " * Version: <%= pkg.version %>\n" +
@@ -14,7 +15,15 @@ module.exports = function(grunt) {
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
-        karma: {
+	bower: {
+	    install:{
+		options:{
+		    targetDir: 'src/lib',
+		    cleanBowerDir: true
+		}
+	    }
+	},
+	karma: {
             unit: {
                 configFile: 'test/karma.conf.js'
             }
@@ -24,23 +33,38 @@ module.exports = function(grunt) {
                 // define a string to put between each file in the concatenated output
                 separator: '\n\n'
             },
-            dist: {
+            app: {
                 options: {
                     banner: banner
                 },
                 // the files to concatenate
                 src: [
-                    'src/controllers/*.js',
-                    'conf.js',
-                    'src/app.js'
+                    'src/app/*.js',
+                    'conf.js'
                 ],
                 // the location of the resulting JS file
-                dest: DEST + NAME
+                dest: DEST + APP_NAME
+            },
+	    lib: {
+                // the files to concatenate
+                src: [
+		    'src/lib/IndexedDBShim/IndexedDBShim.js',
+		    'src/lib/latlon/vector3d.js',
+		    'src/lib/latlon/geo.js',
+		    'src/lib/latlon/latlon-ellipsoid.js',
+		    'src/lib/latlon/osgridref.js',
+		    'src/lib/handlebars/handlebars.js',
+		    'src/lib/photoswipe/lib/klass.min.js',
+		    'src/lib/photoswipe/code.photoswipe.jquery-3.0.5.min.js',
+		    'src/lib/morel/morel.js'
+                ],
+                // the location of the resulting JS file
+                dest: DEST + LIB_NAME
             }
         },
         replace: {
             main: {
-                src: ['../../scripts/theme.js'],
+                src: ['../../scripts/app.js'],
                 overwrite: true, // overwrite matched source files
                 replacements: [{
                         from: /(app\.CONF.VERSION =) \'0\';/g, // string replacement
@@ -60,17 +84,19 @@ module.exports = function(grunt) {
                     banner: banner
                 },
                 files: {
-                   '../../scripts/theme.min.js' : ['<%= concat.dist.dest %>']
+                   '../../scripts/app.min.js' : ['<%= concat.app.dest %>']
                 }
             }
         }
     });
-
+    
+    grunt.loadNpmTasks('grunt-bower-task');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-text-replace');
     grunt.loadNpmTasks('grunt-contrib-uglify');
 
     // the default task can be run just by typing "grunt" on the command line
-    grunt.registerTask('default', ['concat', 'replace', 'uglify']);
-
+    grunt.registerTask('init', ['bower']);
+    grunt.registerTask('build', ['concat', 'replace', 'uglify']);
+    grunt.registerTask('default', ['init', 'build']);
 };

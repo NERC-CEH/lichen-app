@@ -11,8 +11,8 @@ regions[content] = 'Content'
 
 ;Include
 ;js
-scripts[] = scripts/theme.js
-scripts[] = scripts/d3/d3.js
+scripts[] = scripts/libs.js
+scripts[] = scripts/app.js
 
 
 ;Settings
