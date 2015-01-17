@@ -3,8 +3,10 @@ source and controllers, as well as styling and configuration.
 
 ## Requirements
 
-This theme uses Drupal 7 [iform_mobile_auth](http://indicia-docs.readthedocs.org/en/latest/site-building/iform/modules/mobile-auth/)
-module for interacting with Indicia Biological Records database (default iRecord).
+ - This theme uses Drupal 7 [`iform_mobile_auth`](http://indicia-docs.readthedocs.org/en/latest/site-building/iform/modules/mobile-auth/) module for interacting with Indicia Biological Records database (default iRecord).
+ - `jQuery Mobile` script should be loaded after the theme scripts.
+ - Data sources (`species`) endpoints should be configured (read Configuration). Data examples are provided in `THEME_SOURCE/data` folder.
+
 
 ## Configuration
 
@@ -37,4 +39,4 @@ Have a bug or a feature request? search for existing and closed issues. [Please 
 
 ## Copyright and license
 
-Code and documentation copyright 2014 CEH. Code released under the [GNU GPL v3 license](LICENSE).
+Code and documentation copyright 2015 CEH. Code released under the [GNU GPL v3 license](LICENSE).
