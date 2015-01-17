@@ -10,7 +10,7 @@ app.CONF.NAME = 'app'; //grunt replaced.
 
 app.CONF.HOME = "lichen/";
 app.CONF.LOG = app.LOG_DEBUG;
-app.CONF.APPCACHE_LOADER_URL = 'sites/all/modules/iform_mobile/php/offline.php';
+app.CONF.APPCACHE_LOADER_URL = Drupal.settings.themePath + 'scripts/offline.php';
 
 
 app.auth.CONF.APPNAME = "lichen";
