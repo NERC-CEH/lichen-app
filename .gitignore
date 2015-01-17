@@ -1,2 +1,3 @@
 THEME_SOURCE/scripts/node_packages/
-THEME_SOURCE/scripts/src/lib/ 
+THEME_SOURCE/scripts/src/lib/
+.DS_Store
