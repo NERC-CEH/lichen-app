@@ -3,9 +3,8 @@ source and controllers, as well as styling and configuration.
 
 ## Requirements
 
-This theme uses Drupal 7 [iform_mobile](http://indicia-docs.readthedocs.org/en/latest/site-building/iform/modules/mobile/) 
-& [iform_mobile_auth](http://indicia-docs.readthedocs.org/en/latest/site-building/iform/modules/mobile-auth/)
-modules for interacting with Indicia Biological Records database (default iRecord).
+This theme uses Drupal 7 [iform_mobile_auth](http://indicia-docs.readthedocs.org/en/latest/site-building/iform/modules/mobile-auth/)
+module for interacting with Indicia Biological Records database (default iRecord).
 
 ## Configuration
 
