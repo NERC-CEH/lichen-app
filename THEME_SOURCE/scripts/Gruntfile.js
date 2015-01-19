@@ -48,6 +48,7 @@ module.exports = function(grunt) {
 	    libs: {
                 // the files to concatenate
                 src: [
+		    'src/lib/d3/d3.js',
 		    'src/lib/IndexedDBShim/IndexedDBShim.js',
 		    'src/lib/latlon/vector3d.js',
 		    'src/lib/latlon/geo.js',
@@ -79,10 +80,15 @@ module.exports = function(grunt) {
 	    libs: {
                 src: ['../../scripts/' + LIBS_NAME],
                 overwrite: true, // Fix klass.js no ';' problem
-                replacements: [{
-                    from: '\/\/ PhotoSwipe',
+		replacements: [{
+		    from: '\/\/ PhotoSwipe',
                     to: ';\/\/ photoswipe'
-                    }
+				},
+		    {
+			from: 'use strict',
+			to: ''
+		     }
+
                 ]
             }
         },

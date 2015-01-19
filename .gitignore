@@ -2,3 +2,7 @@ THEME_SOURCE/scripts/node_packages/
 THEME_SOURCE/scripts/src/lib/
 THEME_SOURCE/scripts/bower_components
 .DS_Store
+node_modules
+scripts/app.js
+scripts/app.min.js
+scripts/libs.js
