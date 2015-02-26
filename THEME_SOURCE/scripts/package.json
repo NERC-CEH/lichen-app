@@ -11,10 +11,10 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/NERC-CEH/drupal-mobile-themes"
+		"url": "https://github.com/NERC-CEH/mobile_lichen"
 	},
 	"bugs": {
-		"url": "https://github.com/NERC-CEH/drupal-mobile-themes/issues"
+		"url": "https://github.com/NERC-CEH/mobile_lichen/issues"
 	},
 	"licenses": [
 		{
@@ -27,10 +27,10 @@
 	},
 	"dependencies": {},
 	"devDependencies": {
-	        "bower": "1.3.12",
-	        "grunt": "0.4.4",
-                "grunt-bower-task": "0.4.0",
-	        "grunt-contrib-compress": "0.7.0",
+	    "bower": "1.3.12",
+	    "grunt": "0.4.4",
+        "grunt-bower-task": "0.4.0",
+	    "grunt-contrib-compress": "0.7.0",
 		"grunt-contrib-concat": "0.3.0",
 		"grunt-contrib-uglify": "0.4.0",
 		"grunt-contrib-watch": "0.6.0",
@@ -38,6 +38,7 @@
     },
 	"keywords": [
 		"mobile",
+		"lichen",
 		"indicia",
 		"iRecord"
 	]
