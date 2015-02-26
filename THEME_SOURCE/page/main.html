@@ -139,15 +139,15 @@
                         </fieldset>
                     </li>
                     <li>
-                        <a href="#sref" id="sref-top-button" class="none" data-role="button"
-                           data-icon="arrow-r" data-iconpos="right">Location</a>
+                      <a href="#date" data-role="button" data-iconpos="right" data-icon="calendar">Date</a>
                     </li>
                     <li>
-                        <a href="#date" data-role="button" data-iconpos="right" data-icon="arrow-r">Date</a>
+                        <a href="#sref" id="sref-top-button" class="none" data-role="button"
+                           data-icon="location" data-iconpos="right">Location</a>
                     </li>
                     <li>
                         <a href="#comment" id="comment-button" class="record-button" data-role="button"
-                           data-icon="arrow-r" data-iconpos="right"> Comment </a>
+                           data-icon="comment" data-iconpos="right"> Comment </a>
                     </li>
                 </ul>
             </div>
@@ -200,6 +200,7 @@
         </div>
     </div>
     <div data-role="content" >
+      <div class="info-message">Please add any extra info about your survey. </div>
         <textarea id="sample:comment" name="sample:comment" class=" "  cols="80" rows="4" ></textarea>
     </div>
     <div data-role="footer" data-position="fixed"data-tap-toggle="false"></div>
@@ -452,18 +453,47 @@
     </div>
 
     <div data-role="content">
-        <div class="info-message">
+        <div class="success-message">
             <p>Below is your results graph.</p>
             <p style="text-align: left">
-                Branch LIS: <em id="results-branch-lis">N/A</em>
-                <br/>Trunk LIS: <em id="results-trunk-lis">N/A</em>
+              Trunk lichen indicator score (LIS): <em id="results-trunk-lis">N/A</em><br/>
+              Branch lichen indicator score (LIS): <em id="results-branch-lis">N/A</em>
             </p>
             <p style="text-align: left">
-                <br/>Branch NAQI: <em id="results-branch-naqi">N/A</em>
-                <br/>Trunk NAQI: <em id="results-trunk-naqi">N/A</em>
+              <br/>Trunk  Nitrogen Air Quality Index (NAQI): <em id="results-trunk-naqi">N/A</em>
+              <br/>Branch Nitrogen Air Quality Index (NAQI): <em id="results-branch-naqi">N/A</em>
             </p>
         </div>
-        <div id="graph-container" class="graph-container"></div>
+      <ul data-role="listview" data-inset="true">
+        <li>
+          <div id="graph-container" class="graph-container"></div>
+        </li>
+        <li>
+          <p>
+            The lines on this graph indicate mean values for the LIS taken from a UK wide survey.
+          </p>
+        </li>
+        <li>
+          <p>
+            The LIS NAQI relationship for branches should be read from the broken line and for trunks
+            from the solid line.
+          </p>
+        </li>
+        <li>
+          <p>Sites that are designated as:</p>
+          <p>
+            <b>'Clean'</b> have an NAQI between 0 and 0.5,<br/>
+            <b>'At risk'</b> NAQI > 0.5-0.85,<br/>
+            <b>'Nitrogen polluted'</b> NAQI 0.86-1.25,<br/>
+            <b>'Very Nitrogen polluted'</b> NAQI > 1.25.<br/>
+          </p>
+        </li>
+        <li>
+          <p>
+            See Guide for further guidance.
+          </p>
+        </li>
+      </ul>
     </div>
     <div data-role="footer" data-position="fixed" data-tap-toggle="false">
         <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>

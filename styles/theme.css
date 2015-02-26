@@ -144,13 +144,18 @@ body {
 	background: #E3FFD4;
 }
 
+.ui-title {
+    color: white;
+    text-shadow: none !important;
+}
+
 .ui-page {
     background: #F3F5ED;
 }
 
 .ui-header-fixed, 
 .ui-footer-fixed {
-    background-color: #85BB6B !important;
+    background-color: #6A754F !important;
 }
 
 .brc-approved-logo{
@@ -257,6 +262,10 @@ i.sensitive{
 }
 
 /* Tree type */
+fieldset.tree-type {
+    width: 120%;
+    margin: 0;
+}
 .tree-type > div > legend {
     float: left;
     padding-right: 30px;
