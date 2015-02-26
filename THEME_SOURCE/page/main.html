@@ -93,7 +93,7 @@
 
                 <ul data-role="listview" data-inset="true" style="max-width:800px;">
                     <li>
-                        <div class="taxon">{{taxon}}</div>
+                        <div class="taxon"><i>{{taxon}}</i></div>
                     </li>
                     <li>
                         <p><strong>Growth form</strong>: <i>{{growth_form}}</i></p>
@@ -103,6 +103,13 @@
                         <p>{{{description}}}</p>
                     </li>
                 </ul>
+              {{#if confusion}}
+                <ul data-role="listview" data-inset="true" style="max-width:800px;">
+                  <li>
+                    <p><strong>Confusion:</strong><br/>{{{confusion}}}</p>
+                  </li>
+                </ul>
+              {{/if}}
             </center>
         </script>
     </div>
@@ -168,9 +175,15 @@
             </script>
             <div id="trunks">
                 <div id="trunk-placeholder"></div>
+                <div class="info-message">
+                  <p>To see your results after you have finished recording Trunks and/or Branches please click the results button (bottom right).</p>
+                </div>
             </div>
             <div id="branches">
                 <div id="branch-placeholder"></div>
+                <div class="info-message">
+                  <p>To see your results after you have finished recording Branches and/or Trunks please click the results button (bottom right).</p>
+                </div>
             </div>
         </div>
     </div>
@@ -200,7 +213,7 @@
         </div>
     </div>
     <div data-role="content" >
-      <div class="info-message">Please add any extra info about your survey. </div>
+      <div class="info-message"><p>Please add any extra info about your survey. </p></div>
         <textarea id="sample:comment" name="sample:comment" class=" "  cols="80" rows="4" ></textarea>
     </div>
     <div data-role="footer" data-position="fixed"data-tap-toggle="false"></div>
@@ -241,7 +254,7 @@
     <div data-role="content">
         <script id="part-template" type="text/x-handlebars-template">
             {{#if trunk}}
-            <input type="text" id="circumference" placeholder="Trunk circumference in cm"/>
+            <input type="number" id="circumference" placeholder="Trunk circumference in cm" required/>
             <br/>
             {{/if}}
 
@@ -398,8 +411,9 @@
         <div id="user-placeholder"></div>
         <script id="user-template" type="text/x-handlebars-template">
             {{#if user.loggedout}}
-            <div class="warning-message">Looks like you have not Signed in yet. Please
-                do so, as otherwise all the records will be submitted anonymously.
+            <div class="warning-message">
+              <p>Looks like you have not Signed in yet. Please
+                do so, as otherwise all the records will be submitted anonymously.</p>
                 <a href='login' data-role="button" data-icon="arrow-r" data-iconpos="user">Log in</a>
             </div>
             {{else}}
@@ -411,7 +425,7 @@
         <div id="saved-list-placeholder"></div>
         <script id="saved-list-template" type="text/x-handlebars-template">
             {{#if records.length}}
-            <div class="info-message">Saved recordings.</div>
+            <div class="info-message"><p>Saved recordings.</p></div>
 
             <ul data-role="listview" id="saved-list" data-split-icon="gear"
                 data-inset="true" data-split-theme="d">
@@ -434,7 +448,7 @@
                 {{/each}}
             </ul>
             {{else}}
-            <div class="info-message">No saved recordings.</div>
+            <div class="info-message"><p>No saved recordings.</p></div>
             {{/if}}
         </script>
     </div>
@@ -453,45 +467,40 @@
     </div>
 
     <div data-role="content">
-        <div class="success-message">
-            <p>Below is your results graph.</p>
-            <p style="text-align: left">
-              Trunk lichen indicator score (LIS): <em id="results-trunk-lis">N/A</em><br/>
-              Branch lichen indicator score (LIS): <em id="results-branch-lis">N/A</em>
-            </p>
-            <p style="text-align: left">
-              <br/>Trunk  Nitrogen Air Quality Index (NAQI): <em id="results-trunk-naqi">N/A</em>
-              <br/>Branch Nitrogen Air Quality Index (NAQI): <em id="results-branch-naqi">N/A</em>
-            </p>
-        </div>
       <ul data-role="listview" data-inset="true">
         <li>
-          <div id="graph-container" class="graph-container"></div>
-        </li>
-        <li>
+          <strong>Trunk</strong>
           <p>
-            The lines on this graph indicate mean values for the LIS taken from a UK wide survey.
+            Lichen indicator score (LIS): <em id="results-trunk-lis">N/A</em><br/>
+            Nitrogen Air Quality Index (NAQI):</strong> <em id="results-trunk-naqi">N/A</em><br/>
           </p>
         </li>
         <li>
+          <strong>Branch</strong>
+          <p>
+            Nitrogen Air Quality Index (NAQI): <em id="results-branch-naqi">N/A</em> <br/>
+            Branch lichen indicator score (LIS): <em id="results-branch-lis">N/A</em>
+          </p>
+        </li>
+        <li>
+          <div id="graph-container" class="graph-container"></div>
+          <p>
+            The lines on this graph indicate mean values for the LIS taken from a UK wide survey.
+          </p>
           <p>
             The LIS NAQI relationship for branches should be read from the broken line and for trunks
             from the solid line.
           </p>
         </li>
         <li>
-          <p>Sites that are designated as:</p>
+          <strong>Sites that are designated as:</strong>
           <p>
             <b>'Clean'</b> have an NAQI between 0 and 0.5,<br/>
             <b>'At risk'</b> NAQI > 0.5-0.85,<br/>
             <b>'Nitrogen polluted'</b> NAQI 0.86-1.25,<br/>
             <b>'Very Nitrogen polluted'</b> NAQI > 1.25.<br/>
           </p>
-        </li>
-        <li>
-          <p>
-            See Guide for further guidance.
-          </p>
+          <p> See Guide for further guidance.</p>
         </li>
       </ul>
     </div>

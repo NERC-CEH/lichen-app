@@ -27,10 +27,11 @@ body {
     border-color: rgba(202, 202, 202, 0.28);
 }
 
+.ui-listview > li p,
 .list-normal-white-space > li > p,
 ul[data-role="listview"] > li > strong,
 ul[data-role="listview"] > li > p {
-    white-space: normal;
+    white-space: normal !important;
 }
 
 /* Buttons in fixed footer control group are shifted down. This lifts them up.*/
@@ -254,11 +255,11 @@ p.second {
 
 p.tolerant,
 i.tolerant{
-    background-color: yellow;
+    background-color: #eee5cd;
 }
 p.sensitive,
 i.sensitive{
-    background-color: lightblue;
+    background-color: #cadfed;
 }
 
 /* Tree type */
@@ -317,7 +318,7 @@ path {
 }
 
 .granular{
-    background-color: #DFDFDF !important;
+    /*background-color: #DFDFDF !important;*/
 }
 
 /* Lichen key icons on list */
@@ -416,3 +417,36 @@ label.granular {
 .progress{
     background: rgb(71, 71, 71);
 }
+
+/* Active JQM Tabs stop displaying some styles. This is a fix to restore them. */
+.ui-tabs-active > a {
+    background-color: #3388CC !important;
+    color: #ffffff !important;
+    text-shadow: none !important;
+}
+
+/* Guide images */
+.naqi-image {
+    width: 100%;
+    height: 30vh;
+    background: url("../images/naqi.jpg") 50% 50% no-repeat;
+    background-size: contain;
+}
+
+.trunk-image {
+    width: 100%;
+    height: 20vh;
+    background: url("../images/trunk.jpg") 50% 50% no-repeat;
+    background-size: contain;
+}
+
+.branch-image {
+    width: 100%;
+    height: 20vh;
+    background: url("../images/branch.jpg") 50% 50% no-repeat;
+    background-size: contain;
+}
+
+ul.circle {list-style-type: circle !important;}
+ul.square {list-style-type: square !important;}
+ol.lower-alpha {list-style: lower-alpha !important;}
