@@ -3,25 +3,29 @@
     #############-->
 <div data-role="page" id="welcome">
     <div data-role="content">
-        <center><h1>Lichen App</h1></center>
-        <br />
-        <ul data-role="listview" data-inset="true">
-            <li>
-                <a href='info' data-role="button" data-icon="info">Info</a>
-            </li>
-            <li>
-                <a href='guide' data-role="button" data-icon="star">User Guide</a>
-            </li>
-            <li>
-                <a href='#list' data-role="button" data-icon="eye">Lichen ID Guide</a>
-            </li>
-            <li>
-                <a href='#record' id="record-button" data-role="button" data-icon="plus">Record</a>
-            </li>
+      <div id="app-logo"></div>
+      <ul data-role="listview" data-inset="true">
+          <li>
+              <a href='info' data-role="button" data-icon="info">Info</a>
+          </li>
+          <li>
+            <a href='chemical-testing' data-role="button" data-icon="alert">How to do chemical tests</a>
+          </li>
+          <li>
+              <a href='guide' data-role="button" data-icon="star">User Guide</a>
+          </li>
+        </ul>
+       <ul data-role="listview" data-inset="true">
+          <li>
+              <a href='#list' data-role="button" data-icon="eye">Lichen ID Guide</a>
+          </li>
+          <li>
+              <a href='#record' id="record-button" data-role="button" data-icon="plus">Record</a>
+          </li>
         </ul>
         <br />
         <br />
-        <center><h3>Logos go here</h3></center>
+        <div id="sponsor-logo"></div>
     </div>
 </div>
 
@@ -90,7 +94,6 @@
         <script id="species-template" type="text/x-handlebars-template">
             <center>
                 <img src="{{profile_pic}}">
-
                 <ul data-role="listview" data-inset="true" style="max-width:800px;">
                     <li>
                         <div class="taxon"><i>{{taxon}}</i></div>
@@ -106,7 +109,7 @@
               {{#if confusion}}
                 <ul data-role="listview" data-inset="true" style="max-width:800px;">
                   <li style="padding:.7em 1em">
-                    <p><strong>Confusion:</strong><br/>{{{confusion}}}</p>
+                    <p><strong>Easily confused with: </strong><br/>{{{confusion}}}</p>
                     {{#if confusion_images}}
                       <p><button id="confusion-species-button">Confusion species Images</button></p>
                       <p id="confusion-species-gallery" style="display:none">
