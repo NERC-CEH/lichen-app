@@ -16,8 +16,19 @@
 
       var species = app.controller.list.getCurrentSpecies();
 
+      if (species.confusion_image_1.length || species.confusion_image_2.length){
+        species.confusion_images = [
+          species.confusion_image_1,
+          species.confusion_image_2
+        ];
+      }
+
       placeholder.html(compiled_template(species));
       placeholder.trigger('create');
+
+      $('#confusion-species-button').on('click', function () {
+        $('#confusion-species-gallery').toggle();
+      });
     }
 
   };

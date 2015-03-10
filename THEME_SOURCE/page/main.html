@@ -105,8 +105,16 @@
                 </ul>
               {{#if confusion}}
                 <ul data-role="listview" data-inset="true" style="max-width:800px;">
-                  <li>
+                  <li style="padding:.7em 1em">
                     <p><strong>Confusion:</strong><br/>{{{confusion}}}</p>
+                    {{#if confusion_images}}
+                      <p><button id="confusion-species-button">Show Images</button></p>
+                      <p id="confusion-species-gallery" style="display:none">
+                        {{#each confusion_images}}
+                        <img src="{{this}}"><br/>
+                        {{/each}}
+                      </p>
+                    {{/if}}
                   </li>
                 </ul>
               {{/if}}
@@ -136,6 +144,9 @@
             </div>
             <div id="general">
                 <ul data-role="listview" data-inset="true">
+                    <li>
+                      <input type="email" name="email" placeholder="Please enter your Email (optional)"/>
+                    </li>
                     <li>
                         <fieldset class="tree-type" data-role="controlgroup" data-type="horizontal">
                             <legend>Tree type: </legend>
@@ -504,6 +515,7 @@
         </li>
       </ul>
     </div>
+
     <div data-role="footer" data-position="fixed" data-tap-toggle="false">
         <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>
             <button id="save-button" data-icon="plus" data-iconpos="left" data-theme="b">Save</button>
