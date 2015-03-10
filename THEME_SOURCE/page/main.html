@@ -153,9 +153,9 @@
                     <li>
                         <fieldset class="tree-type" data-role="controlgroup" data-type="horizontal">
                             <legend>Tree type: </legend>
-                            <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2a" value="on" checked="checked">
+                            <input type="radio" name="tree-type" id="radio-choice-h-2a" value="birch" checked="checked">
                             <label for="radio-choice-h-2a">Birch</label>
-                            <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2b" value="off">
+                            <input type="radio" name="tree-type" id="radio-choice-h-2b" value="oak">
                             <label for="radio-choice-h-2b">Oak</label>
                         </fieldset>
                     </li>
@@ -414,28 +414,10 @@
         <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>
             <a href='#' data-rel='back' data-role="button" data-icon="arrow-l">Back</a>
         </div>
-        <h1 id='user_heading'></h1>
-        <div class='ui-btn-right' data-role='controlgroup' data-type='horizontal'>
-            <a href="#sref" data-role="button" data-icon="location"
-               data-theme="b" >Set your location</a>
-        </div>
+        <h1 id='user_heading'>My Account</h1>
     </div>
 
     <div data-role="content">
-        <div id="user-placeholder"></div>
-        <script id="user-template" type="text/x-handlebars-template">
-            {{#if user.loggedout}}
-            <div class="warning-message">
-              <p>Looks like you have not Signed in yet. Please
-                do so, as otherwise all the records will be submitted anonymously.</p>
-                <a href='login' data-role="button" data-icon="arrow-r" data-iconpos="user">Log in</a>
-            </div>
-            {{else}}
-            <a href='#' id="logout-button" data-role="button" data-icon="user"
-               data-theme="b" onclick="app.controller.login.logout()">Log out</a>
-            {{/if}}
-        </script>
-
         <div id="saved-list-placeholder"></div>
         <script id="saved-list-template" type="text/x-handlebars-template">
             {{#if records.length}}
@@ -451,13 +433,12 @@
                 {{#each records}}
                 <li data-corners="false" data-shadow="false" data-iconshadow="true"
                     data-wrapperels="div" data-icon="arrow-r" data-iconpos="right">
-                    <a href="#" onclick="app.controller.user.sendSavedRecord({{id}})">
-                        <!--<img src="" />-->
+                    <a href="#" class='send-button' data-id="{{id}})">
                         <h3>{{common_name}}</h3>
                         <p>{{date}}</p>
                     </a>
-                    <a href="#" data-icon="delete" data-ajax="false"
-                       onclick="app.controller.user.deleteSavedRecord({{id}})">Send</a>
+                    <a href="#" class='delete-button' data-icon="delete" data-ajax="false"
+                       data-id="{{id}})">Delete</a>
                 </li>
                 {{/each}}
             </ul>

@@ -18,6 +18,12 @@ app.auth.CONF.APPSECRET = "mylichen";
 app.auth.CONF.WEBSITE_ID = 0;
 app.auth.CONF.SURVEY_ID = 0;
 
+jQuery.extend(app.record.inputs.KEYS, {
+  TREE_TYPE: 'sample:tree_type',
+  CIRCUMFERENCE: 'sample:circumference',
+  EMAIL: 'sample:email'
+});
+
 app.geoloc.CONF.GPS_ACCURACY_LIMIT = 10; //meters
 
 app.io.CONF.RECORD_URL = "mobile/submit";
@@ -30,3 +36,4 @@ c.login.CONF.URL = Drupal.settings.basePath + "user/mobile/register";
 c.register.CONF.URL = c.login.CONF.URL;
 
 window.onerror = _onerror;
+

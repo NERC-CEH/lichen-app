@@ -1,12 +1,19 @@
 (function ($) {
   app.controller = app.controller || {};
   app.controller.record = {
-
     RECORDING: 'recording',
     SPECIES: 'species',
     TYPE: 'recording_type',
     PART: 'recording_part',
     ZONE: 'recording_zone',
+
+    CONF: {
+      USER_EMAIL_STORAGE_KEY: 'userEmail',
+      TREE_TYPES: {
+        BIRCH: 'birch',
+        OAK: 'oak'
+      }
+    },
 
     types: {
       'branch': [
@@ -75,13 +82,24 @@
 
       app.controller.list.loadSpeciesData();
 
-      //attach button listeners
-      $('#results-button').on('click', function () {
+      //attach element listeners
+      this.$resultsButton = $('#results-button');
+      this.$resultsButton.on('click', function () {
         var valid = app.controller.record.valid();
         if (valid == app.TRUE) {
           $("body").pagecontainer("change", "#results");
         }
       });
+
+      this.$treeTypeInputs = $('input[name=tree-type]');
+      this.$treeTypeInputs.on('change', function(){
+        if($(this).is(':checked')) {
+          // code here
+          app.record.inputs.set(app.record.inputs.KEYS.TREE_TYPE, $(this).val());
+        }
+      });
+
+      this.$emailInput = $('input[name=email]');
     },
 
     pagecontainershow: function (e, data) {
@@ -90,8 +108,8 @@
       var prevPageId = data.prevPage[0].id;
       switch (prevPageId) {
         case 'welcome':
-//                    //prepare a new record
-//                    this.clear();
+          //prepare a new record
+          this.clear();
           break;
         default:
       }
@@ -199,7 +217,21 @@
     clear: function () {
       _log('record: clearing recording page.');
       app.record.clear();
+
+      //if exists append previous email
+      var email = app.settings(this.CONF.USER_EMAIL_STORAGE_KEY);
+      if (email){
+        this.$emailInput.val(email);
+      }
+
+      //add date
       this.saveDate();
+
+      //save tree type to default
+      app.record.inputs.set(
+        app.record.inputs.KEYS.TREE_TYPE,
+        this.CONF.TREE_TYPES.BIRCH
+      );
     },
 
 
@@ -224,14 +256,6 @@
         app.navigation.message(message);
         return app.FALSE;
       }
-
-      //validate gps
-      var gps = app.geoloc.valid();
-      if (gps == app.ERROR || gps == app.FALSE) {
-        //redirect to gps page
-        $('body').pagecontainer("change", "#sref");
-        return app.FALSE;
-      }
       return app.TRUE;
     },
 
@@ -241,19 +265,22 @@
     validateInputs: function () {
       var invalids = [];
       //core inputs
-      if (!app.record.inputs.is('sample:date')) {
+      if (!app.record.inputs.is(app.record.inputs.KEYS.DATE)) {
         invalids.push({
           'id': 'sample:date',
           'name': 'Date'
         })
       }
-      if (!app.record.inputs.is('sample:entered_sref')) {
+      if (!app.record.inputs.is(app.record.inputs.KEYS.SREF)) {
         invalids.push({
           'id': 'sample:entered_sref',
           'name': 'Location'
         })
       }
       //NAQI data
+      //species
+
+      //circum
 
       return invalids;
     },
