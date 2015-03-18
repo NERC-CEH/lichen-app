@@ -26,23 +26,28 @@
 
       //compile results
       var species = app.controller.list.getAllSpecies();
+
       //lis
       var trunk_lis = this.calculateLIS(species['trunk']);
       var branch_lis = this.calculateLIS(species['branch']);
+
       //naqi
-      var trunk_naqi = (3.6666666 - trunk_lis) / 3.33333;
-      var branch_naqi = (3.4 - branch_lis) / 4;
-
-      _log('results: trunk_lis: ' + trunk_lis + ', branch_lis: ' + branch_lis);
-
-      $('#results-branch-lis').text(branch_lis.toFixed(1));
-      $('#results-trunk-lis').text(trunk_lis.toFixed(1));
-      $('#results-branch-naqi').text(branch_naqi.toFixed(1));
-      $('#results-trunk-naqi').text(trunk_naqi.toFixed(1));
-
-      //add results to the graph
-      this.add_trunk_results(trunk_lis);
-      this.add_branch_results(branch_lis);
+      if (trunk_lis){
+        var trunk_naqi = (3.6666666 - trunk_lis) / 3.33333;
+        this.add_trunk_results(trunk_lis);
+        $('#results-trunk-lis').text(trunk_lis.toFixed(1));
+        $('#results-trunk-naqi').text(trunk_naqi.toFixed(1));
+        $('#results-trunk').show();
+        _log('results: trunk_lis: ' + trunk_lis);
+      }
+      if (branch_lis) {
+        var branch_naqi = (3.4 - branch_lis) / 4;
+        this.add_branch_results(branch_lis);
+        $('#results-branch-lis').text(branch_lis.toFixed(1));
+        $('#results-branch-naqi').text(branch_naqi.toFixed(1));
+        $('#results-branch').show();
+        _log('results: branch_lis: ' + branch_lis);
+      }
     },
 
     /**
@@ -53,6 +58,12 @@
       var sensitive = 0;
 
       var parts = Object.keys(type);
+
+      //return early
+      if (parts.length === 0){
+        return null;
+      }
+
       for (var i = 0; i < parts.length; i++) {
         var zones = Object.keys(type[parts[i]]);
         for (var j = 0; j < zones.length; j++) {
