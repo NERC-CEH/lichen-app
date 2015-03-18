@@ -11,21 +11,22 @@
         var records = [];
         var savedRecordIDs = Object.keys(savedRecords);
         for (var i = 0, length = savedRecordIDs.length; i < length; i++) {
-          var record = {};
-          record.id = savedRecordIDs[i];
+          var record = savedRecords[savedRecordIDs[i]];
+          var recordInfo = {};
+          recordInfo.id = record.id;
 
-          var inputKeys = Object.keys(savedRecords[record.id]);
+          var inputKeys = Object.keys(record);
           for (var j = 0, inputsLength = inputKeys.length; j < inputsLength; j++) {
-            var value = savedRecords[record.id][inputKeys[j]];
+            var value = record[inputKeys[j]];
             var name = value.name;
             switch (name) {
               case app.record.inputs.KEYS.DATE:
-                record.date = value.value;
+                recordInfo.date = value.value;
                 break;
               default:
             }
           }
-          records.push(record);
+          records.push(recordInfo);
         }
 
         var placeholder = $('#saved-list-placeholder');
