@@ -338,6 +338,29 @@
         .attr("transform", function (d) {
           return "translate(" + p.x + "," + p.y + ")";
         });
+
+      var legend = graph.append('g')
+        .attr('class', 'results-legend')
+        .attr("transform", "translate(0," + h + ")")
+        .attr('width', 100)
+        .attr('height', 100);
+
+      legend.append('path')
+        .attr('class', 'trunk')
+        .attr('d', 'M1,55 L40, 55');
+
+      legend.append('text')
+        .text('Trunk')
+        .attr('transform', 'translate(45, 60)');
+
+      legend.append('path')
+        .attr('class', 'branch')
+        .style("stroke-dasharray", ("5, 5, 5, 9, 9"))
+        .attr("d", 'm110,55 L145,55');
+
+      legend.append('text')
+        .text('Branch')
+        .attr("transform", "translate(150,60)");
     },
 
     /**
