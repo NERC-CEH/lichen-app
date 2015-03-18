@@ -50,7 +50,8 @@
       var location = {
         'lat': this.latitude,
         'lon': this.longitude,
-        'acc': this.accuracy
+        'acc': this.accuracy,
+        'name': this.name
       };
       app.settings('location', location);
       app.geoloc.set(location.lat, location.lon, location.acc);
@@ -69,11 +70,13 @@
     latitude: null,
     longitude: null,
     accuracy: -1,
+    name: '',
 
-    set: function (lat, lon, acc) {
+    set: function (lat, lon, acc, name) {
       this.latitude = lat;
       this.longitude = lon;
       this.accuracy = acc;
+      this.name = name || '';
     },
 
     get: function () {
@@ -388,10 +391,12 @@
 
     gridRefConvert: function () {
       var val = $('#grid-ref').val();
+      var name = $('#location-name').val();
+
       var gridref = OsGridRef.parse(val);
       if (!isNaN(gridref.easting) && !isNaN(gridref.northing)) {
         var latLon = OsGridRef.osGridToLatLon(gridref);
-        this.set(latLon.lat, latLon.lon, 1);
+        this.set(latLon.lat, latLon.lon, 1, name);
 
         var gref = val.toUpperCase();
         var message = $('#gref-message');
@@ -399,7 +404,6 @@
         message.addClass('success-message');
         message.empty().append('<p>Grid Ref:<br/>' + gref + '</p>');
       }
-      //todo: set accuracy dependant on Gref
     }
   };
 

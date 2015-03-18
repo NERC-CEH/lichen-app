@@ -295,6 +295,7 @@
       app.record.inputs.set(app.record.inputs.KEYS.SREF, sref);
       app.record.inputs.set(app.record.inputs.KEYS.SREF_SYSTEM, sref_system);
       app.record.inputs.set(app.record.inputs.KEYS.SREF_ACCURACY, sref_accuracy);
+      app.record.inputs.set(app.record.inputs.KEYS.SREF_NAME, location.name);
     },
 
     /**

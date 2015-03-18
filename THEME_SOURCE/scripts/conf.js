@@ -21,7 +21,8 @@ app.auth.CONF.SURVEY_ID = 0;
 jQuery.extend(app.record.inputs.KEYS, {
   TREE_TYPE: 'sample:tree_type',
   CIRCUMFERENCE: 'sample:circumference',
-  EMAIL: 'sample:email'
+  EMAIL: 'sample:email',
+  SREF_NAME: 'sample:locationName'
 });
 
 app.geoloc.CONF.GPS_ACCURACY_LIMIT = 10; //meters
