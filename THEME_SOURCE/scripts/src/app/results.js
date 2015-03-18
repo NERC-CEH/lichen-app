@@ -1,4 +1,5 @@
 (function ($) {
+  window.app = window.app || {};
   app.controller = app.controller || {};
   app.controller.results = {
 
@@ -12,7 +13,7 @@
     branch_result: null,
 
     pagecreate: function () {
-      _log('results: pagecreate', app.LOG_DEBUG);
+      _log('results: pagecreate', morel.LOG_DEBUG);
 
       //attach button listeners
       $('#send-button').on('click', app.controller.results.send);
@@ -20,7 +21,7 @@
     },
 
     pagecontainershow: function () {
-      _log('results: pagecontaintershow', app.LOG_DEBUG);
+      _log('results: pagecontaintershow', morel.LOG_DEBUG);
       // draw the graph
       this.drawgraph();
 
@@ -88,7 +89,7 @@
         } else if (lichen_type == 'tolerant') {
           return species_categorized['tolerant'].length > 0;
         } else {
-          _log('results: no such lichen type.', app.LOG_ERROR);
+          _log('results: no such lichen type.', morel.LOG_ERROR);
         }
       }
 
@@ -105,14 +106,14 @@
         $.mobile.loading('hide');
         var message = "<center><h3>Sorry!</h3></center>" +
           "<p>" + err.message + "</p>";
-        app.navigation.message(message);
+        app.message(message);
       }
 
       if (navigator.onLine) {
         //online
         function onOnlineSuccess() {
           $.mobile.loading('hide');
-          app.navigation.message("<center><h2>Submitted successfully. " +
+          app.message("<center><h2>Submitted successfully. " +
           "</br>Thank You!</h2></center>");
 
           //clean the old record
@@ -146,7 +147,7 @@
 
       function onSuccess() {
         $.mobile.loading('hide');
-        app.navigation.message("<center><h2>Record saved.</h2></center>");
+        app.message("<center><h2>Record saved.</h2></center>");
 
         //clean the old record
         app.controller.record.clear();
@@ -161,7 +162,7 @@
         var message = "<center><h3>Sorry!</h3></center>" +
           "<p>" + err.message + "</p>";
         //xhr.status+ " " + thrownError + "</p><p>" + xhr.responseText +
-        app.navigation.message(message)
+        app.message(message)
         $("body").pagecontainer("change", "#welcome");
       }
 
@@ -174,20 +175,20 @@
     processOnline: function (callback, onError) {
       _log("record: process online.");
       var onSaveSuccess = function (savedRecordId) {
-        app.record.clear();
+        morel.record.clear();
 
         function onSendSuccess() {
-          app.record.db.remove(savedRecordId);
+          morel.record.db.remove(savedRecordId);
           if (callback != null) {
             callback();
           }
         }
 
         //#2 Post the record
-        app.io.sendSavedRecord(savedRecordId, onSendSuccess, onError);
+        morel.io.sendSavedRecord(savedRecordId, onSendSuccess, onError);
       };
       //#1 Save the record first
-      app.record.db.save(onSaveSuccess, onError);
+      morel.record.db.save(null, onSaveSuccess, onError);
     },
 
     /**
@@ -196,13 +197,13 @@
     processOffline: function (callback, onError) {
       _log("record: process offline");
       var onSaveSuccess = function (savedRecordId) {
-        app.record.clear();
+        morel.record.clear();
 
         if (callback != null) {
           callback();
         }
       };
-      app.record.db.save(onSaveSuccess, onError);
+      morel.record.db.save(null, onSaveSuccess, onError);
     },
 
     drawgraph: function () {

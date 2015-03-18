@@ -2,13 +2,151 @@
  * App wide logic.
  */
 
+app.data = app.data || {};
+
+app.initialize = function () {
+  /**
+   * Events from.
+   * http://jqmtricks.wordpress.com/2014/03/26/jquery-mobile-page-events/
+   */
+  var pageEvents = [
+    'pagebeforecreate',
+    'pagecreate',
+    'pagecontainerbeforechange ',
+    'pagecontainerbeforetransition',
+    'pagecontainerbeforehide',
+    'pagecontainerhide',
+    'pagecontainerbeforeshow',
+    'pagecontainershow',
+    'pagecontainertransition',
+    'pagecontainerchange',
+    'pagecontainerchangefailed',
+    'pagecontainerbeforeload',
+    'pagecontainerload',
+    'pagecontainerloadfailed',
+    'pagecontainerremove'
+  ];
+
+  /**
+   * Init function.
+   */
+  (function () {
+    _log('APP: initialised.', morel.LOG_INFO);
+
+    //todo: needs tidying up
+    //Bind JQM page events with page controller handlers
+    jQuery(document).on(pageEvents.join(' '), function (e, data) {
+      var event = e.type;
+      var id = null;
+      switch (event) {
+        case 'pagecreate':
+        case 'pagecontainerbeforechange':
+          id = data.prevPage != null ? data.prevPage[0].id : e.target.id;
+          break;
+
+        case 'pagebeforecreate':
+          id = e.target.id;
+          break;
+
+        case 'pagecontainershow':
+        case 'pagecontainerbeforetransition':
+        case 'pagecontainerbeforehide':
+        case 'pagecontainerbeforeshow':
+        case 'pagecontainertransition':
+        case 'pagecontainerhide':
+        case 'pagecontainerchangefailed':
+        case 'pagecontainerchange':
+          id = data.toPage[0].id;
+          break;
+
+        case 'pagecontainerbeforeload':
+        case 'pagecontainerload':
+        case 'pagecontainerloadfailed':
+        default:
+          break;
+      }
+
+      //  var ihd = e.target.id || data.toPage[0].id;
+      var controller = app.controller[id];
+
+      //if page has controller and it has an event handler
+      if (controller && controller[event]) {
+        controller[event](e, data);
+      }
+    });
+  })();
+};
+
+/**
+ * Displays a self disappearing lightweight message.
+ *
+ * @param text
+ * @param time 0 if no hiding, null gives default 3000ms delay
+ */
+app.message = function (text, time) {
+  if (!text) {
+    _log('NAVIGATION: no text provided to message.', morel.LOG_ERROR);
+    return;
+  }
+
+  var messageId = 'morelLoaderMessage';
+
+  text = '<div id="' + messageId + '">' + text + '</div>';
+
+  $.mobile.loading('show', {
+    theme: "b",
+    textVisible: true,
+    textonly: true,
+    html: text
+  });
+
+  //trigger JQM beauty
+  $('#' + messageId).trigger('create');
+
+  if (time !== 0) {
+    setTimeout(function () {
+      $.mobile.loading('hide');
+    }, time || 3000);
+  }
+};
+
+/**
+ * Generic function to detect the browser
+ *
+ * Chrome has to have and ID of both Chrome and Safari therefore
+ * Safari has to have an ID of only Safari and not Chrome
+ */
+app.browserDetect = function (browser) {
+  "use strict";
+  if (browser === 'Chrome' || browser === 'Safari') {
+    var isChrome = navigator.userAgent.indexOf('Chrome') > -1,
+      isSafari = navigator.userAgent.indexOf("Safari") > -1,
+      isMobile = navigator.userAgent.indexOf("Mobile") > -1;
+
+    if (isSafari) {
+      if (browser === 'Chrome') {
+        //Chrome
+        return isChrome;
+      }
+      //Safari
+      return !isChrome;
+    }
+    if (isMobile) {
+      //Safari homescreen Agent has only 'Mobile'
+      return true;
+    }
+    return false;
+  }
+  return (navigator.userAgent.indexOf(browser) > -1);
+};
+
 (function($){
     checkForUpdates();
-    app.initialise();
+    app.initialize();
 
     //Fixing back buttons for Mac 7.* History bug.
     $(document).on('pagecreate', function(event, ui) {
-        if (browserDetect('Safari')){
+        if (app.browserDetect('Safari')){
             if (jQuery.mobile.activePage != null) {
                 var nextPageid = event.target.id;
                 var currentPageURL = null;
@@ -37,7 +175,7 @@
      * @param recordKey
      * @returns {FormData}
      */
-    app.record.db.getData =  function(recordKey, callback, onError){
+    morel.record.db.getData =  function(recordKey, callback, onError){
         function onSuccess(savedRecord) {
             var data = new FormData();
 
@@ -68,21 +206,21 @@
  */
 function checkForUpdates(){
     var CONTROLLER_VERSION_KEY = 'controllerVersion';
-    var controllerVersion = app.settings(CONTROLLER_VERSION_KEY);
+    var controllerVersion = morel.settings(CONTROLLER_VERSION_KEY);
     //set for the first time
     if (controllerVersion == null){
-        app.settings(CONTROLLER_VERSION_KEY, app.CONF.VERSION);
+        morel.settings(CONTROLLER_VERSION_KEY, app.CONF.VERSION);
         return;
     }
 
     if (controllerVersion != app.CONF.VERSION){
-        _log('app: controller version differs. Updating the app.', app.LOG_INFO);
+        _log('app: controller version differs. Updating the app.', morel.LOG_INFO);
 
         //TODO: add try catch for any problems
-        app.storage.remove('species');
-        app.storage.tmpClear();
+        morel.storage.remove('species');
+        morel.storage.tmpClear();
 
         //set new version
-        app.settings(CONTROLLER_VERSION_KEY, app.CONF.VERSION);
+        morel.settings(CONTROLLER_VERSION_KEY, app.CONF.VERSION);
     }
 }

@@ -1,4 +1,5 @@
 (function ($) {
+  window.app = window.app || {};
   app.controller = app.controller || {};
   app.controller.tree_part = {
 
@@ -43,8 +44,8 @@
 
       //set header
       var heading = "";
-      var type = app.storage.tmpGet(app.controller.record.TYPE);
-      var part = app.storage.tmpGet(app.controller.record.PART);
+      var type = morel.storage.tmpGet(app.controller.record.TYPE);
+      var part = morel.storage.tmpGet(app.controller.record.PART);
       switch (type) {
         case 'trunk':
           heading = 'Trunk ';
@@ -80,8 +81,8 @@
         var type = $(this).data('type');
         var part = $(this).data('part');
 
-        app.storage.tmpSet(app.controller.record.TYPE, type);
-        app.storage.tmpSet(app.controller.record.PART, part);
+        morel.storage.tmpSet(app.controller.record.TYPE, type);
+        morel.storage.tmpSet(app.controller.record.PART, part);
       });
 
       if (part++ < app.controller.record.types[type].length) {
@@ -111,7 +112,7 @@
         'zone': this.zones[type]
       };
 
-      template_data['trunk'] = app.storage.tmpGet(app.controller.record.TYPE) == 'trunk';
+      template_data['trunk'] = morel.storage.tmpGet(app.controller.record.TYPE) == 'trunk';
 
       var placeholder = $('#part-placeholder');
       var compiled_template = Handlebars.compile(template);
@@ -125,7 +126,7 @@
       $('a.zone').on('click', function () {
         //change the state of the recording: what tree and part of it we are now recording
         var zone = $(this).data('zone');
-        app.storage.tmpSet(app.controller.record.ZONE, zone);
+        morel.storage.tmpSet(app.controller.record.ZONE, zone);
       });
     },
 

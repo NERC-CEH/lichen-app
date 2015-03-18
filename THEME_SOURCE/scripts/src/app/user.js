@@ -1,4 +1,5 @@
 (function ($) {
+  window.app = window.app || {};
   app.controller = app.controller || {};
   app.controller.user = {
 
@@ -17,11 +18,11 @@
 
           var inputKeys = Object.keys(record);
           for (var j = 0, inputsLength = inputKeys.length; j < inputsLength; j++) {
-            var value = record[inputKeys[j]];
-            var name = value.name;
+            var name = inputKeys[j];
+            var value = record[name];
             switch (name) {
-              case app.record.inputs.KEYS.DATE:
-                recordInfo.date = value.value;
+              case morel.record.inputs.KEYS.DATE:
+                recordInfo.date = value;
                 break;
               default:
             }
@@ -43,7 +44,7 @@
         $('.send-button').on('click',  app.controller.user.sendSavedRecord);
       }
 
-      app.record.db.getAll(onSuccess);
+      morel.record.db.getAll(onSuccess);
     },
 
     sendSavedRecord: function (e) {
@@ -65,7 +66,7 @@
             $.mobile.loading('hide');
           }, 3000);
 
-          app.record.db.remove(recordKey, function () {
+          morel.record.db.remove(recordKey, function () {
             app.controller.user.printList();
           });
         };
@@ -74,8 +75,8 @@
           if (!xhr.responseText) {
             xhr.responseText = "Sorry. Some Error Occurred."
           }
-          _log("user: ERROR record ajax (" + xhr.status + " " + thrownError + ").", app.LOG_ERROR);
-          _log(xhr.responseText, app.LOG_ERROR);
+          _log("user: ERROR record ajax (" + xhr.status + " " + thrownError + ").", morel.LOG_ERROR);
+          _log(xhr.responseText, morel.LOG_ERROR);
 
           $.mobile.loading('show', {
             text: xhr.responseText,
@@ -89,7 +90,7 @@
           }, 10000);
         };
 
-        app.io.sendSavedRecord(recordKey, onSuccess, onError);
+        morel.io.sendSavedRecord(recordKey, onSuccess, onError);
       } else {
         $.mobile.loading('show', {
           text: "Looks like you are offline!",
@@ -106,7 +107,7 @@
 
     deleteSavedRecord: function (e) {
       var recordKey = $(e.currentTarget).data('id');
-      app.record.db.remove(recordKey, function () {
+      morel.record.db.remove(recordKey, function () {
         app.controller.user.printList();
       });
     },
@@ -116,7 +117,7 @@
         app.controller.user.printList();
       }
 
-      app.io.sendAllSavedRecords(onSuccess);
+      morel.io.sendAllSavedRecords(onSuccess);
     }
 
   };

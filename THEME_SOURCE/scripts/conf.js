@@ -5,37 +5,42 @@
  */
 
 //app wide settings
-app.CONF.VERSION = '0'; //grunt replaced. Application (controllers and data) version
-app.CONF.NAME = 'app'; //grunt replaced.
+$ = jQuery;
 
-app.CONF.HOME = "lichen/";
-app.CONF.LOG = app.LOG_DEBUG;
-app.CONF.APPCACHE_LOADER_URL = Drupal.settings.themePath + 'scripts/offline.php';
+app.CONF = {
+  VERSION: '0', //version grunt replaced //Application (controllers and data) version
+  NAME: 'app', //name grunt replaced
+  HOME: "lichen/",
+  LOG: morel.LOG_DEBUG,
+  APPCACHE_LOADER_URL: Drupal.settings.themePath + 'scripts/offline.php',
 
-app.auth.CONF = {
+  //app feature settings
+  FEATURES: {
+    SEND_RECORD: true
+  }
+};
+
+morel.auth.CONF = {
   APPNAME: "lichen",
   APPSECRET: "mylichen",
   WEBSITE_ID: 0,
   SURVEY_ID: 0
 };
 
-jQuery.extend(app.record.inputs.KEYS, {
+jQuery.extend(morel.record.inputs.KEYS, {
   TREE_TYPE: 'sample:tree_type',
   CIRCUMFERENCE: 'sample:circumference',
   EMAIL: 'sample:email',
   SREF_NAME: 'sample:locationName'
 });
 
-app.geoloc.CONF.GPS_ACCURACY_LIMIT = 10; //meters
+morel.geoloc.CONF.GPS_ACCURACY_LIMIT = 10; //meters
 
-app.io.CONF.RECORD_URL = "mobile/submit";
+morel.io.CONF.RECORD_URL = "mobile/submit";
 
 //controllers
 var c = app.controller;
 c.list.CONF.SPECIES_DATA_SRC = "http://192.171.199.230/lichen/serv/species";
 
-c.login.CONF.URL = Drupal.settings.basePath + "user/mobile/register";
-c.register.CONF.URL = c.login.CONF.URL;
-
-window.onerror = _onerror;
+//window.onerror = _onerror;
 

@@ -1,4 +1,5 @@
 (function ($) {
+  window.app = window.app || {};
   app.controller = app.controller || {};
   app.controller.sref = {
     saveData: false,
@@ -7,14 +8,14 @@
       _log('sref: pagecreate.');
 
       if (typeof google == 'undefined') {
-        $('#sref-opts').disableTab(1);
+        $('#sref-opts').tabs().tabs( "option", "disabled", [1] ); //disable map
 
         /*
          If the browser is offline then we should not proceed and so the
          dummyText controls the caching of the file - always get fresh
          */
         var dummyText = '&' + (new Date).getTime();
-        loadScript('http://maps.googleapis.com/maps/api/js?sensor=false&' +
+        this.loadScript('http://maps.googleapis.com/maps/api/js?sensor=false&' +
           'callback=app.controller.sref.initializeMap' +
           dummyText
         );
@@ -53,8 +54,8 @@
         'acc': this.accuracy,
         'name': this.name
       };
-      app.settings('location', location);
-      app.geoloc.set(location.lat, location.lon, location.acc);
+      morel.settings('location', location);
+      morel.geoloc.set(location.lat, location.lon, location.acc);
       return location;
     },
 
@@ -201,7 +202,7 @@
       $.mobile.loading('hide');
 
       //stop geoloc
-      app.geoloc.stop();
+      morel.geoloc.stop();
 
       //modify the UI
       app.controller.sref.renderGPStab('init');
@@ -340,8 +341,7 @@
 
       this.fixTabMap("#sref-opts", '#map');
 
-      //todo: create event
-      $('#sref-opts').enableTab(1);
+      $('#sref-opts').tabs().tabs( "option", "disabled", [] ); //disable map
 
       function updateMapCoords(mapLatLng) {
         var location = {
@@ -404,6 +404,18 @@
         message.addClass('success-message');
         message.empty().append('<p>Grid Ref:<br/>' + gref + '</p>');
       }
+    },
+
+    /**
+     * Loads the google maps script.
+     *
+     * @param src
+     */
+    loadScript: function (src) {
+      var script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.src = src;
+      document.body.appendChild(script);
     }
   };
 

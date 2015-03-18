@@ -1,4 +1,5 @@
 (function ($) {
+  window.app = window.app || {};
   app.controller = app.controller || {};
   app.controller.record = {
     RECORDING: 'recording',
@@ -86,7 +87,7 @@
       this.$resultsButton = $('#results-button');
       this.$resultsButton.on('click', function () {
         var valid = app.controller.record.valid();
-        if (valid == app.TRUE) {
+        if (valid) {
           $("body").pagecontainer("change", "#results");
         }
       });
@@ -95,7 +96,7 @@
       this.$treeTypeInputs.on('change', function(){
         if($(this).is(':checked')) {
           // code here
-          app.record.inputs.set(app.record.inputs.KEYS.TREE_TYPE, $(this).val());
+          morel.record.inputs.set(morel.record.inputs.KEYS.TREE_TYPE, $(this).val());
         }
       });
 
@@ -147,8 +148,8 @@
         var type = $(this).data('type');
         var part = $(this).data('part');
 
-        app.storage.tmpSet(app.controller.record.TYPE, type);
-        app.storage.tmpSet(app.controller.record.PART, part);
+        morel.storage.tmpSet(app.controller.record.TYPE, type);
+        morel.storage.tmpSet(app.controller.record.PART, part);
       });
 
       //light up results
@@ -200,7 +201,7 @@
             default:
               //no modified ones
               if (modified > 3) {
-                _log('record: Too many modified ones.', app.LOG_ERROR);
+                _log('record: Too many modified ones.', morel.LOG_ERROR);
               }
               button.find('.first-progress').removeClass('progress');
               button.find('.half-progress').removeClass('progress');
@@ -216,10 +217,10 @@
      */
     clear: function () {
       _log('record: clearing recording page.');
-      app.record.clear();
+      morel.record.clear();
 
       //if exists append previous email
-      var email = app.settings(this.CONF.USER_EMAIL_STORAGE_KEY);
+      var email = morel.settings(this.CONF.USER_EMAIL_STORAGE_KEY);
       if (email){
         this.$emailInput.val(email);
       }
@@ -228,8 +229,8 @@
       this.saveDate();
 
       //save tree type to default
-      app.record.inputs.set(
-        app.record.inputs.KEYS.TREE_TYPE,
+      morel.record.inputs.set(
+        morel.record.inputs.KEYS.TREE_TYPE,
         this.CONF.TREE_TYPES.BIRCH
       );
     },
@@ -253,10 +254,10 @@
 
         message += "</ul>";
         //app.navigation.popup(message, true);
-        app.navigation.message(message);
-        return app.FALSE;
+        app.message(message);
+        return false;
       }
-      return app.TRUE;
+      return true;
     },
 
     /**
@@ -265,13 +266,13 @@
     validateInputs: function () {
       var invalids = [];
       //core inputs
-      if (!app.record.inputs.is(app.record.inputs.KEYS.DATE)) {
+      if (!morel.record.inputs.is(morel.record.inputs.KEYS.DATE)) {
         invalids.push({
           'id': 'sample:date',
           'name': 'Date'
         })
       }
-      if (!app.record.inputs.is(app.record.inputs.KEYS.SREF)) {
+      if (!morel.record.inputs.is(morel.record.inputs.KEYS.SREF)) {
         invalids.push({
           'id': 'sample:entered_sref',
           'name': 'Location'
@@ -287,15 +288,15 @@
 
     saveSref: function (location) {
       if (location == null) {
-        return app.ERROR;
+        return false;
       }
       var sref = location.lat + ', ' + location.lon;
       var sref_system = "4326";
       var sref_accuracy = location.acc;
-      app.record.inputs.set(app.record.inputs.KEYS.SREF, sref);
-      app.record.inputs.set(app.record.inputs.KEYS.SREF_SYSTEM, sref_system);
-      app.record.inputs.set(app.record.inputs.KEYS.SREF_ACCURACY, sref_accuracy);
-      app.record.inputs.set(app.record.inputs.KEYS.SREF_NAME, location.name);
+      morel.record.inputs.set(morel.record.inputs.KEYS.SREF, sref);
+      morel.record.inputs.set(morel.record.inputs.KEYS.SREF_SYSTEM, sref_system);
+      morel.record.inputs.set(morel.record.inputs.KEYS.SREF_ACCURACY, sref_accuracy);
+      morel.record.inputs.set(morel.record.inputs.KEYS.SREF_NAME, location.name);
     },
 
     /**
@@ -304,12 +305,12 @@
     saveInput: function (name) {
       if (name == null && name == "") {
         _log('record: ERROR, no input name provided.');
-        return app.ERROR;
+        return false;
       }
       var ele = document.getElementById(name);
       var value = $(ele).val();
       if (value != "") {
-        app.record.inputs.set(name, value);
+        morel.record.inputs.set(name, value);
       }
     },
 
@@ -321,7 +322,7 @@
       if (specie != null && specie.warehouse_id != null && specie.warehouse_id != "") {
         var name = 'occurrence:taxa_taxon_list_id';
         var value = specie.warehouse_id;
-        app.record.inputs.set(name, value);
+        morel.record.inputs.set(name, value);
 
         //add header to the page
         $('#record_heading').text(specie.common_name);
@@ -344,7 +345,7 @@
       var ele = document.getElementById(name);
       $(ele).val(value);
 
-      app.record.inputs.set(name, value);
+      morel.record.inputs.set(name, value);
     },
 
     gpsButtonState: function (state) {

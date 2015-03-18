@@ -2,6 +2,7 @@
  * Created by karkaz on 20/08/14.
  */
 (function ($) {
+  window.app = window.app || {};
   app.controller = app.controller || {};
   app.controller.about = {
 

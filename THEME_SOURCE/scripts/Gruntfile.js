@@ -17,8 +17,7 @@ module.exports = function(grunt) {
 		bower: {
 			install:{
 				options:{
-					targetDir: 'src/lib',
-					cleanBowerDir: true
+					targetDir: 'src/lib'
 				}
 			}
 		},
@@ -64,19 +63,19 @@ module.exports = function(grunt) {
 			}
 		},
 		replace: {
-			main: {
-				src: ['../../scripts/app.js'],
-				overwrite: true, // overwrite matched source files
-				replacements: [{
-					from: /(app\.CONF.VERSION =) \'0\';/g, // string replacement
-					to: '$1 \'<%= pkg.version %>\';'
-				},
-				{
-					from: /(app\.CONF\.NAME =) \'app\';/g,  // string replacement
-					to: '$1 \'<%= pkg.name %>\';'
-				}
-			]
-		},
+      main: {
+        src: [DEST + APP_NAME],
+        overwrite: true, // overwrite matched source files
+        replacements: [{
+          from: /(VERSION:).*version grunt replaced/g, // string replacement
+          to: '$1 \'<%= pkg.version %>\','
+        },
+          {
+            from: /(NAME:).*name grunt replaced/g,  // string replacement
+            to: '$1 \'<%= pkg.name %>\','
+          }
+        ]
+      },
 		libs: {
 			src: ['../../scripts/' + LIBS_NAME],
 			overwrite: true, // Fix klass.js no ';' problem

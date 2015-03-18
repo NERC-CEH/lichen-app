@@ -2,13 +2,14 @@
  * Created by karkaz on 20/08/14.
  */
 (function ($) {
+  window.app = window.app || {};
   app.controller = app.controller || {};
   app.controller.compass = {
     lastUpdate: 0,
     UPDATE_TIME_DIFF: 10, //ms
 
     pagecreate: function () {
-      _log('compass: pagecreate', app.LOG_DEBUG);
+      _log('compass: pagecreate', morel.LOG_DEBUG);
       if (window.DeviceOrientationEvent) {
         window.addEventListener('deviceorientation', function (event) {
           var date = new Date();
@@ -42,7 +43,7 @@
         }
       }
 
-      _log('compass: rotate ' + alpha, app.LOG_DEBUG);
+      _log('compass: rotate ' + alpha, morel.LOG_DEBUG);
 
       //Rotate the rose
       compass.style.Transform = 'rotate(' + alpha + 'deg)';

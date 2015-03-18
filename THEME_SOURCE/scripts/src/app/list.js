@@ -1,4 +1,5 @@
 (function ($) {
+  window.app = window.app || {};
   app.controller = app.controller || {};
   app.controller.list = {
     //controller configuration should be set up in an app config file
@@ -29,10 +30,10 @@
 
       //set header
       var heading = "Lichen IDs";
-      var recording = app.storage.tmpGet(app.controller.record.RECORDING);
+      var recording = morel.storage.tmpGet(app.controller.record.RECORDING);
       if (recording) {
-        var zone = app.storage.tmpGet(app.controller.record.ZONE);
-        var type = app.storage.tmpGet(app.controller.record.TYPE);
+        var zone = morel.storage.tmpGet(app.controller.record.ZONE);
+        var type = morel.storage.tmpGet(app.controller.record.TYPE);
 
         var zones = app.controller.tree_part.zones[type];
         var zoneId = null;
@@ -68,10 +69,10 @@
         });
 
         //if recording assign list checkbox event listeners
-        var recording = app.storage.tmpGet(app.controller.record.RECORDING);
+        var recording = morel.storage.tmpGet(app.controller.record.RECORDING);
         if (recording) {
           $('.species-list-checkbox-button > div > input').on('change', function (index, value) {
-            var zone = app.storage.tmpGet(app.controller.record.ZONE);
+            var zone = morel.storage.tmpGet(app.controller.record.ZONE);
 
             var id = $(this).data('speciesid');
             var checked = $(this).is(':checked');
@@ -96,7 +97,7 @@
       zone_next.on('click', function () {
         //change the state of the recording: what tree and part of it we are now recording
         var zone = $(this).data('zone');
-        app.storage.tmpSet(app.controller.record.ZONE, zone);
+        morel.storage.tmpSet(app.controller.record.ZONE, zone);
       });
 
       if (++zoneId < zones.length) {
@@ -120,25 +121,26 @@
      */
     loadSpeciesData: function () {
       //load species data
-      if (!app.storage.is('species')) {
-        app.navigation.message('Loading IDs data for the first time..');
+      if (!morel.storage.is('species')) {
+        app.message('Loading IDs data for the first time..');
+        $.mobile.loading('show');
         $.ajax({
           url: this.CONF.SPECIES_DATA_SRC,
           dataType: 'jsonp',
           async: false,
           success: function (species) {
-            app.navigation.message('Done loading IDs data');
+            $.mobile.loading('hide');
             app.data.species = species;
 
             //saves for quicker loading
-            app.storage.set('species', species);
+            morel.storage.set('species', species);
 
             //todo: what if data comes first before pagecontainershow
             app.controller.list.renderList();
           }
         });
       } else {
-        app.data.species = app.storage.get('species');
+        app.data.species = morel.storage.get('species');
       }
     },
 
@@ -147,7 +149,7 @@
      * @returns {*|{}}
      */
     getAllSpecies: function () {
-      return app.record.inputs.get(app.controller.record.SPECIES) || {'trunk': {}, 'branch': {}};
+      return morel.record.inputs.get(app.controller.record.SPECIES) || {'trunk': {}, 'branch': {}};
     },
 
     /**
@@ -155,7 +157,7 @@
      * @param species
      */
     setAllSpecies: function (species) {
-      app.record.inputs.set(app.controller.record.SPECIES, species);
+      morel.record.inputs.set(app.controller.record.SPECIES, species);
     },
 
     /**
@@ -164,8 +166,8 @@
      * @returns {*} species array
      */
     getSavedZoneSpecies: function (zone) {
-      var type = app.storage.tmpGet(app.controller.record.TYPE);
-      var part = app.storage.tmpGet(app.controller.record.PART);
+      var type = morel.storage.tmpGet(app.controller.record.TYPE);
+      var part = morel.storage.tmpGet(app.controller.record.PART);
       var allSpecies = this.getAllSpecies();
 
       return allSpecies[type][part] ? allSpecies[type][part][zone] || [] : [];
@@ -193,8 +195,8 @@
 
       }
 
-      var type = app.storage.tmpGet(app.controller.record.TYPE);
-      var part = app.storage.tmpGet(app.controller.record.PART);
+      var type = morel.storage.tmpGet(app.controller.record.TYPE);
+      var part = morel.storage.tmpGet(app.controller.record.PART);
 
       var allSpecies = this.getAllSpecies();
       if (allSpecies[type][part] == null) {
@@ -291,7 +293,7 @@
      */
     printList: function (species) {
       var s = species;
-      var recording = app.storage.tmpGet(app.controller.record.RECORDING);
+      var recording = morel.storage.tmpGet(app.controller.record.RECORDING);
 
       var template = null;
       if (recording) {
@@ -300,7 +302,7 @@
         //check the saved ones
         s = objClone(species);
 
-        var zone = app.storage.tmpGet(app.controller.record.ZONE);
+        var zone = morel.storage.tmpGet(app.controller.record.ZONE);
 
         var checkedSpecies = this.getSavedZoneSpecies(zone);
         for (var i = 0; i < s.length; i++) {
@@ -323,7 +325,7 @@
     },
 
     getChecked: function (tree) {
-      var record = app.record.get();
+      var record = morel.record.get();
 
     },
 
@@ -332,11 +334,11 @@
      * @returns {*|Object|{}}
      */
     getSpecies: function () {
-      return app.settings('listSpecies') || {};
+      return morel.settings('listSpecies') || {};
     },
 
     setSpecies: function (species) {
-      return app.settings('listSpecies', species);
+      return morel.settings('listSpecies', species);
     },
 
     /**
@@ -345,7 +347,7 @@
      */
     CURRENT_SPECIES_KEY: 'currentSpecies',
     getCurrentSpecies: function () {
-      return app.storage.tmpGet(this.CURRENT_SPECIES_KEY);
+      return morel.storage.tmpGet(this.CURRENT_SPECIES_KEY);
     },
 
     /**
@@ -362,7 +364,7 @@
           break;
         }
       }
-      return app.storage.tmpSet(this.CURRENT_SPECIES_KEY, species);
+      return morel.storage.tmpSet(this.CURRENT_SPECIES_KEY, species);
     },
 
     /**
@@ -370,7 +372,7 @@
      * @returns {*|Object|Array}
      */
     getCurrentFilters: function () {
-      return app.settings(this.FILTERS_KEY) || [];
+      return morel.settings(this.FILTERS_KEY) || [];
     },
 
     /**
@@ -394,7 +396,7 @@
      * @returns {*|Object|string}
      */
     getSortType: function () {
-      return app.settings(this.SORT_KEY) || this.DEFAULT_SORT;
+      return morel.settings(this.SORT_KEY) || this.DEFAULT_SORT;
     },
 
     /**
@@ -403,7 +405,7 @@
      * @returns {*|Object}
      */
     setSortType: function (type) {
-      return app.settings(this.SORT_KEY, type);
+      return morel.settings(this.SORT_KEY, type);
     },
 
     /**
@@ -485,7 +487,7 @@
      */
     download: function () {
       var OFFLINE = 'offline';
-      var offline = app.settings(OFFLINE);
+      var offline = morel.settings(OFFLINE);
 
       if (offline == null || (!offline['downloaded'] && !offline['dontAsk'])) {
         var donwloadBtnId = "download-button";
@@ -504,7 +506,7 @@
           '<a href="#" id="' + donwloadCancelBtnId + '"' +
           'class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back" data-transition="flow">Cancel</a>';
 
-        app.navigation.popup(message);
+        app.message(message);
 
         $('#' + donwloadBtnId).on('click', function () {
           _log('list: starting appcache downloading process.');
@@ -516,8 +518,8 @@
                 'downloaded': true,
                 'dontAsk': false
               };
-              app.settings(OFFLINE, offline);
-              app.navigation.closePopup();
+              morel.settings(OFFLINE, offline);
+              jQuery.mobile.loading('hide');
               location.reload();
             }
 
@@ -539,7 +541,7 @@
             'dontAsk': dontAsk
           };
 
-          app.settings(OFFLINE, offline);
+          morel.settings(OFFLINE, offline);
         });
       }
     }
