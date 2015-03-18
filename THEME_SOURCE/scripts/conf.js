@@ -12,11 +12,12 @@ app.CONF.HOME = "lichen/";
 app.CONF.LOG = app.LOG_DEBUG;
 app.CONF.APPCACHE_LOADER_URL = Drupal.settings.themePath + 'scripts/offline.php';
 
-
-app.auth.CONF.APPNAME = "lichen";
-app.auth.CONF.APPSECRET = "mylichen";
-app.auth.CONF.WEBSITE_ID = 0;
-app.auth.CONF.SURVEY_ID = 0;
+app.auth.CONF = {
+  APPNAME: "lichen",
+  APPSECRET: "mylichen",
+  WEBSITE_ID: 0,
+  SURVEY_ID: 0
+};
 
 jQuery.extend(app.record.inputs.KEYS, {
   TREE_TYPE: 'sample:tree_type',
