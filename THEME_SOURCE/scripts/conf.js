@@ -10,7 +10,7 @@ $ = jQuery;
 app.CONF = {
   VERSION: '0', //version grunt replaced //Application (controllers and data) version
   NAME: 'app', //name grunt replaced
-  HOME: "http://lichen/",
+  HOME: "http://192.171.199.230/lichen/app/main",
   LOG: morel.LOG_DEBUG,
   APPCACHE_LOADER_URL: Drupal.settings.themePath + 'scripts/offline.php',
 
@@ -52,7 +52,7 @@ jQuery.extend(morel.record.inputs.KEYS, {
 
 morel.geoloc.CONF.GPS_ACCURACY_LIMIT = 10; //meters
 
-morel.io.CONF.RECORD_URL = app.CONF.HOME + "mobile/submit";
+morel.io.CONF.RECORD_URL = "http://192.171.199.230/lichen/mobile/submit";
 
 //controllers
 var c = app.controller;

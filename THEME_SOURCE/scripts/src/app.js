@@ -156,7 +156,7 @@ app.browserDetect = function (browser) {
                     currentPageURL = '#' + jQuery.mobile.activePage.attr('id');
                 }
 
-                fixPageBackButtons(currentPageURL, nextPageid);
+                //fixPageBackButtons(currentPageURL, nextPageid);
             }
         }
     });

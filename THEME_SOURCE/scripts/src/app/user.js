@@ -119,11 +119,14 @@
     },
 
     sendAllSavedRecords: function () {
+      $.mobile.loading('show');
       function onSuccess() {
         app.controller.user.printList();
       }
-
-      morel.io.sendAllSavedRecords(onSuccess);
+      function onSuccessAll() {
+        $.mobile.loading('hide');
+      }
+      morel.io.sendAllSavedRecords(onSuccess, onSuccessAll);
     }
 
   };
