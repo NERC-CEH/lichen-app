@@ -194,19 +194,17 @@ app.browserDetect = function (browser) {
                 var dataSpeciesCount = 0; //species counter
 
                 //add trunks
-                var trunks = convertToWarehouse(value['trunk'], 'trunk');
-
+                var trunks = convertToWarehouse(value['trunk']);
                 //add branches
-                var branches = convertToWarehouse(value['branch'], 'branch');
+                var branches = convertToWarehouse(value['branch']);
 
                 var species = $.extend(trunks, branches);
-
                 var speciesKeys = Object.keys(species);
                 for (var i = 0; i < speciesKeys.length; i++) {
                   data.append(speciesKeys[i], species[speciesKeys[i]])
                 }
 
-                function convertToWarehouse (trees, type) {
+                function convertToWarehouse (trees) {
                   var speciesData = {};
                   var treeNumberIDs = Object.keys(trees);
                   //every tree
@@ -214,7 +212,7 @@ app.browserDetect = function (browser) {
                     //every part of tree
                     var treeNumberID = treeNumberIDs[i];
                     var treePartIDs = Object.keys(trees[treeNumberID]);
-                    for (var j = 0; j < treeNumberIDs.length; j++) {
+                    for (var j = 0; j < treePartIDs.length; j++) {
                       var treePartID = treePartIDs[j];
                       var species = trees[treeNumberID][treePartID];
                       //every specie
@@ -279,4 +277,9 @@ function checkForUpdates(){
         //set new version
         morel.settings(CONTROLLER_VERSION_KEY, app.CONF.VERSION);
     }
+}
+
+function validateEmail(email) {
+  var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(email);
 }

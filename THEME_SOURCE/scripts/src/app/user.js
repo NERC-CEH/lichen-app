@@ -24,6 +24,12 @@
               case morel.record.inputs.KEYS.DATE:
                 recordInfo.date = value;
                 break;
+              case morel.record.inputs.KEYS.TRUNK_LIS:
+                recordInfo.trunk_lis = value;
+                break
+              case morel.record.inputs.KEYS.BRANCH_LIS:
+                recordInfo.branch_lis = value;
+                break;
               default:
             }
           }

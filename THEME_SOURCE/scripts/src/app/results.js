@@ -34,6 +34,8 @@
 
       //naqi
       if (trunk_lis){
+        morel.record.inputs.set(morel.record.inputs.KEYS.TRUNK_LIS, trunk_lis);
+
         var trunk_naqi = (3.6666666 - trunk_lis) / 3.33333;
         this.add_trunk_results(trunk_lis);
         $('#results-trunk-lis').text(trunk_lis.toFixed(1));
@@ -42,6 +44,8 @@
         _log('results: trunk_lis: ' + trunk_lis);
       }
       if (branch_lis) {
+        morel.record.inputs.set(morel.record.inputs.KEYS.BRANCH_LIS, branch_lis);
+
         var branch_naqi = (3.4 - branch_lis) / 4;
         this.add_branch_results(branch_lis);
         $('#results-branch-lis').text(branch_lis.toFixed(1));

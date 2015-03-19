@@ -430,8 +430,9 @@
                 <li data-corners="false" data-shadow="false" data-iconshadow="true"
                     data-wrapperels="div" data-icon="arrow-r" data-iconpos="right">
                     <a href="#" class='send-button' data-id="{{id}}">
-                        <h3>{{common_name}}</h3>
-                        <p>{{date}}</p>
+                        <p><strong>{{date}}</strong></p>
+                        <p style="float:left">Branch LIS: {{branch_lis}}</p>
+                        <p style="float:left; margin-left:20px">Trunk LIS: {{trunk_lis}}</p>
                     </a>
                     <a href="#" class='delete-button' data-icon="delete" data-ajax="false"
                        data-id="{{id}}">Delete</a>
@@ -462,8 +463,8 @@
         <li id="results-trunk" style="display:none">
           <strong>Trunk</strong>
           <p>
-            Lichen indicator score (LIS): <strong><em id="results-trunk-lis">N/A</em></strong><br/>
             Nitrogen Air Quality Index (NAQI):<strong> <em id="results-trunk-naqi">N/A</em></strong><br/>
+            Lichen indicator score (LIS): <strong><em id="results-trunk-lis">N/A</em></strong><br/>
           </p>
         </li>
         <li id="results-branch" style="display:none">

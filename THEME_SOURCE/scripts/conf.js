@@ -21,24 +21,13 @@ app.CONF = {
 
   WAREHOUSE_VALUES: {
     treeType: {
-      'birch': 3183,
-      'oak': 3184
+      'birch': 3183, 'oak': 3184
     },
     treePart: {
-      'e': 3173,
-      's': 3174,
-      'w': 3175,
-      'one': 3176,
-      'two': 3177,
-      'three': 3178
+      'e': 3173, 's': 3174, 'w': 3175,
+      'one': 3176, 'two': 3177, 'three': 3178
     },
-    treeNumber: [
-      3185,
-      3186,
-      3187,
-      3188,
-      3189
-    ]
+    treeNumber: [3185, 3186, 3187, 3188, 3189]
   }
 };
 
@@ -54,10 +43,11 @@ jQuery.extend(morel.record.inputs.KEYS, {
   TREE_TYPE: 'smpAttr:433',
   TREE_NUMBER: 'occAttr:230',
   TREE_PART: 'occAttr:229',
-  LIS: 'smpAttr:434',
-  CIRCUMFERENCE: 'sample:circumference',
-  EMAIL: 'smpAttr:9',
-  SREF_NAME: 'sample:locationName'
+  TRUNK_LIS: 'smpAttr:434',
+  BRANCH_LIS: 'smpAttr:441',
+  CIRCUMFERENCE: 'occAttr:444',
+  EMAIL: 'smpAttr:14',
+  SREF_NAME: 'smpAttr:442'
 });
 
 morel.geoloc.CONF.GPS_ACCURACY_LIMIT = 10; //meters

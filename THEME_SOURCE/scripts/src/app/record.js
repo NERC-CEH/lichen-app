@@ -81,12 +81,7 @@
 
       //attach element listeners
       this.$resultsButton = $('#results-button');
-      this.$resultsButton.on('click', function () {
-        var valid = app.controller.record.valid();
-        if (valid) {
-          $("body").pagecontainer("change", "#results");
-        }
-      });
+      this.$resultsButton.on('click', this.proceedToResults);
 
       this.$treeTypeInputs = $('input[name=tree-type]');
       this.$treeTypeInputs.on('change', function(){
@@ -100,6 +95,23 @@
       });
 
       this.$emailInput = $('input[name=email]');
+    },
+
+    proceedToResults: function () {
+      var email = $('input[name=email]').val();
+      if (email){
+        morel.settings(app.controller.record.CONF.USER_EMAIL_STORAGE_KEY, email);
+        morel.record.inputs.set(morel.record.inputs.KEYS.EMAIL, email);
+      } else {
+        morel.settings(app.controller.record.CONF.USER_EMAIL_STORAGE_KEY, ' ');
+        morel.record.inputs.remove(morel.record.inputs.KEYS.EMAIL);
+      }
+
+      var valid = app.controller.record.valid();
+      if (valid) {
+        $("body").pagecontainer("change", "#results");
+      }
+
     },
 
     pagecontainershow: function (e, data) {
@@ -267,16 +279,27 @@
       //core inputs
       if (!morel.record.inputs.is(morel.record.inputs.KEYS.DATE)) {
         invalids.push({
-          'id': 'sample:date',
+          'id': morel.record.inputs.KEYS.DATE,
           'name': 'Date'
-        })
+        });
       }
       if (!morel.record.inputs.is(morel.record.inputs.KEYS.SREF)) {
         invalids.push({
-          'id': 'sample:entered_sref',
+          'id': morel.record.inputs.KEYS.SREF,
           'name': 'Location'
-        })
+        });
       }
+      if (morel.record.inputs.is(morel.record.inputs.KEYS.EMAIL)) {
+        var email = morel.record.inputs.get(morel.record.inputs.KEYS.EMAIL);
+        if (!validateEmail(email)){
+          invalids.push({
+            'id': morel.record.inputs.KEYS.EMAIL,
+            'name': 'Email is Invalid'
+          });
+        }
+      }
+
+
       //NAQI data
       //species
 
