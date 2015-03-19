@@ -9,11 +9,7 @@
     ZONE: 'recording_zone',
 
     CONF: {
-      USER_EMAIL_STORAGE_KEY: 'userEmail',
-      TREE_TYPES: {
-        BIRCH: 'birch',
-        OAK: 'oak'
-      }
+      USER_EMAIL_STORAGE_KEY: 'userEmail'
     },
 
     types: {
@@ -96,7 +92,10 @@
       this.$treeTypeInputs.on('change', function(){
         if($(this).is(':checked')) {
           // code here
-          morel.record.inputs.set(morel.record.inputs.KEYS.TREE_TYPE, $(this).val());
+          var value = $(this).val();
+          morel.record.inputs.set(
+            morel.record.inputs.KEYS.TREE_TYPE,
+            app.CONF.WAREHOUSE_VALUES.treeType[value]);
         }
       });
 
@@ -231,7 +230,7 @@
       //save tree type to default
       morel.record.inputs.set(
         morel.record.inputs.KEYS.TREE_TYPE,
-        this.CONF.TREE_TYPES.BIRCH
+        app.CONF.WAREHOUSE_VALUES.treeType['birch']
       );
     },
 

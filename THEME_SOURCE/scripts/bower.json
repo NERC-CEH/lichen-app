@@ -2,7 +2,7 @@
     "name": "lichen_app",
     "version": "0.0.0",
     "dependencies": {
-      "morel": "NERC-CEH/morel#develop",
+      "morel": "NERC-CEH/morel",
       "d3": "3.5.3",
       "latlon": "chrisveness/geodesy#ddde271a16c06f9c0696c76a989e04140c2790f5",
       "indexeDBShim": "axemclion/IndexedDBShim",

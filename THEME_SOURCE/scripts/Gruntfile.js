@@ -17,8 +17,9 @@ module.exports = function(grunt) {
 		bower: {
 			install:{
 				options:{
-					targetDir: 'src/lib'
-				}
+					targetDir: 'src/lib',
+          cleanBowerDir: true
+        }
 			}
 		},
 		karma: {
