@@ -13,7 +13,7 @@
     branch_result: null,
 
     pagecreate: function () {
-      _log('results: pagecreate', morel.LOG_DEBUG);
+      _log('results: pagecreate', log.DEBUG);
 
       //attach button listeners
       $('#send-button').on('click', app.controller.results.send);
@@ -21,7 +21,7 @@
     },
 
     pagecontainershow: function () {
-      _log('results: pagecontaintershow', morel.LOG_DEBUG);
+      _log('results: pagecontaintershow', log.DEBUG);
       // draw the graph
       this.drawgraph();
 
@@ -93,7 +93,7 @@
         } else if (lichen_type == 'tolerant') {
           return species_categorized['tolerant'].length > 0;
         } else {
-          _log('results: no such lichen type.', morel.LOG_ERROR);
+          _log('results: no such lichen type.', log.ERROR);
         }
       }
 

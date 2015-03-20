@@ -212,7 +212,7 @@
             default:
               //no modified ones
               if (modified > 3) {
-                _log('record: Too many modified ones.', morel.LOG_ERROR);
+                _log('record: Too many modified ones.', log.ERROR);
               }
               button.find('.first-progress').removeClass('progress');
               button.find('.half-progress').removeClass('progress');

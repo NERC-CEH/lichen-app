@@ -11,7 +11,6 @@ app.CONF = {
   VERSION: '0', //version grunt replaced //Application (controllers and data) version
   NAME: 'app', //name grunt replaced
   HOME: "http://192.171.199.230/lichen/app/main",
-  LOG: morel.LOG_DEBUG,
   APPCACHE_LOADER_URL: Drupal.settings.themePath + 'scripts/offline.php',
 
   //app feature settings
@@ -31,6 +30,15 @@ app.CONF = {
   }
 };
 
+//logging
+log.CONF = {
+  STATE: log.DEBUG,
+  ERROR_URL: "http://192.171.199.230/lichen/mobile/log",
+  APP_NAME: app.NAME,
+  APP_VERSION: app.VERSION
+};
+
+//morel
 morel.CONF.NAME = app.CONF.NAME;
 morel.auth.CONF = {
   APPNAME: "lichen",
@@ -51,7 +59,6 @@ jQuery.extend(morel.record.inputs.KEYS, {
 });
 
 morel.geoloc.CONF.GPS_ACCURACY_LIMIT = 10; //meters
-
 morel.io.CONF.RECORD_URL = "http://192.171.199.230/lichen/mobile/submit";
 
 //controllers

@@ -7,7 +7,7 @@
   app.controller.welcome = {
 
     pagecreate: function () {
-      _log('welcome: pagecreate.', morel.LOG_DEBUG);
+      _log('welcome: pagecreate.', log.DEBUG);
 
       $('#record-button').on('click', function () {
         morel.storage.tmpSet(app.controller.record.RECORDING, true);
@@ -15,7 +15,7 @@
     },
 
     pagecontainershow: function (e, data) {
-      _log('welcome: pagecontainershow', morel.LOG_DEBUG);
+      _log('welcome: pagecontainershow', log.DEBUG);
       morel.storage.tmpSet(app.controller.record.RECORDING, false);
 
       setTimeout(function(){

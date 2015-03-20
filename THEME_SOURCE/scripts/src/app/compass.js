@@ -9,7 +9,7 @@
     UPDATE_TIME_DIFF: 10, //ms
 
     pagecreate: function () {
-      _log('compass: pagecreate', morel.LOG_DEBUG);
+      _log('compass: pagecreate', log.DEBUG);
       if (window.DeviceOrientationEvent) {
         window.addEventListener('deviceorientation', function (event) {
           var date = new Date();
@@ -43,7 +43,7 @@
         }
       }
 
-      _log('compass: rotate ' + alpha, morel.LOG_DEBUG);
+      _log('compass: rotate ' + alpha, log.DEBUG);
 
       //Rotate the rose
       compass.style.Transform = 'rotate(' + alpha + 'deg)';

@@ -81,8 +81,8 @@
           if (!xhr.responseText) {
             xhr.responseText = "Sorry. Some Error Occurred."
           }
-          _log("user: ERROR record ajax (" + xhr.status + " " + thrownError + ").", morel.LOG_ERROR);
-          _log(xhr.responseText, morel.LOG_ERROR);
+          _log("user: ERROR record ajax (" + xhr.status + " " + thrownError + ").", log.ERROR);
+          _log(xhr.responseText, log.ERROR);
 
           $.mobile.loading('show', {
             text: xhr.responseText,
