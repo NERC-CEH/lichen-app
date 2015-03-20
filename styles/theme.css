@@ -51,6 +51,11 @@ img {
     max-width: 100%;
 }
 
+/* Move loader dialog up */
+.ui-loader{
+    top: 30% !important;
+}
+
 /* Information box*/
 .info-message {
     font-size: 13px;
