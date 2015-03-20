@@ -53,7 +53,11 @@ jQuery.extend(morel.record.inputs.KEYS, {
   TREE_PART: 'occAttr:229',
   TRUNK_LIS: 'smpAttr:434',
   BRANCH_LIS: 'smpAttr:441',
-  CIRCUMFERENCE: 'occAttr:444',
+  TREE_CIRCUM_1: 'smpAttr:443',
+  TREE_CIRCUM_2: 'smpAttr:444',
+  TREE_CIRCUM_3: 'smpAttr:445',
+  TREE_CIRCUM_4: 'smpAttr:446',
+  TREE_CIRCUM_5: 'smpAttr:447',
   EMAIL: 'smpAttr:14',
   SREF_NAME: 'smpAttr:442'
 });

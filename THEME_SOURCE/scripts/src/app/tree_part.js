@@ -62,6 +62,26 @@
 
       //render Zone buttons
       app.controller.tree_part.renderButtons(type);
+
+      //attach listeners
+      var $circumference = $('#circumference');
+      $circumference.change(this.updateCircumference);
+
+      var name = morel.record.inputs.KEYS['TREE_CIRCUM_' + part];
+      var value = morel.record.inputs.get(name);
+      $circumference.val(value);
+    },
+
+    updateCircumference: function () {
+      var part = morel.storage.tmpGet(app.controller.record.PART);
+      var value = $(this).val();
+      var name = morel.record.inputs.KEYS['TREE_CIRCUM_' + part];
+
+      if (value){
+        morel.record.inputs.set(name, value);
+      } else {
+        morel.record.inputs.remove(name);
+      }
     },
 
     /**

@@ -98,6 +98,7 @@
     },
 
     proceedToResults: function () {
+      //update email
       var email = $('input[name=email]').val();
       if (email){
         morel.settings(app.controller.record.CONF.USER_EMAIL_STORAGE_KEY, email);
@@ -106,6 +107,9 @@
         morel.settings(app.controller.record.CONF.USER_EMAIL_STORAGE_KEY, ' ');
         morel.record.inputs.remove(morel.record.inputs.KEYS.EMAIL);
       }
+
+      //update tree circumferences
+
 
       var valid = app.controller.record.valid();
       if (valid) {
@@ -257,7 +261,7 @@
       var invalids = this.validateInputs();
       if (invalids.length > 0) {
         var message =
-          "<p>The following is still missing:</p><ul>";
+          "<p>Still missing:</p><ul>";
 
         for (var i = 0; i < invalids.length; i++) {
           message += "<li>" + invalids[i].name + "</li>";
@@ -280,13 +284,13 @@
       if (!morel.record.inputs.is(morel.record.inputs.KEYS.DATE)) {
         invalids.push({
           'id': morel.record.inputs.KEYS.DATE,
-          'name': 'Date'
+          'name': 'General: Date'
         });
       }
       if (!morel.record.inputs.is(morel.record.inputs.KEYS.SREF)) {
         invalids.push({
           'id': morel.record.inputs.KEYS.SREF,
-          'name': 'Location'
+          'name': 'General: Location'
         });
       }
       if (morel.record.inputs.is(morel.record.inputs.KEYS.EMAIL)) {
@@ -294,16 +298,34 @@
         if (!validateEmail(email)){
           invalids.push({
             'id': morel.record.inputs.KEYS.EMAIL,
-            'name': 'Email is Invalid'
+            'name': 'General: Email Invalid'
           });
         }
       }
 
-
       //NAQI data
       //species
+      var species = morel.record.inputs.get('species');
+      if (!species) {
+        invalids.push({
+          'name': 'Lichen Species'
+        });
+        return invalids;
+      }
 
       //circum
+      var trunks = species['trunk'];
+      var trunkIDs = Object.keys(trunks);
+      for (var i = 0; i < trunkIDs.length; i++) {
+        var part = trunkIDs[i];
+        var name = morel.record.inputs.KEYS['TREE_CIRCUM_' + part];
+        var value = morel.record.inputs.get(name);
+        if (!value) {
+          invalids.push({
+            'name': 'Trunk ' + part + ' Circumference'
+          });
+        }
+      }
 
       return invalids;
     },
