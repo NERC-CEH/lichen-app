@@ -71,6 +71,9 @@ $iform_mobile_path = 'sites/all/modules/iform_mobile/';
   <!-- JavaScript -->
   <?php print $scripts; ?>
 
+    <script>
+        Drupal.settings.themePath = '<?php echo $theme_path ?>';
+    </script>
   <!-- Google Analytics -->
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

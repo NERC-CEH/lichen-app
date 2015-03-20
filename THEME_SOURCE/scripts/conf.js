@@ -11,7 +11,6 @@ app.CONF = {
   VERSION: '0', //version grunt replaced //Application (controllers and data) version
   NAME: 'app', //name grunt replaced
   HOME: "http://192.171.199.230/lichen/app/main",
-  APPCACHE_LOADER_URL: Drupal.settings.themePath + 'scripts/offline.php',
 
   //app feature settings
   FEATURES: {

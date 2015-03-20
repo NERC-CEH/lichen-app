@@ -1,7 +1,7 @@
 <?php
 //Configuration
-$base_path = empty($_GET['base_path']) ? '' : $_GET['base_path'];
-$FILES = empty($_GET['files']) ? 1 : $_GET['files'];
+$base_path = '/lichen';
+$FILES = 80;
 
 $WIDTH = 200;
 $HEIGHT = 200;
@@ -9,10 +9,10 @@ $FONT_SIZE = 20;
 ?>
 
 <!DOCTYPE HTML>
-<html manifest="<?php print $base_path ?>manifest.appcache">
+<html manifest="<?php print $base_path ?>/manifest.appcache">
 <head>
   <title>offline.html</title>
-  <script src="<?php print $base_path ?>sites/all/modules/jquery_update/replace/jquery/1.10/jquery.min.js"></script>
+  <script src="<?php print $base_path ?>/sites/all/modules/jquery_update/replace/jquery/1.10/jquery.min.js"></script>
   <script type="text/javascript">
     var lastUpdate = 0;
     var TIME_DIFF = 100; //ms

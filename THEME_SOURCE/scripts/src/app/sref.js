@@ -183,7 +183,7 @@
       }
 
       //start geoloc
-      app.geoloc.run(onUpdate, onSuccess, onError);
+      morel.geoloc.run(onUpdate, onSuccess, onError);
 
       var location = null;
       var currentLocation = app.controller.sref.get();

@@ -253,6 +253,117 @@ app.message = function (text, time) {
 };
 
 /**
+ * Asks the user to start an appcache download
+ * process.
+ */
+app.download =  function () {
+  var OFFLINE = 'offline';
+  var offline = morel.settings(OFFLINE);
+  var downloadedApp = offline ? offline['downloaded'] : false;
+  var dontAskDownloadApp = offline ? offline['dontAsk'] : false;
+
+  if (!downloadedApp && !dontAskDownloadApp) {
+    var donwloadBtnId = "download-button";
+    var donwloadCancelBtnId = "download-cancel-button";
+    var downloadCheckbox = "download-checkbox";
+
+    var message =
+      '<h3>Start downloading the app for offline use?</h3></br>' +
+
+      '<label><input id="' + downloadCheckbox + '" type="checkbox" name="checkbox-0 ">Don\'t ask again' +
+      '</label> </br>' +
+
+      '<button id="' + donwloadBtnId + '" class="ui-btn">Download</button>' +
+      '<button id="' + donwloadCancelBtnId + '" class="ui-btn">Cancel</button>';
+
+    app.message(message, 0);
+
+    $('#' + donwloadBtnId).on('click', function () {
+      _log('helpers: starting appcache downloading process.', app.LOG_DEBUG);
+      $.mobile.loading('hide');
+
+      //for some unknown reason on timeout the popup does not disappear
+      setTimeout(function () {
+        function onSuccess() {
+          offline = {
+            'downloaded': true,
+            'dontAsk': false
+          };
+          morel.settings(OFFLINE, offline);
+          jQuery.mobile.loading('hide');
+          window.location.reload();
+        }
+
+        function onError() {
+          _log('helpers: ERROR appcache.');
+        }
+
+        app.startManifestDownload('appcache', onSuccess, onError);
+      }, 500);
+    });
+
+    $('#' + donwloadCancelBtnId).on('click', function () {
+      _log('helpers: appcache dowload canceled.', app.LOG_DEBUG);
+      $.mobile.loading('hide');
+
+      var dontAsk = $('#' + downloadCheckbox).prop('checked');
+      offline = {
+        'downloaded': false,
+        'dontAsk': dontAsk
+      };
+
+      morel.settings(OFFLINE, offline);
+    });
+  }
+};
+
+
+/**
+ * Starts an Appcache Manifest Downloading.
+ *
+ * @param id
+ * @param files_no
+ * @param src
+ * @param callback
+ * @param onError
+ */
+app.startManifestDownload = function (id, callback, onError) {
+  var APPCACHE_LOADER_URL = Drupal.settings.themePath + '/scripts/offline.php';
+
+  /*todo: Add better offline handling:
+   If there is a network connection, but it cannot reach any
+   Internet, it will carry on loading the page, where it should stop it
+   at that point.
+   */
+  if (navigator.onLine) {
+    var src = APPCACHE_LOADER_URL;
+    var frame = document.getElementById(id);
+    if (frame) {
+      //update
+      frame.contentWindow.applicationCache.update();
+    } else {
+      //init
+      app.message('<iframe id="' + id + '" src="' + src + '" width="215px" height="215px" scrolling="no" frameBorder="0"></iframe>', 0);
+      frame = document.getElementById(id);
+
+      //After frame loading set up its controllers/callbacks
+      frame.onload = function () {
+        _log('Manifest frame loaded', app.LOG_INFO);
+        if (callback != null) {
+          frame.contentWindow.finished = callback;
+        }
+
+        if (onError != null) {
+          frame.contentWindow.error = onError;
+        }
+      }
+    }
+  } else {
+    app.message("Looks like you are offline!");
+  }
+};
+
+/**
  * Generic function to detect the browser
  *
  * Chrome has to have and ID of both Chrome and Safari therefore

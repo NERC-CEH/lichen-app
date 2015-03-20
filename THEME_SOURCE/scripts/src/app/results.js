@@ -133,7 +133,7 @@
         //offline
         function onSaveSuccess() {
           $.mobile.loading('hide');
-          app.navigation.message("<center><h2>No Internet. Record saved.</h2></center>");
+          app.message("<center><h2>No Internet. Record saved.</h2></center>");
           setTimeout(function () {
             $("body").pagecontainer("change", "#welcome");
           }, 3000);

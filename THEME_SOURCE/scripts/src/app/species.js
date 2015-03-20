@@ -17,7 +17,7 @@
 
       var species = app.controller.list.getCurrentSpecies();
 
-      if (species.confusion_image_1.length || species.confusion_image_2.length){
+      if (species.confusion_image_1 && species.confusion_image_1.length){
         species.confusion_images = [
           species.confusion_image_1,
           species.confusion_image_2
