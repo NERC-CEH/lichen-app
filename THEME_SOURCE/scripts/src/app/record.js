@@ -259,7 +259,7 @@
       var invalids = this.validateInputs();
       if (invalids.length > 0) {
         var message =
-          "<p>Still missing:</p><ul>";
+          "<h3>Still missing:</h3><ul>";
 
         for (var i = 0; i < invalids.length; i++) {
           message += "<li>" + invalids[i].name + "</li>";
