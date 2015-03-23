@@ -184,6 +184,11 @@ body {
     background: url('../images/sponsor_logo.png') center center no-repeat;
     background-size: contain;
 }
+@media only screen and (max-width: 400px) {
+    .sponsor-logo {
+        height: 40vh;
+    }
+}
 
 .species-list-taxon{
     font-size: large !important;

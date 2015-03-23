@@ -2,12 +2,6 @@
   window.app = window.app || {};
   app.controller = app.controller || {};
   app.controller.list = {
-    //controller configuration should be set up in an app config file
-    CONF: {
-      PROB_DATA_SRC: "",
-      SPECIES_DATA_SRC: ""
-    },
-
     DEFAULT_SORT: 'taxonomic',
 
     /**
@@ -16,10 +10,7 @@
     pagecreate: function () {
       _log('list: pagecreate.');
 
-      this.loadSpeciesData();
-
-      //ask user to appcache
-      //setTimeout(app.controller.list.download, 1000);
+      $(document).on('dataLoaded', this.pagecontainershow); //async data load for the first time
     },
 
     /**
@@ -113,34 +104,6 @@
         zone_next.on('click', function (event) {
           history.back();
         });
-      }
-    },
-
-    /**
-     * Loads the species data to app.data.species.
-     */
-    loadSpeciesData: function () {
-      //load species data
-      if (!morel.storage.is('species')) {
-        app.message('Loading IDs data for the first time..');
-        $.mobile.loading('show');
-        $.ajax({
-          url: this.CONF.SPECIES_DATA_SRC,
-          dataType: 'jsonp',
-          async: false,
-          success: function (species) {
-            $.mobile.loading('hide');
-            app.data.species = species;
-
-            //saves for quicker loading
-            morel.storage.set('species', species);
-
-            //todo: what if data comes first before pagecontainershow
-            app.controller.list.renderList();
-          }
-        });
-      } else {
-        app.data.species = morel.storage.get('species');
       }
     },
 

@@ -77,8 +77,6 @@
 
       this.saveDate();
 
-      app.controller.list.loadSpeciesData();
-
       //attach element listeners
       this.$resultsButton = $('#results-button');
       this.$resultsButton.on('click', this.proceedToResults);
