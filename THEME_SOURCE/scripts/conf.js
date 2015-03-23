@@ -12,7 +12,11 @@ app.CONF = {
   NAME: 'app', //name grunt replaced
   HOME: "http://192.171.199.230/lichen/app/main",
   SPECIES_DATA_URL: "http://192.171.199.230/lichen/serv/species",
-
+  GA: {
+    //Google Analytics settings
+    STATUS: true,
+    ID: 'UA-58378803-1'
+  },
   //app feature settings
   FEATURES: {
     SEND_RECORD: true
@@ -30,12 +34,14 @@ app.CONF = {
   }
 };
 
+//historic
+app.NAME = app.CONF.NAME; //remove the ones from CONF
+app.VERSION = app.CONF.VERSION;
+
 //logging
 log.CONF = {
   STATE: log.DEBUG,
-  ERROR_URL: "http://192.171.199.230/lichen/mobile/log",
-  APP_NAME: app.NAME,
-  APP_VERSION: app.VERSION
+  GA_ERROR: true //log error using google analytics
 };
 
 //morel

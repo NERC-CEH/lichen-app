@@ -44,7 +44,7 @@ $FONT_SIZE = 20;
               case 'error':
                 message = "Error";
                 jQuery('path').css('fill', 'red');
-                error();
+                error(e.originalEvent);
                 break;
               case 'cached':
               case 'updateready':

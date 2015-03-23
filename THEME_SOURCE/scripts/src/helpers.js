@@ -151,42 +151,10 @@ window.log = {
     //print error
     console.error(error.message, error.url, error.line);
 
-    //prepare the message
-    var message = '<b style="color: red">' + error.message + '</b>';
-    message += '</br><b> morel version = </b><i>"' + morel.VERSION + '"</i>';
-
-    message += '</br><b> app name = </b><i>"' + log.CONF.APP_NAME + '"</i>';
-    message += '</br><b> app version = </b><i>"' + log.CONF.APP_VERSION + '"</i></br>';
-
-    //browser info
-    message += '</br>' + navigator.appName;
-    message += '</br>' + navigator.appVersion;
-
-    var url = error.url + ' (' + error.line + ')';
-
-    if (navigator.onLine) {
-      //send to server
-
-      var data = {};
-      data.append = function (name, value) {
-        this[name] = value;
-      };
-      data.append('message', message);
-      data.append('url', url);
-      morel.auth.appendApp(data);
-
-      //removing unnecessary information
-      delete data.append;
-
-      jQuery.ajax({
-        url: errorLogURL,
-        type: 'post',
-        dataType: 'json',
-        success: function (data) {
-          console.log(data);
-        },
-        data: data
-      });
+    if (app.CONF.GA.STATUS && log.CONF.GA_ERROR){
+      ga('send', 'exception', {
+        'exDescription': error.message + ' ' +  error.url + ' ' +  error.line
+      })
     }
   },
 
@@ -291,6 +259,11 @@ app.download =  function () {
           };
           morel.settings(OFFLINE, offline);
 
+          //Send update to Google Analytics
+          if (app.CONF.GA.STATUS){
+            ga('send', 'event', 'app', 'downloadSuccess');
+          }
+
           var finishedBtnId = 'download-finished-restart-button';
           var finishedBtnCloseId = 'download-finished-close-button';
 
@@ -310,8 +283,8 @@ app.download =  function () {
           });
         }
 
-        function onError() {
-          _log('helpers: ERROR appcache.');
+        function onError(error) {
+          _log(error, log.ERROR);
         }
 
         app.startManifestDownload('appcache', onSuccess, onError);
