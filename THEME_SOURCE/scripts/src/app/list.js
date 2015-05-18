@@ -222,7 +222,7 @@
       var list_form_categorised = {
         'bushy': [],
         'leafy': [],
-        'granular': []
+        'granular-crustose': []
       };
 
       for (var i = 0; i < list.length; i++) {
@@ -235,11 +235,11 @@
 
       list_form_categorised['bushy'].sort(sorter);
       list_form_categorised['leafy'].sort(sorter);
-      list_form_categorised['granular'].sort(sorter);
+      list_form_categorised['granular-crustose'].sort(sorter);
 
       var sorted_list = list_form_categorised['bushy'];
       sorted_list = sorted_list.concat(list_form_categorised['leafy']);
-      sorted_list = sorted_list.concat(list_form_categorised['granular']);
+      sorted_list = sorted_list.concat(list_form_categorised['granular-crustose']);
 
       if (list != null) {
         app.controller.list.printList(sorted_list);

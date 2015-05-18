@@ -337,9 +337,6 @@ path {
     background-color: #EDEDED !important;
 }
 
-.granular{
-    /*background-color: #DFDFDF !important;*/
-}
 
 /* Lichen key icons on list */
 li.list > .bushy,
@@ -356,8 +353,8 @@ label.leafy {
     background-size: 70px 20px;
     background-image: url('../images/leafy.png');
 }
-li.list > .granular,
-label.granular {
+li.list > .granular-crustose,
+label.granular-crustose {
     background-position: right 50px center;
     background-repeat: no-repeat;
     background-size: 70px 20px;
@@ -377,7 +374,7 @@ label.granular {
         background-size: 70px 20px;
         background-image: url('../images/leafy.png');
     }
-    li.list > .granular {
+    li.list > .granular-crustose {
         background-position: 80% 80%;
         background-repeat: no-repeat;
         background-size: 70px 20px;
@@ -402,7 +399,7 @@ label.granular {
         background-size: 70px 20px;
         background-image: url('../images/leafy.png');
     }
-    label.granular {
+    label.granular-crustose {
         min-height: 80px;
         padding-top: 0;
         padding-bottom: 0;
