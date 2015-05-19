@@ -72,6 +72,11 @@
             $.mobile.loading('hide');
           }, 3000);
 
+          //Send update to Google Analytics
+          if (app.CONF.GA.STATUS){
+            ga('send', 'event', 'app', 'sendRecordSuccess');
+          }
+
           morel.record.db.remove(recordKey, function () {
             app.controller.user.printList();
           });
@@ -81,7 +86,7 @@
           if (!xhr.responseText) {
             xhr.responseText = "Sorry. Some Error Occurred."
           }
-          _log("user: ERROR record ajax (" + xhr.status + " " + thrownError + ").", log.ERROR);
+          _log("user: record ajax (" + xhr.status + " " + thrownError + ").", log.ERROR);
           _log(xhr.responseText, log.ERROR);
 
           $.mobile.loading('show', {

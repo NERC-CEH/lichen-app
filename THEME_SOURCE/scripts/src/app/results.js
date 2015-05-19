@@ -111,6 +111,8 @@
         var message = "<center><h3>Sorry!</h3></center>" +
           "<p>" + err.message + "</p>";
         app.message(message);
+
+        _log("results: record ajax (" + err.message + ").", log.ERROR);
       }
 
       if (navigator.onLine) {
@@ -123,6 +125,10 @@
           //clean the old record
           app.controller.record.clear();
 
+          //Send update to Google Analytics
+          if (app.CONF.GA.STATUS){
+            ga('send', 'event', 'app', 'sendRecordSuccess');
+          }
           setTimeout(function () {
             $("body").pagecontainer("change", "#welcome");
           }, 3000);

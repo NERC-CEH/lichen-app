@@ -3,19 +3,20 @@
   checkForUpdates();
   app.initialize();
 
-  (function() {
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  //initialize Google Analytics
+  if (app.CONF.GA.STATUS) {
+    (function() {
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-    ga('create', 'UA-58378803-1', 'auto');
-    ga('set', 'appName', app.NAME);
-    ga('set', 'appVersion', app.VERSION);
+      ga('create', app.CONF.GA.ID, 'auto');
+      ga('set', 'appName', app.NAME);
+      ga('set', 'appVersion', app.VERSION);
 
-    ga('send', 'pageview');
+      ga('send', 'pageview');
 
-    if (app.CONF.GA.STATUS) {
       $(document).on("pageshow", function(e){
         // Record page view
         ga('send', {
@@ -23,8 +24,9 @@
           'page': e.target.id
         });
       });
-    }
-  })();
+    })();
+  }
+
 
   /**
    * Overriding the default iform mobile library function responsible

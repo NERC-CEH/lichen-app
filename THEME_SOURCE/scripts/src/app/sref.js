@@ -222,7 +222,7 @@
           longitude: location.lon,
           accuracy: location.acc
         });
-        location = this.getGeoloc();
+        location = app.controller.sref.getGeoloc();
 
         app.controller.sref.renderGPStab('finished', location);
       }
