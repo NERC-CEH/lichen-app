@@ -111,20 +111,22 @@ app.VERSION = app.CONF.VERSION;
 
 //logging
 log.CONF = {
-  STATE: log.DEBUG,
+  STATE: log.INFO,
   GA_ERROR: true //log error using google analytics
 };
+window.onerror = log.onError;
 
 //morel
+morel.geoloc.CONF.GPS_ACCURACY_LIMIT = 10; //meters
+morel.io.CONF.RECORD_URL = "http://192.171.199.230/lichen/mobile/submit";
 morel.CONF.NAME = app.CONF.NAME;
-morel.auth.CONF = {
+$.extend(morel.auth.CONF, {
   APPNAME: "lichen",
   APPSECRET: "mylichen",
   WEBSITE_ID: 101,
   SURVEY_ID: 184
-};
-
-jQuery.extend(morel.record.inputs.KEYS, {
+});
+$.extend(morel.record.inputs.KEYS, {
   TREE_TYPE: 'smpAttr:433',
   TREE_NUMBER: 'occAttr:230',
   TREE_PART: 'occAttr:229',
@@ -139,8 +141,6 @@ jQuery.extend(morel.record.inputs.KEYS, {
   SREF_NAME: 'smpAttr:442'
 });
 
-morel.geoloc.CONF.GPS_ACCURACY_LIMIT = 10; //meters
-morel.io.CONF.RECORD_URL = "http://192.171.199.230/lichen/mobile/submit";
 
-//window.onerror = _onerror;
+
 
