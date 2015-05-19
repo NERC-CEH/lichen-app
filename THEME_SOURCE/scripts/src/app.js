@@ -3,23 +3,6 @@
   checkForUpdates();
   app.initialize();
 
-  //Fixing back buttons for Mac 7.* History bug.
-  $(document).on('pagecreate', function(event, ui) {
-    if (app.browserDetect('Safari')){
-      if (jQuery.mobile.activePage != null) {
-        var nextPageid = event.target.id;
-        var currentPageURL = null;
-
-        var external = jQuery.mobile.activePage.attr('data-external-page');
-        if (external == null) {
-          currentPageURL = '#' + jQuery.mobile.activePage.attr('id');
-        }
-
-        //fixPageBackButtons(currentPageURL, nextPageid);
-      }
-    }
-  });
-
   /**
    * Overriding the default iform mobile library function responsible
    * for extracting and compiling saved records into a FormData object for posting.

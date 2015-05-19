@@ -19,7 +19,8 @@ app.CONF = {
   },
   //app feature settings
   FEATURES: {
-    SEND_RECORD: true
+    SEND_RECORD: true,
+    OFFLINE: true
   },
 
   WAREHOUSE_VALUES: {

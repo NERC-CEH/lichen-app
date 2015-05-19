@@ -15,9 +15,7 @@
 
       this.loadSpeciesData();
 
-      setTimeout(function(){
-        app.download();
-      }, 500);
+      this.trip();
     },
 
     pagecontainershow: function (e, data) {
@@ -45,6 +43,44 @@
         });
       } else {
         app.data.species = morel.storage.get('species');
+      }
+    },
+
+    trip: function () {
+      if(app.browser.isMobile() && !app.browser.isHomeMode()) {
+        var homeScreenShown = morel.settings('homescreen');
+        if (!homeScreenShown) {
+          setTimeout(function(){
+            var finishedBtnCloseId = 'finished-ok-button';
+
+            var addingToHomeScreen = '<p>1. Browser Options<br/> 2. Add to Home Screen</p>';
+
+            if(app.browser.detect('Safari')){
+              addingToHomeScreen =
+                '<img id="safari-add-homescreen" src="' + Drupal.settings.themePath + '/images/add_homescreen.png">';
+            }
+
+            var message =
+              '<center><h2>Add to Homescreen</h2></center>' +
+              addingToHomeScreen +
+              '<button id="' + finishedBtnCloseId + '">OK</button>';
+
+            app.message(message, 0);
+
+            $('#' + finishedBtnCloseId ).on('click', function () {
+              if (app.CONF.FEATURES.OFFLINE) {
+                morel.settings('homescreen', true);
+                app.download();
+              }
+            });
+          }, 500);
+          return;
+        }
+      }
+
+      //in case the home screen mode was not detected correctly
+      if (app.CONF.FEATURES.OFFLINE){
+        setTimeout(app.download, 500);
       }
     }
   };
