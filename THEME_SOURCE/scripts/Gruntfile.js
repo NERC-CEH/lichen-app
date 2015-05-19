@@ -82,14 +82,21 @@ module.exports = function(grunt) {
 			src: ['../../scripts/' + LIBS_NAME],
 			overwrite: true, // Fix klass.js no ';' problem
 			replacements: [{
-				from: '\/\/ PhotoSwipe',
-				to: ';\/\/ photoswipe'
-			},
-			{
-				from: 'use strict',
-				to: ''
-			}
-
+          from: '\/\/ PhotoSwipe',
+          to: ';\/\/ photoswipe'
+        },
+        {
+          from: 'use strict',
+          to: ''
+        },
+        {
+          from: 'shim(\'indexedDB\', idbModules.shimIndexedDB);',
+          to:  'shim(\'_indexedDB\', idbModules.shimIndexedDB);'
+        },
+        {
+          from: 'shim(\'IDBKeyRange\', idbModules.IDBKeyRange);',
+          to:  'shim(\'_IDBKeyRange\', idbModules.IDBKeyRange);'
+        }
 		]
 	}
 },
