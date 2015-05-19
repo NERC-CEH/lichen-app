@@ -22,6 +22,7 @@
       }
 
       $('#grid-ref-set').on('click', this.gridRefConvert);
+      $('#location-opts').on('tabsactivate', this.refreshMap);
     },
 
     pagecontainerbeforeshow: function (e, data) {
