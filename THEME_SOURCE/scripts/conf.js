@@ -130,6 +130,8 @@ $.extend(morel.record.inputs.KEYS, {
   TREE_TYPE: 'smpAttr:433',
   TREE_NUMBER: 'occAttr:230',
   TREE_PART: 'occAttr:229',
+  TRUNK_NAQI: 'smpAttr:448',
+  BRANCH_NAQI: 'smpAttr:449',
   TRUNK_LIS: 'smpAttr:434',
   BRANCH_LIS: 'smpAttr:441',
   TREE_CIRCUM_1: 'smpAttr:443',
@@ -138,7 +140,7 @@ $.extend(morel.record.inputs.KEYS, {
   TREE_CIRCUM_4: 'smpAttr:446',
   TREE_CIRCUM_5: 'smpAttr:447',
   EMAIL: 'smpAttr:14',
-  SREF_NAME: 'smpAttr:442'
+  SREF_NAME: 'sample:location_name'
 });
 
 

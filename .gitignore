@@ -6,3 +6,4 @@ node_modules
 scripts/app.js
 scripts/app.min.js
 scripts/libs.js
+.idea
