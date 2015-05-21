@@ -337,6 +337,26 @@ path {
     background-color: #EDEDED !important;
 }
 
+#results-branch-info,
+#results-trunk-info {
+    font-size: small;
+}
+
+.nitrogen-very-polluted {
+    color: rgb(229, 12, 45);
+}
+
+.nitrogen-polluted {
+    color: rgb(190, 190, 58);
+}
+
+.nitrogen-risk {
+    color: rgb(129, 129, 129);
+}
+
+.nitrogen-clean {
+    color: rgb(26, 153, 23);
+}
 
 /* Lichen key icons on list */
 li.list > .bushy,

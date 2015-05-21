@@ -36,24 +36,26 @@
       if (trunk_lis || trunk_lis === 0){
         morel.record.inputs.set(morel.record.inputs.KEYS.TRUNK_LIS, trunk_lis);
 
-        var trunk_naqi = (3.6666666 - trunk_lis) / 3.33333;
-        morel.record.inputs.set(morel.record.inputs.KEYS.TRUNK_NAQI, trunk_naqi);
+        var naqi = (3.6666666 - trunk_lis) / 3.33333;
+        morel.record.inputs.set(morel.record.inputs.KEYS.TRUNK_NAQI, naqi);
 
         this.add_trunk_results(trunk_lis);
         $('#results-trunk-lis').text(trunk_lis.toFixed(1));
-        $('#results-trunk-naqi').text(trunk_naqi.toFixed(1));
+        $('#results-trunk-naqi').text(naqi.toFixed(1));
+        this.setPollutionMessage('#results-trunk-info', naqi);
         $('#results-trunk').show();
         _log('results: trunk_lis: ' + trunk_lis);
       }
       if (branch_lis || trunk_lis === 0) {
         morel.record.inputs.set(morel.record.inputs.KEYS.BRANCH_LIS, branch_lis);
 
-        var branch_naqi = (3.4 - branch_lis) / 4;
-        morel.record.inputs.set(morel.record.inputs.KEYS.BRANCH_NAQI, branch_naqi);
+        var naqi = (3.4 - branch_lis) / 4;
+        morel.record.inputs.set(morel.record.inputs.KEYS.BRANCH_NAQI, naqi);
 
         this.add_branch_results(branch_lis);
         $('#results-branch-lis').text(branch_lis.toFixed(1));
-        $('#results-branch-naqi').text(branch_naqi.toFixed(1));
+        $('#results-branch-naqi').text(naqi.toFixed(1));
+        this.setPollutionMessage('#results-branch-info', naqi);
         $('#results-branch').show();
         _log('results: branch_lis: ' + branch_lis);
       }
@@ -102,6 +104,29 @@
       }
 
       return (sensitive - tolerant) / parts.length;
+    },
+
+    setPollutionMessage: function (id, naqi) {
+      var $messagePlaceholder = $(id);
+      var message = '';
+      switch(true) {
+        case naqi > 1.25:
+          message = '(Very Nitrogen polluted)';
+          $messagePlaceholder.addClass('nitrogen-very-polluted');
+          break;
+        case naqi > 0.86:
+          message = '(Nitrogen polluted)';
+          $messagePlaceholder.addClass('nitrogen-polluted');
+          break;
+        case naqi > 0.5:
+          message = '(At risk)';
+          $messagePlaceholder.addClass('nitrogen-risk');
+          break;
+        default:
+          message = '(Clean)';
+          $messagePlaceholder.addClass('nitrogen-clean');
+      }
+      $messagePlaceholder.text(message);
     },
 
     /*
