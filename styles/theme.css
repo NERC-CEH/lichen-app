@@ -297,6 +297,7 @@ fieldset.tree-type {
 .graph-container {
     width: 100%;
     height: 40vh;
+    min-height: 270px;
 }
 
 path {
@@ -356,6 +357,10 @@ path {
 
 .nitrogen-clean {
     color: rgb(26, 153, 23);
+}
+
+div#results ul {
+    margin-top: 0;
 }
 
 /* Lichen key icons on list */

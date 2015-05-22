@@ -10,8 +10,8 @@ $ = jQuery;
 app.CONF = {
   VERSION: '0', //version grunt replaced //Application (controllers and data) version
   NAME: 'app', //name grunt replaced
-  HOME: "http://192.171.199.230/lichen/app/main",
-  SPECIES_DATA_URL: "http://192.171.199.230/lichen/serv/species",
+  HOME: "http://www.apis.ac.uk/lichen-app",
+  SPECIES_DATA_URL: "http://www.apis.ac.uk/serv/species",
   GA: {
     //Google Analytics settings
     STATUS: true,

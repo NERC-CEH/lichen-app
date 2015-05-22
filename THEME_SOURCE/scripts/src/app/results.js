@@ -251,7 +251,7 @@
       // define dimensions of graph
       var m = [40, 10, 80, 20]; // margins
       var w = container.width() - m[1] - m[3]; // width
-      var h = container.height() - m[0] - m[2]; // height
+      var h = (container.height() || 200) - m[0] - m[2]; // height
 
       var data = [3.6, 0.3, -3];
       var data2 = [3.4, -0.4, -4.6];
