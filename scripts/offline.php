@@ -1,6 +1,6 @@
 <?php
 //Configuration
-$base_path = '/lichen';
+$base_path = 'http://www.apis.ac.uk';
 $FILES = 80;
 
 $WIDTH = 200;
