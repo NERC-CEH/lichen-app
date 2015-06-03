@@ -51,25 +51,33 @@ $iform_mobile_path = 'sites/all/modules/iform_mobile/';
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="manifest" href="<?php echo $theme_path ?>/manifest.json">
 
-  <!-- ICONS -->
-  <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="<?php echo $theme_path ?>/images/favicon.ico">
-  <link rel="shortcut icon" sizes="192x192" href="<?php echo $theme_path ?>/images/android/192.png">
-  <link rel="apple-touch-icon" href="<?php echo $theme_path ?>/images/ios/AppIcon60x60.png">
-  <link rel="apple-touch-icon" sizes="76x76" href="<?php echo $theme_path ?>/images/ios/AppIcon76x76.png">
-  <link rel="apple-touch-icon" sizes="120x120" href="<?php echo $theme_path ?>/images/ios/AppIcon120x120.png">
-  <link rel="apple-touch-icon" sizes="152x152" href="<?php echo $theme_path ?>/images/ios/AppIcon152x152.png">
-  <link rel="apple-touch-startup-image" href="<?php echo $theme_path ?>/images/ios/startup.png">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,
+        minimum-scale=1, maximum-scale=1, user-scalable=no"/>
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Lichen App">
+    <meta name="application-name" content="Lichen App">
+    <meta name="format-detection" content="telephone=no">
 
-  <!-- CSS -->
-  <?php print $styles; ?>
+    <!-- ICONS -->
+    <link rel="icon" type="image/vnd.microsoft.icon" href="<?php echo $theme_path ?>/images/favicon.ico">
+    <link rel="icon" sizes="192x192" href="<?php echo $theme_path ?>/images/Icon-192.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?php echo $theme_path ?>/images/Icon-72.png">
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="<?php echo $theme_path ?>/images/Icon-76.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?php echo $theme_path ?>/images/Icon@2x.png">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php echo $theme_path ?>/images/Icon-72@2x.png">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="<?php echo $theme_path ?>/images/Icon-76@2x.png">
+    <link rel="apple-touch-icon-precomposed" sizes="180x180" href="<?php echo $theme_path ?>/images/Icon-60@3x.png">
 
-  <!-- JavaScript -->
-  <?php print $scripts; ?>
+    <!-- CSS -->
+    <?php print $styles; ?>
+
+    <!-- JavaScript -->
+    <?php print $scripts; ?>
 
     <script>
         Drupal.settings.themePath = '<?php echo $theme_path ?>';

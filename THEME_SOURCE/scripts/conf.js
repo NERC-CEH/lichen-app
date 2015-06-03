@@ -25,13 +25,13 @@ app.CONF = {
 
   WAREHOUSE_VALUES: {
     treeType: {
-      'birch': 3183, 'oak': 3184
+      'birch': 5202, 'oak': 5203
     },
     treePart: {
-      'e': 3173, 's': 3174, 'w': 3175,
-      'one': 3176, 'two': 3177, 'three': 3178
+      'e': 5213, 's': 5214, 'w': 5215,
+      'one': 5216, 'two': 5217, 'three': 5218
     },
-    treeNumber: [3185, 3186, 3187, 3188, 3189]
+    treeNumber: [5208, 5209, 5210, 5211, 5212]
   },
   MAP: {
     zoom: 5,
@@ -117,29 +117,29 @@ log.CONF = {
 window.onerror = log.onError;
 
 //morel
-morel.geoloc.CONF.GPS_ACCURACY_LIMIT = 10; //meters
-morel.io.CONF.RECORD_URL = "http://192.171.199.230/lichen/mobile/submit";
+morel.geoloc.CONF.GPS_ACCURACY_LIMIT = 50; //meters
+morel.io.CONF.RECORD_URL = "http://www.apis.ac.uk/mobile/submit";
 morel.CONF.NAME = app.CONF.NAME;
 $.extend(morel.auth.CONF, {
   APPNAME: "lichen",
-  APPSECRET: "mylichen",
-  WEBSITE_ID: 101,
-  SURVEY_ID: 184
+  APPSECRET: "4n2cIuqi9t60TZtYy6aKQ",
+  WEBSITE_ID: 77,
+  SURVEY_ID: 307
 });
 $.extend(morel.record.inputs.KEYS, {
-  TREE_TYPE: 'smpAttr:433',
-  TREE_NUMBER: 'occAttr:230',
-  TREE_PART: 'occAttr:229',
-  TRUNK_NAQI: 'smpAttr:448',
-  BRANCH_NAQI: 'smpAttr:449',
-  TRUNK_LIS: 'smpAttr:434',
-  BRANCH_LIS: 'smpAttr:441',
-  TREE_CIRCUM_1: 'smpAttr:443',
-  TREE_CIRCUM_2: 'smpAttr:444',
-  TREE_CIRCUM_3: 'smpAttr:445',
-  TREE_CIRCUM_4: 'smpAttr:446',
-  TREE_CIRCUM_5: 'smpAttr:447',
-  EMAIL: 'smpAttr:14',
+  TREE_TYPE: 'smpAttr:621',
+  TREE_NUMBER: 'occAttr:425',
+  TREE_PART: 'occAttr:426',
+  TRUNK_NAQI: 'smpAttr:613',
+  BRANCH_NAQI: 'smpAttr:619',
+  TRUNK_LIS: 'smpAttr:620',
+  BRANCH_LIS: 'smpAttr:612',
+  TREE_CIRCUM_1: 'smpAttr:618',
+  TREE_CIRCUM_2: 'smpAttr:617',
+  TREE_CIRCUM_3: 'smpAttr:616',
+  TREE_CIRCUM_4: 'smpAttr:615',
+  TREE_CIRCUM_5: 'smpAttr:614',
+  EMAIL: 'smpAttr:623',
   SREF_NAME: 'sample:location_name'
 });
 

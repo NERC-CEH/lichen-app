@@ -175,6 +175,7 @@ body {
     margin: 0 auto;
     width: 100%;
     height: 30vh;
+    min-height: 200px;
     background: url('../images/app_logo.png') center center no-repeat;
     background-size: contain;
 }
