@@ -46,35 +46,64 @@
       }
     },
 
+    /**
+     * Shows user messages to guide through app use: saving to home screen & downloading
+     *
+     * Fixing iOS 8.x reloading problem - disabling downloading on non app-mode
+     */
     trip: function () {
+      //check if we are NOT in a HOME-MODE
       if(app.browser.isMobile() && !app.browser.isHomeMode()) {
+
+        //proceed only if the user has NOT CANCELED the dialog future showings
         var homeScreenShown = morel.settings('homescreen');
         if (!homeScreenShown) {
           setTimeout(function(){
             var finishedBtnCloseId = 'finished-ok-button';
 
-            var addingToHomeScreen = '<p>1. Browser Options<br/> 2. Add to Home Screen</p>';
+            var addingToHomeScreen = '<p>1. Open <strong>Browser Options</strong></p>' +
+              '<p>2. Tap <strong>Add to Home Screen</strong></p>';
+            var appModeCheckbox = "app-mode-checkbox"; //checkbox used in Safari non-app-mode
 
+            //if iOS then we need to show different options
             if(app.browser.detect('Safari')){
               addingToHomeScreen =
                 '<img id="safari-add-homescreen" src="' + Drupal.settings.themePath + '/images/add_homescreen.png">';
+
+              //iOS 8.x fix
+              addingToHomeScreen += '<label><input id="' + appModeCheckbox + '" type="checkbox" name="checkbox-0 ">Don\'t ask again' +
+              '</label> </br>';
             }
 
-            var message =
-              '<center><h2>Add to Homescreen</h2></center>' +
+            var message = '<center><h2>Add to Homescreen</h2></center>' +
               addingToHomeScreen +
               '<button id="' + finishedBtnCloseId + '">OK</button>';
 
             app.message(message, 0);
 
             $('#' + finishedBtnCloseId ).on('click', function () {
-              if (app.CONF.FEATURES.OFFLINE) {
+              //iOS 8.x fix
+              if (app.browser.detect('Safari')) {
+                if ($('#'  + appModeCheckbox).prop('checked')) {
+                  morel.settings('homescreen', true);
+                }
+                $.mobile.loading('hide');
+              } else {
+                //normal behaviour
                 morel.settings('homescreen', true);
-                app.download();
+                if (app.CONF.FEATURES.OFFLINE) {
+                  app.download();
+                }
               }
             });
           }, 500);
+
           return;
+        } else {
+          //iOS 8.x fix
+          if (app.browser.detect('Safari')) {
+            return;
+          }
         }
       }
 
