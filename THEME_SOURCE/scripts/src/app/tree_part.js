@@ -74,7 +74,7 @@
 
     updateCircumference: function () {
       var part = morel.storage.tmpGet(app.controller.record.PART);
-      var value = $(this).val();
+      var value = $('#circumference').val();
       var name = morel.record.inputs.KEYS['TREE_CIRCUM_' + part];
 
       if (value){
@@ -97,6 +97,10 @@
       tree_part_next.unbind('click'); //remove previous handlers
       //set the state update upon click
       tree_part_next.on('click', function () {
+        //sometimes the onChange is not fired on circumference field change
+        //so we need to manually check if it was changed and save on leave
+        app.controller.tree_part.updateCircumference();
+
         //change the state of the recording: what tree and part of it we are now recording
         var type = $(this).data('type');
         var part = $(this).data('part');
@@ -144,6 +148,10 @@
 
       //button listeners
       $('a.zone').on('click', function () {
+        //sometimes the onChange is not fired on circumference field change
+        //so we need to manually check if it was changed and save on leave
+        app.controller.tree_part.updateCircumference();
+
         //change the state of the recording: what tree and part of it we are now recording
         var zone = $(this).data('zone');
         morel.storage.tmpSet(app.controller.record.ZONE, zone);
