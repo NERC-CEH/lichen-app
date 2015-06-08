@@ -362,14 +362,29 @@ app.startManifestDownload = function (id, callback, onError) {
  * Safari has to have an ID of only Safari and not Chrome
  */
 app.browser = (function() {
+  var ua = navigator.userAgent.toLowerCase();
+
+  var isIPhone = is('iphone');
+  var isIPad = is('ipad');
+  var isIPod = is('ipad');
+  var isChrome = is('chrome') || is('crmo');
+  var isFirefox = is('firefox');
+
+
+  function is (string) {
+    return ua.search(string) >= 0;
+  }
+
   var detect = function (browser) {
+    browser = browser.toLowerCase();
+
     "use strict";
-    if (browser === 'Chrome' || browser === 'Safari') {
-      var isChrome = navigator.userAgent.indexOf('Chrome') > -1,
-        isSafari = navigator.userAgent.indexOf("Safari") > -1;
+    if (browser === 'chrome' || browser === 'safari') {
+      var isChrome = is('chrome'),
+        isSafari = is("safari");
 
       if (isSafari) {
-        if (browser === 'Chrome') {
+        if (browser === 'chrome') {
           //Chrome
           return isChrome;
         }
@@ -382,13 +397,24 @@ app.browser = (function() {
       }
       return false;
     }
-    return (navigator.userAgent.indexOf(browser) > -1);
+    return (is(browser));
   };
 
   var isMobile = function () {
-    var mobile = navigator.userAgent.indexOf("Mobile") > -1;
-    var android = navigator.userAgent.indexOf("Android") > -1;
-    return mobile || android;
+    return is('mobile') || is('android');
+  };
+
+  var isIOS = function () {
+    return isIPad || isIPod || isIPhone;
+  };
+
+  var isAndroidChrome = function () {
+    return is('android') && isChrome;
+  };
+
+  var getIOSVersion = function () {
+    var ver = /i.*OS (\d+)_(\d+)(?:_(\d+))?/i.exec(ua);
+    return ver[1];
   };
 
   var isHomeMode = function () {
@@ -399,6 +425,9 @@ app.browser = (function() {
   return {
     detect: detect,
     isMobile: isMobile,
+    isIOS: isIOS,
+    isAndroidChrome: isAndroidChrome,
+    getIOSVersion: getIOSVersion,
     isHomeMode: isHomeMode
   };
 })();

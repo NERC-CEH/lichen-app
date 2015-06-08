@@ -66,7 +66,7 @@
             var appModeCheckbox = "app-mode-checkbox"; //checkbox used in Safari non-app-mode
 
             //if iOS then we need to show different options
-            if(app.browser.detect('Safari')){
+            if(app.browser.isIOS()){
               addingToHomeScreen =
                 '<img id="safari-add-homescreen" src="' + Drupal.settings.themePath + '/images/add_homescreen.png">';
 
@@ -83,7 +83,7 @@
 
             $('#' + finishedBtnCloseId ).on('click', function () {
               //iOS 8.x fix
-              if (app.browser.detect('Safari')) {
+              if (app.browser.isIOS()) {
                 if ($('#'  + appModeCheckbox).prop('checked')) {
                   morel.settings('homescreen', true);
                 }
@@ -101,7 +101,7 @@
           return;
         } else {
           //iOS 8.x fix
-          if (app.browser.detect('Safari')) {
+          if (app.browser.isIOS()) {
             return;
           }
         }
