@@ -1,7 +1,48 @@
-(function($){
+(function ($) {
   app.data = app.data || {};
   checkForUpdates();
   app.initialize();
+
+  //********************************************
+  //Fixing back buttons for Mac 7.* History bug.
+  //********************************************
+  if (app.browser.isIOS() && (app.browser.getIOSVersion() == 7)) {
+    $(document).on('pagecontainerchange', function (event, ui) {
+      //skip on returning or external
+      var external = jQuery.mobile.activePage.attr('data-external-page');
+      if (!ui.prevPage || window.navFixBack || external) {
+        window.navFixBack = false;
+        return;
+      }
+      window.navFixBack = false;
+
+      var prevPageID = ui.prevPage[0].id;
+      var toPageID = ui.toPage[0].id;
+
+      //for each button on page change its return route
+      var buttons = jQuery("div[id='" + toPageID + "'] a[data-rel='back']"); //return default jqm nav
+      if (buttons.length == 0) {
+        buttons = jQuery("div[id='" + toPageID + "'] a[data-navFix='" + toPageID + "']");
+      }
+      buttons.each(function (index, button) {
+        jQuery(button).removeAttr('data-rel');
+        jQuery(button).attr('data-navFix', toPageID);
+
+        jQuery(button).off('click.navFix'); //unbind previous ones
+        jQuery(button).on('click.navFix', function () {
+          console.log('navFix - returning to: ' + prevPageID);
+
+          window.navFixBack = true; //if returning
+          jQuery(this).attr('href', '#' + prevPageID);
+        });
+      });
+    });
+  }
+  //********************************************
+  // iOS FIX END
+  //********************************************
+
+
 
   //initialize Google Analytics
   if (app.CONF.GA.STATUS) {
