@@ -102,7 +102,7 @@
 
         //set button listener to refresh the page
         zone_next.on('click', function (event) {
-          history.back();
+          $.mobile.back();
         });
       }
     },
