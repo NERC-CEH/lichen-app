@@ -1,0 +1,189 @@
+@import '@ionic/core/css/core.css';
+@import '@ionic/core/css/ionic.bundle.css';
+
+@import '@flumens/ionic/dist/themes/rounded.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  a {
+    // change link colours
+    color: var(--ion-color-primary);
+  }
+  h1 {
+    // tailwind is loaded later than ionic so resets some of the ionic's base styles
+    @apply text-2xl;
+  }
+}
+
+:root {
+  --ion-color-primary: var(--color-primary);
+  --ion-color-primary-rgb: var(--color-primary-rgb);
+  --ion-color-primary-contrast: var(--color-primary-50);
+  --ion-color-primary-contrast-rgb: var(--color-primary-50-rgb);
+  --ion-color-primary-shade: var(--color-primary-700);
+  --ion-color-primary-tint: var(--color-primary-500);
+  --ion-color-primary-dark: var(--color-primary-950);
+
+  --ion-color-secondary: var(--color-secondary);
+  --ion-color-secondary-rgb: var(--color-secondary-rgb);
+  --ion-color-secondary-contrast: var(--color-secondary-50);
+  --ion-color-secondary-contrast-rgb: var(--color-secondary-50-rgb);
+  --ion-color-secondary-shade: var(--color-secondary-700);
+  --ion-color-secondary-tint: var(--color-secondary-500);
+  --ion-color-secondary-dark: var(--color-secondary-950);
+
+  --ion-color-tertiary: var(--color-tertiary);
+  --ion-color-tertiary-rgb: var(--color-tertiary-rgb);
+  --ion-color-tertiary-contrast: var(--color-tertiary-50);
+  --ion-color-tertiary-contrast-rgb: var(--color-tertiary-50-rgb);
+  --ion-color-tertiary-shade: var(--color-tertiary-700);
+  --ion-color-tertiary-tint: var(--color-tertiary-500);
+  --ion-color-tertiary-dark: var(--color-tertiary-950);
+
+  --ion-color-success: var(--color-success);
+  --ion-color-success-rgb: var(--color-success-rgb);
+  --ion-color-success-contrast: var(--color-success-50);
+  --ion-color-success-contrast-rgb: var(--color-success-50-rgb);
+  --ion-color-success-shade: var(--color-success-700);
+  --ion-color-success-tint: var(--color-success-500);
+  --ion-color-success-dark: var(--color-success-950);
+
+  --ion-color-warning: var(--color-warning);
+  --ion-color-warning-rgb: var(--color-warning-rgb);
+  --ion-color-warning-contrast: var(--color-warning-50);
+  --ion-color-warning-contrast-rgb: var(--color-warning-50-rgb);
+  --ion-color-warning-shade: var(--color-warning-700);
+  --ion-color-warning-tint: var(--color-warning-500);
+
+  --ion-color-danger: var(--color-danger);
+  --ion-color-danger-rgb: var(--color-danger-rgb);
+  --ion-color-danger-contrast: var(--color-danger-50);
+  --ion-color-danger-contrast-rgb: var(--color-danger-50-rgb);
+  --ion-color-danger-shade: var(--color-danger-700);
+  --ion-color-danger-tint: var(--color-danger-500);
+  --ion-color-danger-dark: var(--color-danger-950);
+
+  --ion-color-dark: var(--color-slate-900);
+  --ion-color-dark-contrast: var(--color-slate-50);
+  --ion-color-dark-shade: var(--color-slate-950);
+  --ion-color-dark-tint: var(--color-slate-800);
+
+  --ion-color-medium: var(--color-slate-400);
+  --ion-color-medium-contrast: var(--color-slate-50);
+  --ion-color-medium-shade: var(--color-slate-500);
+  --ion-color-medium-tint: var(--color-slate-300);
+
+  --ion-color-light: white;
+  --ion-color-light-contrast: var(--color-slate-950);
+  --ion-color-light-shade: var(--color-slate-200);
+  --ion-color-light-tint: var(--color-slate-50);
+
+  --ion-page-background: var(--color-primary-50);
+  --ion-item-background: var(--color-white);
+
+  --ion-headings-font-weight: 300;
+  --ion-item-border-color: rgb(0, 0, 0, 0.2);
+
+  --ion-toolbar-background: var(--color-primary-800);
+  --ion-toolbar-color: var(--color-white);
+  --ion-toolbar-color-activated: var(--color-white);
+}
+
+// status bar
+html.ios.plt-hybrid #status-bar-background {
+  background: var(--ion-color-primary-dark);
+  width: 100vw;
+  height: env(safe-area-inset-top);
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+}
+
+// add safe padding for devices with a notch
+ion-content {
+  --padding-top: env(safe-area-inset-top);
+}
+
+// header colours
+.apps-section .apps-section-h,
+h1,
+h2,
+h3 {
+  color: var(--ion-color-primary-dark);
+}
+
+// move south from status-bar
+.ion-page ion-content:only-child {
+  --padding-top: 20px !important;
+}
+
+// prettier main buttons
+ion-button[type='submit'],
+ion-button[expand='block'] {
+  max-height: 40px;
+  --border-radius: var(--theme-border-radius);
+}
+
+// brighter and bigger divider
+ion-item-divider {
+  font-size: 0.9em;
+  color: var(--ion-text-color);
+  padding: 0 5px 7px 5px;
+  font-weight: 500;
+}
+
+ion-item-divider ion-label[slot='end'] {
+  text-align: right;
+}
+
+// segment styles
+ion-segment {
+  width: calc(100% - 15px); // -15px to match the padding of the list below
+  min-height: 40px;
+  margin: 8px auto;
+  z-index: 100000000;
+  box-shadow: -1px 2px 7px 0 #0000001a, 0 2px 9px 0 #3e396b1a;
+  background: var(--ion-color-light);
+  border-radius: 10px;
+
+  ion-badge {
+    display: inline;
+    vertical-align: top;
+    margin: 3px;
+    margin-left: 3px;
+  }
+
+  ion-label {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-left: 1px;
+    color: var(--ion-color-primary);
+  }
+
+  ion-label.md {
+    color: var(--ion-color-primary);
+  }
+
+  ion-segment-button {
+    --color-checked: var(--ion-color-primary);
+    --padding-end: 3px;
+    --padding-start: 3px;
+  }
+
+  ion-segment-button.md {
+    --indicator-height: 4px;
+  }
+
+  .segment-button-checked.ios {
+    --indicator-color: var(--color-primary-800);
+
+    ion-label.ios {
+      color: var(--ion-color-primary-contrast);
+    }
+  }
+}

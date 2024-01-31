@@ -1,0 +1,155 @@
+[
+  {
+    "id": "NBNSYS0000018961",
+    "warehouse_id": 369244,
+    "type": "sensitive",
+    "taxon": "Pseudevernia furfuracea",
+    "description": "Pale grey upper surface, black lower surface (except on young lobes), with numerous pin-like isidia on the upper surface .",
+    "profile_pic": "Pseudevernia_furfuracea.jpg",
+    "growth_form": "bushy"
+  },
+  {
+    "id": "NBNSYS0000018480",
+    "warehouse_id": 369175,
+    "type": "sensitive",
+    "taxon": "Evernia prunastri",
+    "description": "Lobes pale green on the upper surface and whitish on the lower surface; strap-like, flattened; with soredia present on upper surface of well-developed specimens.",
+    "profile_pic": "Evernia_prunastri.jpg",
+    "growth_form": "bushy"
+  },
+  {
+    "id": "NHMSYS0001501147",
+    "warehouse_id": 369237,
+    "type": "sensitive",
+    "taxon": "Usnea species",
+    "description": "Beard lichens - greenish-grey, with a central core (visible when the branch is stretched); often pendent.",
+    "profile_pic": "Usnea_species.jpg",
+    "growth_form": "bushy"
+  },
+  {
+    "id": "NHMSYS0001476287",
+    "warehouse_id": 369226,
+    "type": "sensitive",
+    "taxon": "Bryoria species",
+    "description": "Hair lichens - green-brown to brown; hair-like and fine without central core; pendent when well developed.",
+    "profile_pic": "Bryoria_species.jpg",
+    "growth_form": "bushy"
+  },
+  {
+    "id": "NBNSYS0000015580",
+    "warehouse_id": 369207,
+    "type": "sensitive",
+    "taxon": "Sphaerophorus globosus",
+    "description": "Green-grey to brownish; branches erect, solid, with many digitate branchlets at the tip.",
+    "profile_pic": "Sphaerophorus_globosus.jpg",
+    "growth_form": "bushy"
+  },
+  {
+    "id": "NBNSYS0000016934",
+    "warehouse_id": 369247,
+    "type": "sensitive",
+    "taxon": "Graphis species",
+    "description": "Script lichens - thallus whitish grey, fruiting bodies elongate with raised lip-like margins.",
+    "profile_pic": "Graphis_species.jpg",
+    "growth_form": "granular"
+  },
+  {
+    "id": "NBNSYS0000019365",
+    "warehouse_id": 369198,
+    "type": "sensitive",
+    "taxon": "Ochrolechia androgyna",
+    "description": "Thallus white to cream with soredia in conspicuous rounded clusters and occasional whitish fruiting bodies with a thick margin (thallus and sorediared)",
+    "profile_pic": "Ochrolechia_androgyna.jpg",
+    "growth_form": "granular"
+  },
+  {
+    "id": "NBNSYS0000015513",
+    "warehouse_id": 369150,
+    "type": "tolerant",
+    "taxon": "Arthonia radiata",
+    "description": "Thallus whitish, fruiting bodies brown to black; irregular to branched; not raised above the surface.",
+    "profile_pic": "Arthonia_radiata.jpg",
+    "growth_form": "granular"
+  },
+  {
+    "id": "NHMSYS0001486983",
+    "warehouse_id": 369196,
+    "type": "tolerant",
+    "taxon": "Lecidella elaeochroma",
+    "description": "Thallus grey with black margin, often forming a mosaic on smooth bark; fruiting bodies black (c. 1 mm diameter); disc-like, concave with distinct black margin (orange).",
+    "profile_pic": "Lecidella_elaechroma.jpg",
+    "growth_form": "granular"
+  },
+  {
+    "id": "BMSSYS0000001357",
+    "warehouse_id": 369132,
+    "type": "tolerant",
+    "taxon": "Amandinea punctata",
+    "description": "Thallus grey-green with pale margin, fruiting bodies small, (c. 0.5 mm diameter); rounded, convex without distinct margin ( negative).",
+    "profile_pic": "Amandinea_punctata.jpg",
+    "growth_form": "granular"
+  },
+  {
+    "id": "NHMSYS0000361737",
+    "warehouse_id": 369172,
+    "type": "tolerant",
+    "taxon": "Candelariella reflexa",
+    "description": "Sorediate granules (< 1 mm) often with yellow fruiting bodies (negative).",
+    "profile_pic": "Candelariella_reflexa.jpg",
+    "growth_form": "granular"
+  },
+  {
+    "id": "NHMSYS0000364559",
+    "warehouse_id": 369215,
+    "type": "tolerant",
+    "taxon": "Xanthoria parietina",
+    "description": "Lobes broad (to 7 mm wide), spreading yellow to greenish, orange fruiting bodies often present.",
+    "profile_pic": "Xanthoria_parietina.jpg",
+    "growth_form": "leafy"
+  },
+  {
+    "id": "NBNSYS0000155500",
+    "warehouse_id": 369245,
+    "type": "tolerant",
+    "taxon": "Punctelia subrudecta",
+    "description": "Lobes leaf-like, more or less appressed with soredia in white spots (red), lower surface pale tan.",
+    "profile_pic": "Punctelia_subrudecta.jpg",
+    "growth_form": "leafy"
+  },
+  {
+    "id": "NBNSYS0000020585",
+    "warehouse_id": 369246,
+    "type": "tolerant",
+    "taxon": "Xanthoria polycarpa",
+    "description": "Xanthoria polycarpa (A) and X. ucrainica (B). Lobes narrow (to 1 mm wide), erect. X. polycarpa A has abundant fruiting bodies; X. ucrainica B has marginal soredia.",
+    "profile_pic": "Xanthoria_polycarpa.jpg",
+    "growth_form": "leafy"
+  },
+  {
+    "id": "NHMSYS0001491749",
+    "warehouse_id": 369234,
+    "type": "tolerant",
+    "taxon": "Parmelia species",
+    "description": "Lobes leaf-like; overlapping with a network of pale lines that become sorediate in P. sulcata while P. saxatilis has isidia on the upper surface.",
+    "profile_pic": "Parmelia_species.jpg",
+    "growth_form": "leafy"
+  },
+  {
+    "id": "NHMSYS0001493680",
+    "warehouse_id": 369243,
+    "type": "tolerant",
+    "taxon": "Physcia adscendens",
+    "description": "Lobes small narrow (c. 1 mm wide) with white lower surface and conspicuous black-tipped cilia along the margins of the lobes. Both have soredia at the lobe ends.",
+    "profile_pic": "Physcia_adscendens.jpg",
+    "growth_form": "leafy"
+  },
+  {
+    "id": "NHMSYS0001485077",
+    "warehouse_id": 369232,
+    "type": "sensitive",
+    "taxon": "Hypogymnia species",
+    "description": "Lobes swollen, hollow when cut; without rhizines",
+    "profile_pic": "Hypogmnia_species.jpg",
+    "growth_form": "leafy"
+  }
+]

@@ -1,0 +1,38 @@
+ion-tab-bar {
+  --background: var(--color-primary-800);
+  padding: 5px 0 9px;
+  padding-bottom: var(--ion-safe-area-bottom + 0, 9px);
+
+  ion-tab-button {
+    --color: var(--color-primary-100);
+
+    ion-icon {
+      font-size: 2rem;
+      --ionicon-stroke-width: 20px;
+    }
+
+    ion-label {
+      margin: 0;
+    }
+
+    @keyframes example {
+      from {
+        transform: scale(1);
+      }
+      to {
+        transform: scale(1.2);
+      }
+    }
+    &.tab-selected {
+      --color-selected: var(--color-secondary-300);
+
+      animation-fill-mode: forwards;
+      animation-name: example;
+      animation-duration: 0.5s;
+    }
+  }
+}
+
+ion-tab-bar.ios {
+  padding-bottom: calc(var(--ion-safe-area-bottom) + 9px);
+}

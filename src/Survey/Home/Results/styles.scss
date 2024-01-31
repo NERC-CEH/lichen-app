@@ -1,0 +1,23 @@
+.regionClean rect {
+  fill: green;
+}
+
+.regionAtRisk rect {
+  fill: gray;
+}
+
+.regionPolluted rect {
+  fill: yellow;
+}
+
+.regionVeryPolluted rect {
+  fill: red;
+}
+
+.branch-line {
+  stroke-dasharray: 3 4;
+}
+
+.bb-grid line {
+  stroke: #cfcfcf;
+}

@@ -1,0 +1,115 @@
+#home-user-surveys {
+  ion-header ion-toolbar {
+    --background: transparent;
+    padding: 0;
+
+    ion-segment {
+      width: calc(100% - 20px); // -20px to match the padding of the list below
+      min-height: 40px;
+      margin: 8px auto;
+      z-index: 100000000;
+      box-shadow: -1px 2px 7px 0 #0000001a, 0 2px 9px 0 #3e396b1a;
+      background: var(--ion-color-light);
+      border-radius: 10px;
+
+      ion-badge {
+        display: inline;
+        vertical-align: top;
+        margin: 3px;
+        margin-left: 3px;
+      }
+
+      ion-label {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        margin-left: 1px;
+        color: var(--ion-color-primary);
+      }
+
+      ion-label.md {
+        color: var(--ion-color-primary);
+      }
+
+      ion-segment-button {
+        padding-left: 10px;
+        padding-right: 10px;
+        --color-checked: var(--ion-color-primary);
+      }
+
+      ion-segment-button.md {
+        --indicator-height: 4px;
+      }
+
+      .segment-button-checked.ios {
+        --indicator-color: var(--color-primary-800);
+
+        ion-label.ios {
+          color: var(--ion-color-primary-contrast);
+        }
+      }
+    }
+    ion-segment.ios {
+      border: 1px solid var(--ion-color-medium);
+    }
+
+    color: var(--ion-color-primary-contrast);
+    position: fixed;
+  }
+
+  ion-content {
+    --overflow: hidden;
+
+    ion-list {
+      height: 100%;
+      width: calc(100% - 20px);
+      padding: 0 !important;
+      max-width: 600px; // ipad
+      margin: 0 auto;
+    }
+
+    .upload-all-button {
+      margin: 10px auto;
+      height: 35px !important;
+      display: block;
+      position: absolute;
+      right: 17px;
+      bottom: 0;
+      overflow: hidden;
+      border-radius: var(--theme-border-radius);
+      box-shadow: -1px 2px 7px 0 #0000001a, 0 2px 9px 0 #3e396b1a;
+
+      &.ios {
+        font-size: 0.9em;
+      }
+    }
+
+    .info-background-message {
+      margin-top: 20vh;
+      margin-bottom: 10vh;
+    }
+  }
+
+  ion-item-divider {
+    margin-top: 3px;
+    padding: 0px 4px 0 12px;
+    color: var(--ion-color-primary-shade);
+    border-radius: var(--theme-border-radius);
+  }
+}
+
+.info-background-message ion-icon,
+ion-alert .tip-icon {
+  --ionicon-stroke-width: 40px;
+  margin-bottom: -3px;
+
+  border-radius: 50%;
+  background: var(--ion-color-primary-contrast);
+  color: black;
+
+  &.with-background {
+    color: var(--ion-color-primary-contrast);
+    background: var(--ion-color-primary);
+  }
+}

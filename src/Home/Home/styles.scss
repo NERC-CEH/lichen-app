@@ -1,0 +1,88 @@
+#home ion-content {
+  --overflow: hidden;
+
+  &::part(background) {
+    // background: url('./background.png') no-repeat center center fixed;
+    // background-size: cover;
+  }
+
+  .buttons {
+    position: absolute;
+    width: 100%;
+    bottom: 15vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+
+    .fancy-button {
+      width: 100%;
+      display: block;
+      margin: 10px auto;
+      height: fit-content;
+      max-width: calc(min(90vw, 500px));
+      --padding-start: 25px;
+      --padding-end: 20px;
+      align-content: center;
+      border-radius: 15px;
+      overflow: hidden;
+      border: 1px solid var(--ion-color-primary-border);
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.36);
+
+      --background: white;
+
+      .fancy-button-container {
+        display: flex;
+        width: 100%;
+        padding: 5px 0;
+        justify-content: space-between;
+        align-items: center;
+        color: var(--color-primary-800);
+
+        & > div {
+          display: flex;
+          flex-direction: column;
+          text-align: left;
+          text-transform: none;
+          font-weight: 300;
+
+          h4 {
+            margin: 0;
+            font-weight: 800;
+          }
+
+          h4:not(:only-child) {
+            margin-bottom: 10px;
+          }
+        }
+
+        ion-icon {
+          height: 45px;
+          width: 45px;
+          margin-left: 10px;
+          background: var(--color-secondary-50);
+          color: var(--ion-color-secondary-shade);
+          padding: 10px;
+          border-radius: 15px;
+        }
+      }
+
+      &.small {
+        --padding-end: 10px;
+
+        .fancy-button-container {
+          padding: 8px 0;
+
+          ion-icon {
+            height: 35px;
+            margin-left: 10px;
+          }
+
+          h4 {
+            font-weight: 500;
+          }
+        }
+      }
+    }
+  }
+}

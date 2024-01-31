@@ -1,0 +1,5 @@
+#guide {
+  ion-content {
+    --padding-top: calc(env(safe-area-inset-top) + 60px);
+  }
+}
