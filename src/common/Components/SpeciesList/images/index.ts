@@ -1,3 +1,4 @@
+import './Amandinea_punctata.jpg?originalName';
 import './Arthonia_radiata.jpg?originalName';
 import './Bryoria_species.jpg?originalName';
 import './Candelariella_reflexa.jpg?originalName';
