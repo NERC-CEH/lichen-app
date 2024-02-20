@@ -116,7 +116,7 @@ h3 {
 }
 
 // move south from status-bar
-.ion-page ion-content:only-child {
+.ion-page ion-content:not(.no-padding):only-child {
   --padding-top: 20px !important;
 }
 
