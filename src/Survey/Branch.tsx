@@ -1,8 +1,9 @@
 import { useContext } from 'react';
 import { useRouteMatch } from 'react-router-dom';
 import { Page, Header, Main } from '@flumens';
-import { IonButton, IonItem, IonList, NavContext } from '@ionic/react';
+import { IonItem, IonList, NavContext } from '@ionic/react';
 import Sample from 'models/sample';
+import HeaderButton from './Components/HeaderButton';
 import ToleranceBadge from './Components/ToleranceBadge';
 
 const getNextLink = (match: any) => {
@@ -54,12 +55,9 @@ const Branch = ({ sample }: Props) => {
       : navigator.navigate(nextLink, 'forward', 'replace');
 
   const nextButton = (
-    <IonButton
-      className="rounded-md bg-secondary-400 px-3"
-      onClick={navigateNext}
-    >
+    <HeaderButton onClick={navigateNext}>
       {nextLink ? 'Next' : 'Finish'}
-    </IonButton>
+    </HeaderButton>
   );
 
   return (
@@ -67,7 +65,7 @@ const Branch = ({ sample }: Props) => {
       <Header title={`Branch ${treeBranchNumber}`} rightSlot={nextButton} />
       <Main>
         <IonList className="mt-2">
-          <div className="rounded">{links}</div>
+          <div className="rounded-list">{links}</div>
         </IonList>
       </Main>
     </Page>

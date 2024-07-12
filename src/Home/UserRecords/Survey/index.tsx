@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 import { observer } from 'mobx-react';
 import { Trans as T } from 'react-i18next';
 import { useAlert, useToast } from '@flumens';
@@ -7,7 +7,9 @@ import {
   IonItemSliding,
   IonItemOptions,
   IonItemOption,
+  NavContext,
 } from '@ionic/react';
+import { useUserStatusCheck } from 'common/models/user';
 import Sample, { useValidateCheck } from 'models/sample';
 import Location from './components/Location';
 import OnlineStatus from './components/OnlineStatus';
@@ -54,13 +56,11 @@ type Props = {
 };
 
 const Survey: FC<Props> = ({ sample, style, uploadIsPrimary }) => {
+  const { navigate } = useContext(NavContext);
   const toast = useToast();
   const deleteSurvey = useSurveyDeletePrompt(sample);
+  const checkUserStatus = useUserStatusCheck();
   const checkSampleStatus = useValidateCheck(sample);
-
-  const { synchronising } = sample.remote;
-
-  const href = !synchronising ? `/survey/${sample.cid}` : undefined;
 
   const deleteSurveyWrap = () => deleteSurvey();
 
@@ -68,18 +68,26 @@ const Survey: FC<Props> = ({ sample, style, uploadIsPrimary }) => {
     e.preventDefault();
     e.stopPropagation();
 
+    const isUserOK = await checkUserStatus();
+    if (!isUserOK) return;
+
     const isValid = checkSampleStatus();
     if (!isValid) return;
 
     sample.upload().catch(toast.error);
   };
 
+  const openItem = () => {
+    if (sample.remote.synchronising) return; // fixes button onPressUp and other accidental navigation
+    navigate(`/survey/${sample.cid}`);
+  };
+
   return (
     <IonItemSliding className="survey-list-item" style={style}>
-      <IonItem routerLink={href} detail={false}>
+      <IonItem onClick={openItem} detail={false}>
         <div className="survey-info-container">
           <div className="">
-            <div className="pl-3">Record</div>
+            <div className="pl-3 font-semibold">Record</div>
 
             <div className="survey-info">
               <div className="details">

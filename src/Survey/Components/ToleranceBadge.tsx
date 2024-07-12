@@ -1,3 +1,4 @@
+import { Badge } from 'common/flumens';
 import {
   byTreeBranchNumber,
   byTreeBranchPart,
@@ -22,20 +23,20 @@ const ToleranceBadge = ({
     .filter(byTreeBranchPart(treeBranchPart))
     .filter(byToleranceType(type));
 
-  const value = occurrences.length;
+  const value = `${occurrences.length}`;
 
   if (type === 'sensitive') {
     return (
-      <span className="inline-flex items-center rounded-md bg-primary-50 px-2 py-1 text-xs font-medium text-primary-700 ring-1 ring-inset ring-primary-700/10">
-        Sensitive: <div className="ml-1 font-semibold">{value}</div>
-      </span>
+      <Badge className="bg-primary-100 text-primary-800 ring-primary-700/20">
+        Sensitive: <span className="ml-1 font-semibold">{value}</span>
+      </Badge>
     );
   }
 
   return (
-    <span className="inline-flex items-center rounded-md bg-secondary-50 px-2 py-1 text-xs font-medium text-secondary-800 ring-1 ring-inset ring-secondary-600/20">
-      Tolerant: <div className="ml-1 font-semibold">{value}</div>
-    </span>
+    <Badge className="bg-secondary-100 text-secondary-800 ring-secondary-600/20">
+      Tolerant: <span className="ml-1 font-semibold">{value}</span>
+    </Badge>
   );
 };
 

@@ -1,9 +1,17 @@
 import { useContext } from 'react';
 import { useRouteMatch } from 'react-router-dom';
-import { Page, Header, Main, MenuAttrItemFromModel } from '@flumens';
-import { IonButton, IonItem, IonList, NavContext } from '@ionic/react';
+import { Page, Header, Main, Block } from '@flumens';
+import { IonItem, IonList, NavContext } from '@ionic/react';
 import Sample from 'models/sample';
+import HeaderButton from './Components/HeaderButton';
 import ToleranceBadge from './Components/ToleranceBadge';
+import {
+  treeCircumference1Attr,
+  treeCircumference2Attr,
+  treeCircumference3Attr,
+  treeCircumference4Attr,
+  treeCircumference5Attr,
+} from './config';
 
 const getNextLink = (match: any) => {
   const url = match.url.split('/');
@@ -54,28 +62,34 @@ const Trunk = ({ sample }: Props) => {
       : navigator.navigate(nextLink, 'forward', 'replace');
 
   const nextButton = (
-    <IonButton
-      className="rounded-md bg-secondary-400 px-3"
-      onClick={navigateNext}
-    >
+    <HeaderButton onClick={navigateNext}>
       {nextLink ? 'Next' : 'Finish'}
-    </IonButton>
+    </HeaderButton>
   );
+
+  const treeCircumferenceAttr: any = [
+    treeCircumference1Attr,
+    treeCircumference2Attr,
+    treeCircumference3Attr,
+    treeCircumference4Attr,
+    treeCircumference5Attr,
+  ][(treeBranchNumber as any) - 1];
 
   return (
     <Page id="survey-trunk">
       <Header title={`Trunk ${treeBranchNumber}`} rightSlot={nextButton} />
       <Main>
         <IonList className="mt-2">
-          <div className="rounded">
-            <MenuAttrItemFromModel
-              model={sample}
-              attr={`treeCircumference${treeBranchNumber}`}
+          <div className="rounded-list">
+            <Block
+              block={treeCircumferenceAttr}
+              record={sample.attrs}
+              isDisabled={sample.isDisabled()}
             />
           </div>
         </IonList>
         <IonList className="mt-2">
-          <div className="rounded">{links}</div>
+          <div className="rounded-list">{links}</div>
         </IonList>
       </Main>
     </Page>

@@ -1,40 +1,15 @@
-import {
-  calendarOutline,
-  clipboardOutline,
-  mailOpenOutline,
-} from 'ionicons/icons';
-import * as Yup from 'yup';
+import { mailOpenOutline } from 'ionicons/icons';
+import { z, object } from 'zod';
 import {
   PageProps,
   RemoteConfig,
-  date as DateHelp,
   MenuAttrItemFromModelMenuProps,
 } from '@flumens';
+import { IonIcon } from '@ionic/react';
 import AppOccurrence, { Taxon } from 'models/occurrence';
 import AppSample from 'models/sample';
-import treeIcon from './tree.svg';
-import { byType, getBranchNAQI, getLIS, getTrunkNAQI } from './utils';
-
-const fixedLocationSchema = Yup.object().shape({
-  latitude: Yup.number().required(),
-  longitude: Yup.number().required(),
-  name: Yup.string().required(),
-});
-
-const validateLocation = (val: any) => {
-  try {
-    fixedLocationSchema.validateSync(val);
-    return true;
-  } catch (e) {
-    return false;
-  }
-};
-
-export const verifyLocationSchema = Yup.mixed().test(
-  'location',
-  'Please enter location and its name.',
-  validateLocation
-);
+import tree from './tree.svg';
+import { getBranchNAQI, getLIS, getTrunkNAQI } from './utils';
 
 export const locationNameAttr = {
   remote: { id: 'location_name' },
@@ -136,36 +111,64 @@ export interface Survey extends SampleConfig {
   }) => Promise<AppSample>;
 }
 
-const treeTypeValues = [
-  {
-    id: 5202,
-    value: 'birch',
-    label: 'Birch',
-  },
-  {
-    id: 5203,
-    value: 'oak',
-    label: 'Oak',
-  },
-];
+const mailIcon = (<IonIcon src={mailOpenOutline} className="size-6" />) as any;
+
+export const emailAttr = {
+  id: 'smpAttr:623',
+  type: 'text_input',
+  prefix: mailIcon,
+  title: 'Email (optional)',
+} as const;
+
+const treeIcon = (<IonIcon src={tree} className="size-6" />) as any;
+
+export const treeTypeAttr = {
+  id: 'smpAttr:621',
+  type: 'choice_input',
+  title: 'Tree type',
+  prefix: treeIcon,
+  appearance: 'button',
+  choices: [
+    { title: 'Birch', data_name: '5202' },
+    { title: 'Oak', data_name: '5203' },
+  ],
+} as const;
+
+export const commentAttr = {
+  id: 'comment',
+  type: 'text_input',
+  title: 'Comments',
+  appearance: 'multiline',
+} as const;
 
 const circumferenceProps = {
-  menuProps: {
-    label: 'Circumference',
-    icon: treeIcon,
-  },
-  pageProps: {
-    headerProps: {
-      title: 'Circumference',
-    },
-    attrProps: {
-      input: 'input',
-      inputProps: {
-        type: 'number',
-      },
-      info: 'Enter tree circumference in centimetres.',
-    },
-  },
+  title: 'Circumference',
+  type: 'number_input',
+  appearance: 'counter',
+  prefix: treeIcon,
+  suffix: 'cm',
+  validations: { min: 1 },
+};
+
+export const treeCircumference1Attr = {
+  ...circumferenceProps,
+  id: 'smpAttr:618',
+};
+export const treeCircumference2Attr = {
+  ...circumferenceProps,
+  id: 'smpAttr:617',
+};
+export const treeCircumference3Attr = {
+  ...circumferenceProps,
+  id: 'smpAttr:616',
+};
+export const treeCircumference4Attr = {
+  ...circumferenceProps,
+  id: 'smpAttr:615',
+};
+export const treeCircumference5Attr = {
+  ...circumferenceProps,
+  id: 'smpAttr:614',
 };
 
 const survey: Survey = {
@@ -174,24 +177,6 @@ const survey: Survey = {
   label: 'Survey',
 
   attrs: {
-    email: {
-      menuProps: {
-        label: 'Email (optional)',
-        icon: mailOpenOutline,
-        skipValueTranslation: true,
-      },
-      pageProps: {
-        headerProps: {
-          title: 'Email',
-        },
-        attrProps: {
-          input: 'input',
-          info: 'Please enter your email.',
-        },
-      },
-      remote: { id: 623 },
-    },
-
     location: {
       remote: {
         id: 'entered_sref',
@@ -209,68 +194,12 @@ const survey: Survey = {
       },
     },
 
-    date: {
-      menuProps: {
-        icon: calendarOutline,
-        parse: 'date',
-      },
-      pageProps: {
-        attrProps: {
-          input: 'date',
-          inputProps: { max: () => new Date() },
-        },
-      },
-      remote: {
-        values: (date: any) => DateHelp.print(date, false),
-      },
-    },
-
     locationName: locationNameAttr,
-
-    comment: {
-      menuProps: {
-        label: 'Comment',
-        icon: clipboardOutline,
-        skipValueTranslation: true,
-      },
-      pageProps: {
-        headerProps: {
-          title: 'Comment',
-        },
-        attrProps: {
-          input: 'textarea',
-          info: 'Please add any extra info about this record.',
-        },
-      },
-    },
-
-    treeType: {
-      menuProps: {
-        label: 'Tree type',
-        icon: treeIcon,
-      },
-      pageProps: {
-        attrProps: {
-          input: 'radio',
-          inputProps: { options: treeTypeValues },
-        },
-      },
-      remote: {
-        id: 621,
-        values: treeTypeValues,
-      },
-    },
 
     trunkNAQI: { remote: { id: 613 } },
     branchNAQI: { remote: { id: 619 } },
     trunkLIS: { remote: { id: 620 } },
     branchLIS: { remote: { id: 612 } },
-
-    treeCircumference1: { ...circumferenceProps, remote: { id: 618 } },
-    treeCircumference2: { ...circumferenceProps, remote: { id: 617 } },
-    treeCircumference3: { ...circumferenceProps, remote: { id: 616 } },
-    treeCircumference4: { ...circumferenceProps, remote: { id: 615 } },
-    treeCircumference5: { ...circumferenceProps, remote: { id: 614 } },
   },
 
   occ: {
@@ -327,42 +256,44 @@ const survey: Survey = {
     },
   },
 
-  verify(attrs: any, sample: AppSample) {
-    try {
-      Yup.object()
-        .shape({
-          treeType: Yup.string().required('Tree type cannot be empty.'),
-        })
-        .validateSync(attrs, { abortEarly: false });
+  verify: attrs =>
+    object({
+      date: z.string(),
+      [treeTypeAttr.id]: z.string({
+        required_error: 'Tree type cannot be empty.',
+      }),
+    }).safeParse(attrs).error,
+  // TODO:
+  // verify(attrs: any, sample: AppSample) {
 
-      Yup.number()
-        .min(1, 'Lichen species are missing.')
-        .validateSync(sample.occurrences.length, { abortEarly: false });
+  //     Yup.number()
+  //       .min(1, 'Lichen species are missing.')
+  //       .validateSync(sample.occurrences.length, { abortEarly: false });
 
-      const trunks = sample.occurrences
-        .filter(byType('trunk'))
-        .map((occ: AppOccurrence) => occ.attrs.treeBranchNumber);
+  //     const trunks = sample.occurrences
+  //       .filter(byType('trunk'))
+  //       .map((occ: AppOccurrence) => occ.attrs.treeBranchNumber);
 
-      const uniqueTrunks = Array.from(new Set(trunks));
-      uniqueTrunks.forEach((trunkId: string) => {
-        console.log(
-          `treeCircumference${trunkId}`,
-          (sample.attrs as any)[`treeCircumference${trunkId}`]
-        );
+  //     const uniqueTrunks = Array.from(new Set(trunks));
+  //     uniqueTrunks.forEach((trunkId: string) => {
+  //       console.log(
+  //         `treeCircumference${trunkId}`,
+  //         (sample.attrs as any)[`treeCircumference${trunkId}`]
+  //       );
 
-        Yup.number()
-          .min(0, `Tree ${trunkId} circumference is missing.`)
-          .validateSync(
-            (sample.attrs as any)[`treeCircumference${trunkId}`] || -1,
-            { abortEarly: false }
-          );
-      });
-    } catch (attrError) {
-      return attrError;
-    }
+  //       Yup.number()
+  //         .min(0, `Tree ${trunkId} circumference is missing.`)
+  //         .validateSync(
+  //           (sample.attrs as any)[`treeCircumference${trunkId}`] || -1,
+  //           { abortEarly: false }
+  //         );
+  //     });
+  //   } catch (attrError) {
+  //     return attrError;
+  //   }
 
-    return null;
-  },
+  //   return null;
+  // },
 
   async create({ Sample }) {
     const sample = new Sample({

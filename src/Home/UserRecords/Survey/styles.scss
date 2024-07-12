@@ -8,6 +8,7 @@ ion-item-sliding.survey-list-item {
     --border-style: none;
     --min-height: var(--survey-item-height);
     --padding-start: 0;
+    --padding-end: 5px;
     --inner-padding-end: 5px;
     --border-radius: var(--theme-border-radius);
 
@@ -151,17 +152,16 @@ ion-item-sliding.survey-list-item {
 
     ion-badge[color='warning'] {
       margin: 1px 0;
-
-      &:not(:last-of-type) {
-        margin-bottom: 5px;
-      }
-
       font-size: 1em;
       font-weight: normal;
       width: -webkit-fit-content;
       width: fit-content;
       background-color: rgba(var(--ion-color-warning-rgb), 0.15);
       color: var(--ion-color-warning-dark);
+
+      &:not(:last-of-type) {
+        margin-bottom: 5px;
+      }
     }
 
     .training-band {

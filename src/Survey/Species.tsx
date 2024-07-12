@@ -1,10 +1,11 @@
 import { useContext } from 'react';
 import { useRouteMatch } from 'react-router';
 import { Header, Main, Page } from '@flumens';
-import { IonButton, NavContext } from '@ionic/react';
+import { NavContext } from '@ionic/react';
 import SpeciesList from 'common/Components/SpeciesList';
 import Occurrence, { Taxon } from 'common/models/occurrence';
 import Sample from 'common/models/sample';
+import HeaderButton from './Components/HeaderButton';
 import survey from './config';
 import { byTreeBranchNumber, byTreeBranchPart } from './utils';
 
@@ -75,12 +76,9 @@ const Species = ({ sample }: Props) => {
       : navigator.navigate(nextLink, 'forward', 'replace');
 
   const nextButton = (
-    <IonButton
-      className="rounded-md bg-secondary-400 px-3"
-      onClick={navigateNext}
-    >
+    <HeaderButton onClick={navigateNext}>
       {nextLink ? 'Next' : 'Finish'}
-    </IonButton>
+    </HeaderButton>
   );
 
   return (

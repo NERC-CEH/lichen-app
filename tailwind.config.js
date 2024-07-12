@@ -1,55 +1,18 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-const { parseColor } = require('tailwindcss/lib/util/color'); // eslint-disable-line import/no-extraneous-dependencies
-
-/* Converts HEX color to RGB */
-const toRGB = value => parseColor(value)?.color?.join(', ');
-
-const isCustomGroup = colorGroup =>
-  [
-    '-primary',
-    '-secondary',
-    '-tertiary',
-    '-success',
-    '-warning',
-    '-danger',
-  ].includes(colorGroup);
-
-function exposeColorsAsCssVariables({ addBase, theme }) {
-  function extractColorVars(colorObj, colorGroup = '') {
-    const getColours = (vars, colorKey) => {
-      const value = colorObj[colorKey];
-      const cssVariable =
-        colorKey === 'DEFAULT'
-          ? `--color${colorGroup}`
-          : `--color${colorGroup}-${colorKey}`;
-
-      const rgb = toRGB(value);
-      const rgbVars = {
-        [`${cssVariable}-rbg`]: isCustomGroup(colorGroup) ? rgb : null,
-      };
-
-      const newVars =
-        typeof value === 'string'
-          ? { [cssVariable]: value }
-          : extractColorVars(value, `-${colorKey}`);
-
-      return { ...vars, ...newVars, ...rgbVars };
-    };
-
-    return Object.keys(colorObj).reduce(getColours, {});
-  }
-
-  addBase({
-    ':root': extractColorVars(theme('colors')),
-  });
-}
+const flumensTailwind = require('@flumens/tailwind/tailwind.config.js');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./src/**/*.{ts,tsx}'],
+  content: [
+    './src/**/*.{ts,tsx}',
+    'node_modules/@flumens/ionic/dist/**/*.{js,ts,jsx,tsx}',
+    'node_modules/@flumens/tailwind/dist/**/*.{js,ts,jsx,tsx}',
+  ],
   theme: {
     extend: {
+      ...flumensTailwind.theme?.extend,
+
       colors: {
         primary: {
           // https://www.tailwindshades.com/#color=77.36842105263156%2C19.387755102040813%2C38.431372549019606&step-up=10&step-down=10&hue-shift=0&name=finch&base-stop=6&v=1&overrides=e30%3D
@@ -149,5 +112,5 @@ module.exports = {
       },
     },
   },
-  plugins: [exposeColorsAsCssVariables],
+  plugins: flumensTailwind.plugins,
 };

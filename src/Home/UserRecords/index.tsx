@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { observer } from 'mobx-react';
 import { Trans as T } from 'react-i18next';
-import { Page, Main, date as DateHelp, useToast } from '@flumens';
+import { Page, Main, getRelativeDate, useToast } from '@flumens';
 import {
   IonHeader,
   IonToolbar,
@@ -71,7 +71,7 @@ const getSurveys = (surveys: Sample[], showUploadAll?: boolean) => {
 
       return (
         <IonItemDivider key={date} style={(itemProps as any).style} mode="ios">
-          <IonLabel color="primary">{DateHelp.print(date, true)}</IonLabel>
+          <IonLabel color="dark">{getRelativeDate(date)}</IonLabel>
           {count > 1 && <IonLabel slot="end">{count}</IonLabel>}
         </IonItemDivider>
       );
@@ -132,7 +132,7 @@ const UserRecordsComponent = () => {
 
     if (!surveys.length) {
       return (
-        <InfoBackgroundMessage>
+        <InfoBackgroundMessage className="mb-[10vh] mt-[20vh]">
           You have no submitted records
         </InfoBackgroundMessage>
       );
@@ -149,7 +149,7 @@ const UserRecordsComponent = () => {
 
     if (!surveys.length) {
       return (
-        <InfoBackgroundMessage>
+        <InfoBackgroundMessage className="mb-[10vh] mt-[20vh]">
           You have no pending records
         </InfoBackgroundMessage>
       );

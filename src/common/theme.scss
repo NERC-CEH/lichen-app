@@ -1,6 +1,4 @@
-@import '@ionic/core/css/core.css';
 @import '@ionic/core/css/ionic.bundle.css';
-
 @import '@flumens/ionic/dist/themes/rounded.css';
 
 @tailwind base;
@@ -90,6 +88,8 @@
   --ion-toolbar-background: var(--color-primary-800);
   --ion-toolbar-color: var(--color-white);
   --ion-toolbar-color-activated: var(--color-white);
+
+  --form-value-color: var(--color-tertiary-800);
 }
 
 // status bar
@@ -186,4 +186,46 @@ ion-segment {
       color: var(--ion-color-primary-contrast);
     }
   }
+}
+
+// list item picture
+.list-avatar {
+  @apply flex size-14 shrink-0 items-center justify-center overflow-hidden rounded-md bg-neutral-100;
+}
+
+// top of the list title
+.list-title {
+  @apply mx-2 mb-3 mt-5 flex items-center text-[1.0625rem] text-primary-950;
+}
+
+// top of the list item
+.list-divider {
+  @apply flex items-center justify-between bg-neutral-200/70 p-1 px-2 text-sm text-neutral-600;
+}
+
+// Make Android icons dark, same as iOS
+ion-icon[slot='start'].md {
+  color: var(--ion-text-color, #000);
+}
+
+// Makes iOS menu items same height as Android
+ion-item .sc-ion-label-ios-h.sc-ion-label-ios-s.ios {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+// Make menu item value colours same as form values, e.g. Settings page
+ion-item .sc-ion-label-md-h.sc-ion-label-md-s.md[slot='end'],
+ion-item .sc-ion-label-ios-h.sc-ion-label-ios-s.ios[slot='end'] {
+  color: var(--form-value-color);
+}
+
+// Fix location name cancel button alignment
+.location-name-attr .location-name-attr-input-container ion-input {
+  --padding-end: 15px;
+}
+
+// don't show the border on last Block item
+.group:last-child {
+  border-bottom: none;
 }

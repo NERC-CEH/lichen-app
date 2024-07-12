@@ -4,6 +4,8 @@ import {
 } from '@capacitor/filesystem';
 import { isPlatform } from '@ionic/react';
 
+const backendUrl = process.env.APP_BACKEND_URL || 'https://www.apis.ac.uk';
+
 const indiciaUrl =
   process.env.APP_BACKEND_INDICIA_URL || 'https://warehouse1.indicia.org.uk';
 
@@ -19,7 +21,8 @@ const CONFIG = {
   },
 
   backend: {
-    websiteUrl: 'https://www.apis.ac.uk',
+    url: backendUrl,
+    websiteUrl: backendUrl,
 
     mediaUrl: `${indiciaUrl}/upload/`,
 

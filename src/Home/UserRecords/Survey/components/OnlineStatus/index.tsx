@@ -1,7 +1,8 @@
 import { FC } from 'react';
 import { observer } from 'mobx-react';
-import { Trans as T } from 'react-i18next';
-import { IonSpinner, IonButton } from '@ionic/react';
+import clsx from 'clsx';
+import { IonSpinner } from '@ionic/react';
+import { Badge, Button } from 'common/flumens';
 import Sample from 'models/sample';
 import './styles.scss';
 
@@ -17,25 +18,29 @@ const UsersSurveys: FC<Props> = ({ onUpload, sample, uploadIsPrimary }) => {
   const isDisabled = sample.isUploaded();
 
   if (!saved) {
-    return (
-      <span className="mr-3 inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-700 ring-1 ring-inset ring-gray-700/10">
-        <T>Draft</T>
-      </span>
-    );
+    return <Badge>Draft</Badge>;
   }
 
   if (synchronising) return <IonSpinner className="survey-status" />;
 
   if (isDisabled) return null;
 
+  const isValid = !sample.validateRemote();
+
   return (
-    <IonButton
-      className="survey-status survey-status-upload"
-      onClick={onUpload}
-      fill={uploadIsPrimary ? undefined : 'outline'}
+    <Button
+      color={isValid ? 'secondary' : undefined}
+      fill={!uploadIsPrimary ? 'outline' : undefined}
+      onPress={onUpload}
+      preventDefault
+      className={clsx(
+        'max-w-28 shrink-0 whitespace-nowrap px-4 py-1',
+        isValid && 'bg-secondary-500',
+        !isValid && 'opacity-50'
+      )}
     >
-      <T>Upload</T>
-    </IonButton>
+      Upload
+    </Button>
   );
 };
 

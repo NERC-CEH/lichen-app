@@ -3,6 +3,9 @@
     --background: transparent;
     padding: 0;
 
+    color: var(--ion-color-primary-contrast);
+    position: fixed;
+
     ion-segment {
       width: calc(100% - 20px); // -20px to match the padding of the list below
       min-height: 40px;
@@ -50,12 +53,10 @@
         }
       }
     }
+
     ion-segment.ios {
       border: 1px solid var(--ion-color-medium);
     }
-
-    color: var(--ion-color-primary-contrast);
-    position: fixed;
   }
 
   ion-content {

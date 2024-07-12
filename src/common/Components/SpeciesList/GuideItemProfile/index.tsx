@@ -5,7 +5,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Main, useOnBackButton } from '@flumens';
+import { Badge, Main, useOnBackButton } from '@flumens';
 import {
   IonCardHeader,
   IonButton,
@@ -112,9 +112,7 @@ const GuideItemProfile = ({ item, onClose }: Props) => {
               <div className="heading inline text-base text-primary">
                 Growth form:
               </div>{' '}
-              <span className="inline-flex items-center rounded-md  px-2 py-1 text-xs font-medium text-gray-800 ring-1 ring-inset ring-gray-700/10">
-                {item.growth_form}
-              </span>
+              <Badge className="capitalize">{item.growth_form}</Badge>
             </div>
 
             <div className="my-4">
@@ -122,13 +120,13 @@ const GuideItemProfile = ({ item, onClose }: Props) => {
                 Nitrogen:
               </div>{' '}
               {item.type === 'sensitive' ? (
-                <span className="inline-flex items-center rounded-md bg-primary-50 px-2 py-1 text-xs font-medium text-primary-700 ring-1 ring-inset ring-primary-700/10">
+                <Badge className="bg-secondary-100 text-secondary-800 ring-secondary-600/20">
                   Sensitive
-                </span>
+                </Badge>
               ) : (
-                <span className="inline-flex items-center rounded-md bg-secondary-50 px-2 py-1 text-xs font-medium text-secondary-800 ring-1 ring-inset ring-secondary-600/20">
+                <Badge className="bg-primary-100 text-primary-800 ring-primary-700/20">
                   Tolerant
-                </span>
+                </Badge>
               )}
             </div>
           </IonCardContent>

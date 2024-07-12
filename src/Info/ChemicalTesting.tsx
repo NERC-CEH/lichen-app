@@ -1,5 +1,6 @@
 import { warningOutline } from 'ionicons/icons';
 import { Header, InfoMessage, Main, Page, Section } from '@flumens';
+import { IonIcon } from '@ionic/react';
 
 const { P } = Section;
 
@@ -54,7 +55,7 @@ const ChemicalTesting = () => {
 
         <InfoMessage
           color="warning"
-          icon={warningOutline}
+          prefix={<IonIcon icon={warningOutline} className="size-6" />}
           className="[--background:var(--color-warning-50)]"
         >
           <div className="text-warning-900">
@@ -66,7 +67,7 @@ const ChemicalTesting = () => {
 
         <InfoMessage
           color="warning"
-          icon={warningOutline}
+          prefix={<IonIcon icon={warningOutline} className="size-6" />}
           className="[--background:var(--color-warning-50)]"
         >
           <div className="text-warning-900">

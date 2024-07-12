@@ -1,23 +1,14 @@
 /* eslint-disable no-param-reassign */
 import { useContext, useState } from 'react';
 import { observer } from 'mobx-react';
-import clsx from 'clsx';
 import {
   checkmarkCircleOutline,
   chevronForwardOutline,
   locationOutline,
 } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router';
+import { Page, Main, Header, MenuAttrItem, useToast, Block } from '@flumens';
 import {
-  Page,
-  Main,
-  Header,
-  MenuAttrItemFromModel,
-  MenuAttrItem,
-  useToast,
-} from '@flumens';
-import {
-  IonButton,
   IonItem,
   IonLabel,
   IonList,
@@ -27,9 +18,14 @@ import {
   NavContext,
 } from '@ionic/react';
 import GridRefValue from 'common/Components/GridRefValue';
+import { useUserStatusCheck } from 'common/models/user';
 import Sample, { useValidateCheck } from 'models/sample';
+import { commentAttr, emailAttr, treeTypeAttr } from 'Survey/config';
 import { byTreeBranchNumber, byType, getLIS } from 'Survey/utils';
+import MenuDateAttr from './MenuDateAttr';
 import Results from './Results';
+import SurveyHeaderButton from './SurveyHeaderButton';
+import UploadedRecordInfoMessage from './UploadedRecordInfoMessage';
 
 type Props = {
   sample: Sample;
@@ -40,6 +36,7 @@ const Home = ({ sample }: Props) => {
   const toast = useToast();
   const { navigate } = useContext(NavContext);
   const checkSampleStatus = useValidateCheck(sample);
+  const checkUserStatus = useUserStatusCheck();
 
   const [segment, setSegment] = useState<
     'general' | 'trunks' | 'branches' | 'results'
@@ -68,6 +65,9 @@ const Home = ({ sample }: Props) => {
   const _processSubmission = async () => {
     const isValid = checkSampleStatus();
     if (!isValid) return;
+
+    const isUserOK = await checkUserStatus();
+    if (!isUserOK) return;
 
     sample.upload().catch(toast.error);
 
@@ -120,29 +120,21 @@ const Home = ({ sample }: Props) => {
     );
   };
 
-  const isValid = !sample.validateRemote();
-  const isEditing = sample.metadata.saved;
-
-  const finishButton = (
-    <IonButton
-      className={clsx(
-        isValid ? 'bg-secondary-400' : 'bg-gray-400',
-        'rounded-md px-3'
-      )}
-      onClick={onSubmit}
-    >
-      <IonLabel>{isEditing ? 'Upload' : 'Finish'}</IonLabel>
-    </IonButton>
-  );
+  const recordAttrs = {
+    record: sample.attrs,
+    isDisabled,
+  };
 
   return (
     <Page id="survey-home">
       <Header
         title="Survey"
         backButtonLabel="Home"
-        rightSlot={!isDisabled && finishButton}
+        rightSlot={<SurveyHeaderButton onClick={onSubmit} sample={sample} />}
       />
       <Main>
+        {isDisabled && <UploadedRecordInfoMessage />}
+
         <IonToolbar className=" [--background:transparent]">
           <IonSegment onIonChange={onSegmentClick} value={segment}>
             <IonSegmentButton value="general">
@@ -164,11 +156,13 @@ const Home = ({ sample }: Props) => {
         </IonToolbar>
 
         {segment === 'general' && (
-          <IonList className="mt-3">
-            <div className="rounded">
-              <MenuAttrItemFromModel model={sample} attr="email" />
-              <MenuAttrItemFromModel model={sample} attr="date" />
-              <MenuAttrItemFromModel model={sample} attr="treeType" />
+          <IonList className="mt-3" lines="full">
+            <div className="rounded-list">
+              <Block block={emailAttr} {...recordAttrs} />
+
+              <MenuDateAttr model={sample} />
+
+              <Block block={treeTypeAttr} {...recordAttrs} />
 
               <MenuAttrItem
                 routerLink={`${match.url}/location`}
@@ -178,14 +172,14 @@ const Home = ({ sample }: Props) => {
                 skipValueTranslation
                 disabled={isDisabled}
               />
-              <MenuAttrItemFromModel model={sample} attr="comment" />
+              <Block block={commentAttr} {...recordAttrs} />
             </div>
           </IonList>
         )}
 
         {segment === 'trunks' && (
           <IonList>
-            <div className="rounded">
+            <div className="rounded-list">
               {[1, 2, 3, 4, 5].map(getLinkButton('trunk'))}
             </div>
           </IonList>
@@ -193,7 +187,7 @@ const Home = ({ sample }: Props) => {
 
         {segment === 'branches' && (
           <IonList>
-            <div className="rounded">
+            <div className="rounded-list">
               {[1, 2, 3, 4, 5].map(getLinkButton('branch'))}
             </div>
           </IonList>

@@ -2,36 +2,19 @@ import { useEffect, useRef } from 'react';
 import bb from 'billboard.js';
 import 'billboard.js/dist/billboard.css';
 import 'd3';
+import { Badge } from 'common/flumens';
 import Sample from 'common/models/sample';
 import { getBranchNAQI, getLIS, getTrunkNAQI } from 'Survey/utils';
 import './styles.scss';
 
 const getPollutionMessage = function (naqi: number) {
-  console.log(naqi);
+  if (naqi > 1.25) return <Badge color="danger">Very Nitrogen polluted</Badge>;
 
-  if (naqi > 1.25)
-    return (
-      <span className="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-700/10">
-        Very Nitrogen polluted
-      </span>
-    );
-  if (naqi > 0.86)
-    return (
-      <span className="inline-flex items-center rounded-md bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-700 ring-1 ring-inset ring-yellow-700/10">
-        Nitrogen polluted
-      </span>
-    );
-  if (naqi > 0.5)
-    return (
-      <span className="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-700 ring-1 ring-inset ring-gray-700/10">
-        At risk
-      </span>
-    );
-  return (
-    <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-700/10">
-      Clean
-    </span>
-  );
+  if (naqi > 0.86) return <Badge color="warning">Nitrogen polluted</Badge>;
+
+  if (naqi > 0.5) return <Badge>At risk</Badge>;
+
+  return <Badge color="success">Clean</Badge>;
 };
 
 type Props = { sample: Sample };
@@ -190,8 +173,9 @@ const Results = ({ sample }: Props) => {
     <div className="m-2 divide-y rounded-md bg-white p-1">
       {hasTrunkResults && (
         <div className="p-3">
-          <div className="mb-2 font-semibold">
-            Trunk: {getPollutionMessage(trunkNAQI)}
+          <div className="mb-2">
+            <span className="font-semibold">Trunk:</span>{' '}
+            {getPollutionMessage(trunkNAQI)}
           </div>
           <div>Nitrogen Air Quality Index (NAQI): {trunkNAQI.toFixed(1)}</div>
           <div>Lichen indicator score (LIS): {trunkLIS.toFixed(1)}</div>
@@ -225,28 +209,16 @@ const Results = ({ sample }: Props) => {
       <div className="flex flex-col gap-2 p-3">
         <div className="mb-2 font-bold">Sites that are designated as:</div>
         <div>
-          <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-700/10">
-            Clean
-          </span>{' '}
-          have an NAQI between 0 and 0.5
+          <Badge color="success">Clean</Badge> have an NAQI between 0 and 0.5
         </div>
         <div>
-          <span className="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-700 ring-1 ring-inset ring-gray-700/10">
-            At risk
-          </span>{' '}
-          NAQI {'>'} 0.5-0.85
+          <Badge>At risk</Badge> NAQI {'>'} 0.5-0.85
         </div>
         <div>
-          <span className="inline-flex items-center rounded-md bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-700 ring-1 ring-inset ring-yellow-700/10">
-            Nitrogen polluted
-          </span>{' '}
-          NAQI 0.86-1.25
+          <Badge color="warning">Nitrogen polluted</Badge> NAQI 0.86-1.25
         </div>
         <div>
-          <span className="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-700/10">
-            Very Nitrogen polluted
-          </span>{' '}
-          NAQI {'>'} 1.25
+          <Badge color="danger">Very Nitrogen polluted</Badge> NAQI {'>'} 1.25
         </div>
 
         <div className="mt-3">See Guide for further guidance.</div>

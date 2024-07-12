@@ -1,29 +1,23 @@
 import { observer } from 'mobx-react';
-import { InfoBackgroundMessage } from '@flumens';
+import { InfoBackgroundMessage, InfoMessageProps } from '@flumens';
 import appModel, { Attrs } from 'models/app';
 
-type Props = {
+interface Props extends InfoMessageProps {
   name?: keyof Attrs;
-  children: any;
-};
+}
 
-const Message = ({ name, children, ...props }: Props) => {
-  if (name && !appModel.attrs[name]) {
-    return null;
-  }
+const InfoBackgroundMessageWrap = ({ name, children, ...props }: Props) => {
+  if (name && !appModel.attrs[name]) return null;
 
-  const hideMessage = () => {
-    (appModel.attrs as any)[name as any] = false;
-    return {};
-  };
-
-  const onHide = name ? hideMessage : undefined;
+  const onHide = name
+    ? () => ((appModel.attrs as any)[name as any] = false) // eslint-disable-line
+    : undefined;
 
   return (
-    <InfoBackgroundMessage onHide={onHide} {...props}>
+    <InfoBackgroundMessage {...props} onHide={onHide}>
       {children}
     </InfoBackgroundMessage>
   );
 };
 
-export default observer(Message);
+export default observer(InfoBackgroundMessageWrap);
