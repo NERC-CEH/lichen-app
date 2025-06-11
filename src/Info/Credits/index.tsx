@@ -1,5 +1,6 @@
 import { Header, Page, Main, Section } from '@flumens';
 import logo from 'common/images/flumens.svg';
+import CEHlogo from './UKCEH-Logo-Main-colour.png';
 
 const { P, H } = Section;
 
@@ -7,6 +8,12 @@ export default () => (
   <Page id="credits">
     <Header title="Credits" />
     <Main>
+      <Section>
+        <P>
+          <img src={CEHlogo} alt="" className="w-full" />
+        </P>
+      </Section>
+
       <Section>
         <H>Guide</H>
         <P>
