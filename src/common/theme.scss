@@ -94,12 +94,12 @@
 
 // status bar
 html.ios.plt-hybrid #status-bar-background {
-  background: var(--ion-color-primary-dark);
-  width: 100vw;
-  height: env(safe-area-inset-top);
   position: fixed;
   top: 0;
   z-index: 1000;
+  background: var(--ion-color-primary-dark);
+  width: 100vw;
+  height: env(safe-area-inset-top);
 }
 
 // add safe padding for devices with a notch
@@ -129,10 +129,10 @@ ion-button[expand='block'] {
 
 // brighter and bigger divider
 ion-item-divider {
-  font-size: 0.9em;
-  color: var(--ion-text-color);
   padding: 0 5px 7px 5px;
+  color: var(--ion-text-color);
   font-weight: 500;
+  font-size: 0.9em;
 }
 
 ion-item-divider ion-label[slot='end'] {
@@ -141,13 +141,15 @@ ion-item-divider ion-label[slot='end'] {
 
 // segment styles
 ion-segment {
+  z-index: 100000000;
+  margin: 8px auto;
+  box-shadow:
+    -1px 2px 7px 0 #0000001a,
+    0 2px 9px 0 #3e396b1a;
+  border-radius: 10px;
+  background: var(--ion-color-light);
   width: calc(100% - 15px); // -15px to match the padding of the list below
   min-height: 40px;
-  margin: 8px auto;
-  z-index: 100000000;
-  box-shadow: -1px 2px 7px 0 #0000001a, 0 2px 9px 0 #3e396b1a;
-  background: var(--ion-color-light);
-  border-radius: 10px;
 
   ion-badge {
     display: inline;

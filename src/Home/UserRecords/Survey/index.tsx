@@ -23,7 +23,7 @@ function useSurveyDeletePrompt(sample: Sample) {
       "This record hasn't been uploaded to the database yet. " +
       'Are you sure you want to remove it from your device?';
 
-    const isSynced = sample.metadata.syncedOn;
+    const isSynced = sample.syncedAt;
     if (isSynced) {
       body =
         'Are you sure you want to remove this record from your device? ' +
@@ -78,7 +78,7 @@ const Survey: FC<Props> = ({ sample, style, uploadIsPrimary }) => {
   };
 
   const openItem = () => {
-    if (sample.remote.synchronising) return; // fixes button onPressUp and other accidental navigation
+    if (sample.isSynchronising) return; // fixes button onPressUp and other accidental navigation
     navigate(`/survey/${sample.cid}`);
   };
 

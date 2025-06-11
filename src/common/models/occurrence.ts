@@ -26,16 +26,12 @@ type Attrs = Omit<OccurrenceAttrs, 'taxon'> & {
 type Metadata = OccurrenceMetadata;
 
 export default class Occurrence extends OccurrenceOriginal<Attrs, Metadata> {
-  static fromJSON(json: any) {
-    return super.fromJSON(json);
-  }
-
   declare parent?: Sample;
 
   declare getSurvey: () => Survey;
 
   getPrettyName() {
-    return this.attrs.taxon?.taxon;
+    return this.data.taxon?.taxon;
   }
 
   validateRemote = validateRemoteModel;

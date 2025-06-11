@@ -115,7 +115,7 @@ const mailIcon = (<IonIcon src={mailOpenOutline} className="size-6" />) as any;
 
 export const emailAttr = {
   id: 'smpAttr:623',
-  type: 'text_input',
+  type: 'textInput',
   prefix: mailIcon,
   title: 'Email (optional)',
 } as const;
@@ -124,26 +124,26 @@ const treeIcon = (<IonIcon src={tree} className="size-6" />) as any;
 
 export const treeTypeAttr = {
   id: 'smpAttr:621',
-  type: 'choice_input',
+  type: 'choiceInput',
   title: 'Tree type',
   prefix: treeIcon,
   appearance: 'button',
   choices: [
-    { title: 'Birch', data_name: '5202' },
-    { title: 'Oak', data_name: '5203' },
+    { title: 'Birch', dataName: '5202' },
+    { title: 'Oak', dataName: '5203' },
   ],
 } as const;
 
 export const commentAttr = {
   id: 'comment',
-  type: 'text_input',
+  type: 'textInput',
   title: 'Comments',
   appearance: 'multiline',
 } as const;
 
 const circumferenceProps = {
   title: 'Circumference',
-  type: 'number_input',
+  type: 'numberInput',
   appearance: 'counter',
   prefix: treeIcon,
   suffix: 'cm',
@@ -243,7 +243,7 @@ const survey: Survey = {
 
     create({ Occurrence, taxon, treeBranchPart, treeBranchNumber }) {
       return new Occurrence({
-        attrs: {
+        data: {
           taxon,
           treeBranchPart,
           treeBranchNumber,
@@ -272,7 +272,7 @@ const survey: Survey = {
 
   //     const trunks = sample.occurrences
   //       .filter(byType('trunk'))
-  //       .map((occ: AppOccurrence) => occ.attrs.treeBranchNumber);
+  //       .map((occ: AppOccurrence) => occ.data.treeBranchNumber);
 
   //     const uniqueTrunks = Array.from(new Set(trunks));
   //     uniqueTrunks.forEach((trunkId: string) => {
@@ -297,14 +297,10 @@ const survey: Survey = {
 
   async create({ Sample }) {
     const sample = new Sample({
-      metadata: {
-        survey_id: survey.id,
-        survey: survey.name,
-      },
-
-      attrs: {
-        training: 't', // TODO:
+      data: {
+        surveyId: survey.id,
         date: new Date().toISOString(),
+        enteredSrefSystem: 4326,
         location: {},
       },
     });

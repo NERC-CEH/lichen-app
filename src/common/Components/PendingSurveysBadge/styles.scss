@@ -1,9 +1,9 @@
 .pending-surveys-badge {
-  font-size: 1.2em;
-  margin-left: -2px;
-  padding: 4px 6px;
+  display: inline-table;
   position: absolute;
   right: 0;
+  margin-left: -2px;
+  padding: 4px 6px;
   width: fit-content;
-  display: inline-table;
+  font-size: 1.2em;
 }

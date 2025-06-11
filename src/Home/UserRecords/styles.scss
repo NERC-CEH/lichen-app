@@ -1,19 +1,21 @@
 #home-user-surveys {
   ion-header ion-toolbar {
     --background: transparent;
+    position: fixed;
     padding: 0;
 
     color: var(--ion-color-primary-contrast);
-    position: fixed;
 
     ion-segment {
+      z-index: 100000000;
+      margin: 8px auto;
+      box-shadow:
+        -1px 2px 7px 0 #0000001a,
+        0 2px 9px 0 #3e396b1a;
+      border-radius: 10px;
+      background: var(--ion-color-light);
       width: calc(100% - 20px); // -20px to match the padding of the list below
       min-height: 40px;
-      margin: 8px auto;
-      z-index: 100000000;
-      box-shadow: -1px 2px 7px 0 #0000001a, 0 2px 9px 0 #3e396b1a;
-      background: var(--ion-color-light);
-      border-radius: 10px;
 
       ion-badge {
         display: inline;
@@ -36,8 +38,8 @@
       }
 
       ion-segment-button {
-        padding-left: 10px;
         padding-right: 10px;
+        padding-left: 10px;
         --color-checked: var(--ion-color-primary);
       }
 
@@ -63,23 +65,25 @@
     --overflow: hidden;
 
     ion-list {
-      height: 100%;
-      width: calc(100% - 20px);
-      padding: 0 !important;
-      max-width: 600px; // ipad
       margin: 0 auto;
+      padding: 0 !important;
+      width: calc(100% - 20px);
+      max-width: 600px; // ipad
+      height: 100%;
     }
 
     .upload-all-button {
-      margin: 10px auto;
-      height: 35px !important;
       display: block;
       position: absolute;
       right: 17px;
       bottom: 0;
-      overflow: hidden;
+      margin: 10px auto;
+      box-shadow:
+        -1px 2px 7px 0 #0000001a,
+        0 2px 9px 0 #3e396b1a;
       border-radius: var(--theme-border-radius);
-      box-shadow: -1px 2px 7px 0 #0000001a, 0 2px 9px 0 #3e396b1a;
+      height: 35px !important;
+      overflow: hidden;
 
       &.ios {
         font-size: 0.9em;
@@ -94,9 +98,9 @@
 
   ion-item-divider {
     margin-top: 3px;
+    border-radius: var(--theme-border-radius);
     padding: 0px 4px 0 12px;
     color: var(--ion-color-primary-shade);
-    border-radius: var(--theme-border-radius);
   }
 }
 
@@ -110,7 +114,7 @@ ion-alert .tip-icon {
   color: black;
 
   &.with-background {
-    color: var(--ion-color-primary-contrast);
     background: var(--ion-color-primary);
+    color: var(--ion-color-primary-contrast);
   }
 }

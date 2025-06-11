@@ -9,45 +9,44 @@ export { default as Page } from '@flumens/ionic/dist/components/Page';
 export { default as MenuAttrItem } from '@flumens/ionic/dist/components/MenuAttrItem';
 export { default as Attr } from '@flumens/ionic/dist/components/Attr';
 export { default as Section } from '@flumens/ionic/dist/components/Section';
-export { default as device } from '@flumens/ionic/dist/utils/device';
+export { default as device } from '@flumens/utils/dist/device';
 export { useToast, useAlert, useLoader } from '@flumens/ionic/dist/hooks';
-export { options as sentryOptions } from '@flumens/ionic/dist/utils/sentry';
+export { options as sentryOptions } from '@flumens/utils/dist/sentry';
 export {
   default as Model,
   type Options as ModelOptions,
-  type Metadata as ModelMetadata,
-  type Attrs as ModelAttrs,
-} from '@flumens/ionic/dist/models/Model';
-export { default as Store } from '@flumens/ionic/dist/models/Store';
-export { default as initStoredSamples } from '@flumens/ionic/dist/models/initStoredSamples';
+  type Data as ModelAttrs,
+} from '@flumens/models/dist/Model';
+export { default as Store } from '@flumens/models/dist/Stores/SQLiteStore';
 export {
   default as Sample,
-  type Attrs as SampleAttrs,
+  type Data as SampleAttrs,
   type Metadata as SampleMetadata,
   type Options as SampleOptions,
   type RemoteConfig,
-} from '@flumens/ionic/dist/models/Indicia/Sample';
+} from '@flumens/models/dist/Indicia/Sample';
 export {
   default as Media,
-  type Attrs as MediaAttrs,
-} from '@flumens/ionic/dist/models/Indicia/Media';
+  type Data as MediaAttrs,
+} from '@flumens/models/dist/Indicia/Media';
 export {
   default as Occurrence,
-  type Attrs as OccurrenceAttrs,
+  type Data as OccurrenceAttrs,
   type Metadata as OccurrenceMetadata,
   type Options as OccurrenceOptions,
-} from '@flumens/ionic/dist/models/Indicia/Occurrence';
+} from '@flumens/models/dist/Indicia/Occurrence';
+export { default as SampleCollection } from '@flumens/models/dist/Indicia/SampleCollection';
 export {
   default as DrupalUserModel,
-  type Attrs as DrupalUserModelAttrs,
-} from '@flumens/ionic/dist/models/DrupalUserModel';
+  type Data as DrupalUserModelAttrs,
+} from '@flumens/models/dist/Drupal/User';
 export {
   default as MenuAttrItemFromModel,
   type MenuProps as MenuAttrItemFromModelMenuProps,
 } from '@flumens/ionic/dist/components/MenuAttrItemFromModel';
 export { default as RouteWithModels } from '@flumens/ionic/dist/components/RouteWithModels';
-export * from '@flumens/ionic/dist/utils/date';
-export { validateRemoteModel } from '@flumens/ionic/dist/models/Indicia/helpers';
+export * from '@flumens/utils/dist/date';
+export { validateRemoteModel } from '@flumens/models/dist/Indicia/helpers';
 export { default as Toggle } from '@flumens/tailwind/dist/components/Switch';
 export { default as ModelValidationMessage } from '@flumens/ionic/dist/components/ModelValidationMessage';
 export { default as InfoBackgroundMessage } from '@flumens/tailwind/dist/components/InfoBackgroundMessage';
@@ -56,9 +55,9 @@ export {
   default as InfoMessage,
 } from '@flumens/tailwind/dist/components/InfoMessage';
 export { default as Gallery } from '@flumens/ionic/dist/components/Gallery';
-export { default as MapContainer } from '@flumens/ionic/dist/components/Map/Container';
+export { default as MapContainer } from '@flumens/tailwind/dist/components/Map/Container';
 export { default as MapHeader } from '@flumens/ionic/dist/components/Map/Header';
-export * from '@flumens/ionic/dist/components/Map/utils';
+export * from '@flumens/tailwind/dist/components/Map/utils';
 export {
   default as TailwindContext,
   type ContextValue as TailwindContextValue,
@@ -75,9 +74,9 @@ export {
 export { default as Badge } from '@flumens/tailwind/dist/components/Badge';
 export { default as Button } from '@flumens/tailwind/dist/components/Button';
 
-export * from '@flumens/ionic/dist/utils/type';
-export * from '@flumens/ionic/dist/utils/location';
-export * from '@flumens/ionic/dist/utils/errors';
+export * from '@flumens/utils/dist/type';
+export * from '@flumens/utils/dist/location';
+export * from '@flumens/utils/dist/errors';
 export {
   useDisableBackButton,
   useOnBackButton,

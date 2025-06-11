@@ -14,14 +14,13 @@ interface Props {
 
 const UsersSurveys: FC<Props> = ({ onUpload, sample, uploadIsPrimary }) => {
   const { saved } = sample.metadata;
-  const { synchronising } = sample.remote;
-  const isDisabled = sample.isUploaded();
+  const isDisabled = sample.isUploaded;
 
   if (!saved) {
     return <Badge>Draft</Badge>;
   }
 
-  if (synchronising) return <IonSpinner className="survey-status" />;
+  if (sample.isSynchronising) return <IonSpinner className="survey-status" />;
 
   if (isDisabled) return null;
 

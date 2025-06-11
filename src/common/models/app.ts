@@ -1,5 +1,5 @@
 import { Model, ModelAttrs } from '@flumens';
-import { genericStore } from './store';
+import { mainStore } from './store';
 
 export interface Attrs extends ModelAttrs {
   appSession: number;
@@ -15,12 +15,12 @@ const defaults: Attrs = {
   draftId: '',
 };
 
-class AppModel extends Model {
-  // eslint-disable-next-line
-  // @ts-ignore
-  attrs: Attrs = Model.extendAttrs(this.attrs, defaults);
+class AppModel extends Model<Attrs> {
+  constructor(options: any) {
+    super({ ...options, data: { ...defaults, ...options.data } });
+  }
 }
 
-const appModel = new AppModel({ cid: 'app', store: genericStore });
+const appModel = new AppModel({ cid: 'app', store: mainStore });
 
 export { appModel as default, AppModel };

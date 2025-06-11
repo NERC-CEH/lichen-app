@@ -7,7 +7,7 @@ import {
   device,
 } from '@flumens';
 import CONFIG from 'common/config';
-import { genericStore } from './store';
+import { mainStore } from './store';
 
 export type Portal = 'npms' | 'pp';
 
@@ -22,11 +22,7 @@ const defaults: Attrs = {
   email: '',
 };
 
-export class UserModel extends DrupalUserModel {
-  // eslint-disable-next-line
-  // @ts-ignore
-  attrs: Attrs = DrupalUserModel.extendAttrs(this.attrs, defaults);
-
+export class UserModel extends DrupalUserModel<Attrs> {
   static registerSchema = object({
     email: z.string().email('Please fill in'),
     password: z.string().min(1, 'Please fill in'),
@@ -44,10 +40,10 @@ export class UserModel extends DrupalUserModel {
   });
 
   constructor(options: any) {
-    super(options);
+    super({ ...options, data: { ...defaults, ...options.data } });
 
     const checkForValidation = () => {
-      if (this.isLoggedIn() && !this.attrs.verified) {
+      if (this.isLoggedIn() && !this.data.verified) {
         console.log('User: refreshing profile for validation');
         this.refreshProfile();
       }
@@ -58,21 +54,21 @@ export class UserModel extends DrupalUserModel {
   async checkActivation() {
     if (!this.isLoggedIn()) return false;
 
-    if (!this.attrs.verified) {
+    if (!this.data.verified) {
       try {
         await this.refreshProfile();
       } catch (e) {
         // do nothing
       }
 
-      if (!this.attrs.verified) return false;
+      if (!this.data.verified) return false;
     }
 
     return true;
   }
 
   async resendVerificationEmail() {
-    if (!this.isLoggedIn() || this.attrs.verified) return false;
+    if (!this.isLoggedIn() || this.data.verified) return false;
 
     await this._sendVerificationEmail();
 
@@ -80,20 +76,20 @@ export class UserModel extends DrupalUserModel {
   }
 
   resetDefaults() {
-    return super.resetDefaults(defaults);
+    return super.reset(defaults);
   }
 
   getPrettyName = () => {
     if (!this.isLoggedIn()) return '';
 
-    return `${this.attrs.firstName} ${this.attrs.lastName}`;
+    return `${this.data.firstName} ${this.data.lastName}`;
   };
 }
 
 const userModel = new UserModel({
   cid: 'user',
-  store: genericStore,
-  config: { ...CONFIG.backend },
+  store: mainStore,
+  config: CONFIG.backend,
 });
 
 export const useUserStatusCheck = () => {
@@ -111,7 +107,7 @@ export const useUserStatusCheck = () => {
       return false;
     }
 
-    if (!userModel.attrs.verified) {
+    if (!userModel.data.verified) {
       await loader.show('Please wait...');
       const isVerified = await userModel.checkActivation();
       loader.hide();

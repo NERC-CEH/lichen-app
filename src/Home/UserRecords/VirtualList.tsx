@@ -11,8 +11,8 @@ const VirtualList: FC<any> = ({
   bottomPadding = 0,
   ...props
 }) => {
-  const contentRef = useRef<any>();
-  const listRef = useRef<any>();
+  const contentRef = useRef<any>(null);
+  const listRef = useRef<any>(null);
   const [listHeight, setListHeight] = useState<number>(1); // some positive number
 
   const setCurrentContentHeight = () => {

@@ -7,10 +7,10 @@ interface Props extends InfoMessageProps {
 }
 
 const InfoBackgroundMessageWrap = ({ name, children, ...props }: Props) => {
-  if (name && !appModel.attrs[name]) return null;
+  if (name && !appModel.data[name]) return null;
 
   const onHide = name
-    ? () => ((appModel.attrs as any)[name as any] = false) // eslint-disable-line
+    ? () => ((appModel.data as any)[name as any] = false) // eslint-disable-line
     : undefined;
 
   return (

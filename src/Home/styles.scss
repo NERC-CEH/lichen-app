@@ -25,10 +25,10 @@ ion-tab-bar {
     }
     &.tab-selected {
       --color-selected: var(--color-secondary-300);
+      animation-duration: 0.5s;
 
       animation-fill-mode: forwards;
       animation-name: example;
-      animation-duration: 0.5s;
     }
   }
 }

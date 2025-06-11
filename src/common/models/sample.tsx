@@ -16,7 +16,8 @@ import config from 'common/config';
 import defaultSurvey, { Survey } from 'Survey/config';
 import Occurrence from './occurrence';
 import GPSExtension from './sampleGPSExt';
-import { modelStore } from './store';
+import { samplesStore } from './store';
+import userModel from './user';
 
 type Attrs = SampleAttrs & {
   location?: any;
@@ -34,10 +35,6 @@ type Metadata = SampleMetadata & {
 };
 
 export default class Sample extends SampleOriginal<Attrs, Metadata> {
-  static fromJSON(json: any) {
-    return super.fromJSON(json, Occurrence, Sample);
-  }
-
   declare occurrences: IObservableArray<Occurrence>;
 
   declare samples: IObservableArray<Sample>;
@@ -59,15 +56,12 @@ export default class Sample extends SampleOriginal<Attrs, Metadata> {
     ...options
   }: SampleOptions & { isSubSample?: boolean }) {
     // only top samples should have the store, otherwise sync() will save sub-samples on attr change.
-    const store = isSubSample ? undefined : modelStore; // eventually remove this once using a SubSample class.
+    const store = isSubSample ? undefined : samplesStore; // eventually remove this once using a SubSample class.
 
-    super({ ...options, store });
+    super({ ...options, Occurrence, store });
 
-    this.remote.url = `${config.backend.indicia.url}/index.php/services/rest`;
-    // eslint-disable-next-line
-    this.remote.headers = async () => ({
-      Authorization: `Bearer ${config.backend.indicia.anonToken}`,
-    });
+    this.remote.url = config.backend.indicia.url;
+    this.remote.getAccessToken = () => userModel.getAccessToken();
 
     this.survey = defaultSurvey;
 
@@ -84,7 +78,7 @@ export default class Sample extends SampleOriginal<Attrs, Metadata> {
   }
 
   async upload() {
-    if (this.remote.synchronising || this.isUploaded()) return true;
+    if (this.remote.synchronising || this.isUploaded) return true;
 
     const invalids = this.validateRemote();
     if (invalids) return false;
@@ -92,8 +86,9 @@ export default class Sample extends SampleOriginal<Attrs, Metadata> {
     if (!device.isOnline) return false;
 
     this.cleanUp();
+    await this.saveRemote();
 
-    return this.saveRemote();
+    return true;
   }
 
   getSurvey(): Survey {

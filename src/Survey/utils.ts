@@ -3,17 +3,17 @@ import Occurrence from 'models/occurrence';
 
 export const byTreeBranchNumber =
   (treeBranchNumber: string) => (occ: Occurrence) =>
-    occ.attrs.treeBranchNumber === treeBranchNumber;
+    occ.data.treeBranchNumber === treeBranchNumber;
 
 export const byTreeBranchPart = (treeBranchPart: string) => (occ: Occurrence) =>
-  occ.attrs.treeBranchPart === treeBranchPart;
+  occ.data.treeBranchPart === treeBranchPart;
 
 export const byToleranceType =
   (type: 'sensitive' | 'tolerant') => (occ: Occurrence) =>
-    occ.attrs.taxon.type === type;
+    occ.data.taxon.type === type;
 
 export const byType = (type: 'branch' | 'trunk') => (occ: Occurrence) => {
-  const isBranch = ['one', 'two', 'three'].includes(occ.attrs.treeBranchPart);
+  const isBranch = ['one', 'two', 'three'].includes(occ.data.treeBranchPart);
   return type === 'branch' ? isBranch : !isBranch;
 };
 
@@ -35,7 +35,7 @@ export const getLIS = function (type: 'branch' | 'trunk', sample: Sample) {
   const tolerant = new Set();
 
   const assignToScore = (occ: Occurrence) => {
-    const { treeBranchNumber, treeBranchPart, taxon } = occ.attrs;
+    const { treeBranchNumber, treeBranchPart, taxon } = occ.data;
     const key = `${treeBranchNumber}${treeBranchPart}`;
     trees.add(treeBranchNumber);
     if (taxon.type === 'sensitive') {

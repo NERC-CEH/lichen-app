@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react';
 import { Page, PickByType, useAlert, useLoader, useToast } from '@flumens';
-import savedSamples from 'common/models/savedSamples';
+import savedSamples from 'common/models/collections/samples';
 import userModel, { useUserStatusCheck } from 'common/models/user';
 import appModel, { Attrs as AppModelAttrs } from 'models/app';
 import Main from './Main';
@@ -42,12 +42,12 @@ function onToggle(
   setting: keyof PickByType<AppModelAttrs, boolean>,
   checked: boolean
 ) {
-  appModel.attrs[setting] = checked;
+  appModel.data[setting] = checked;
   appModel.save();
 }
 
 const Controller = () => {
-  const { sendAnalytics } = appModel.attrs;
+  const { sendAnalytics } = appModel.data;
 
   const showLogoutConfirmationDialog = useConfirmationDialog();
   const toast = useToast();

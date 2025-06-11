@@ -30,10 +30,10 @@ const MenuDateAttr = ({ model }: Props) => {
               preferWheel
               onIonChange={(e: any) => {
                 // eslint-disable-next-line
-                (model.attrs as any).date = e.detail.value.split('T')[0];
+                (model.data as any).date = e.detail.value.split('T')[0];
               }}
-              value={(model.attrs as any).date}
-              disabled={model.isDisabled()}
+              value={(model.data as any).date}
+              disabled={model.isDisabled}
               max={new Date().toISOString()}
             />
           </IonModal>

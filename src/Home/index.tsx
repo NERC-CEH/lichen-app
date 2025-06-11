@@ -20,7 +20,7 @@ import {
   useIonRouter,
 } from '@ionic/react';
 import PendingSurveysBadge from 'common/Components/PendingSurveysBadge';
-import savedSamples from 'models/savedSamples';
+import savedSamples from 'models/collections/samples';
 import Guide from './Guide';
 import Home from './Home';
 import Menu from './Menu';

@@ -1,5 +1,5 @@
 import { RouteWithModels } from '@flumens';
-import savedSamples from 'models/savedSamples';
+import savedSamples from 'models/collections/samples';
 import Branch from './Branch';
 import Home from './Home';
 import Location from './Location';

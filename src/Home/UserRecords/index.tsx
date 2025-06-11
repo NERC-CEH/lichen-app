@@ -14,8 +14,8 @@ import {
   IonItemDivider,
 } from '@ionic/react';
 import InfoBackgroundMessage from 'common/Components/InfoBackgroundMessage';
+import savedSamples, { uploadAllSamples } from 'models/collections/samples';
 import Sample from 'models/sample';
-import savedSamples, { uploadAllSamples } from 'models/savedSamples';
 import Survey from './Survey';
 import VirtualList from './VirtualList';
 import './styles.scss';
@@ -29,11 +29,11 @@ const LIST_ITEM_HEIGHT = 80 + 10; // 10px for padding
 const LIST_ITEM_DIVIDER_HEIGHT = 35;
 
 function bySurveyDate(sample1: Sample, sample2: Sample) {
-  const date1 = new Date(sample1.attrs.date);
+  const date1 = new Date(sample1.data.date);
   const moveToTop = !date1 || date1.toString() === 'Invalid Date';
   if (moveToTop) return -1;
 
-  const date2 = new Date(sample2.attrs.date);
+  const date2 = new Date(sample2.data.date);
   return date2.getTime() - date1.getTime();
 }
 
@@ -52,7 +52,7 @@ const getSurveys = (surveys: Sample[], showUploadAll?: boolean) => {
 
   // eslint-disable-next-line @getify/proper-arrows/name
   [...surveys].forEach(survey => {
-    const date = roundDate(new Date(survey.attrs.date).getTime()).toString();
+    const date = roundDate(new Date(survey.data.date).getTime()).toString();
     if (!dates.includes(date) && date !== 'Invalid Date') {
       dates.push(date);
       dateIndices.push(groupedSurveys.length);
@@ -118,7 +118,7 @@ const UserRecordsComponent = () => {
 
   const getSamplesList = (uploaded?: boolean) => {
     const byUploadStatus = (sample: Sample) =>
-      uploaded ? sample.metadata.syncedOn : !sample.metadata.syncedOn;
+      uploaded ? sample.syncedAt : !sample.syncedAt;
 
     return savedSamples.filter(byUploadStatus).sort(bySurveyDate);
   };

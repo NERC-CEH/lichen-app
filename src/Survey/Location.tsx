@@ -1,7 +1,7 @@
 /* eslint-disable no-restricted-syntax */
 import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react';
-import { MapRef } from 'react-map-gl';
+import { MapRef } from 'react-map-gl/mapbox';
 import {
   MapContainer,
   MapHeader,
@@ -21,14 +21,14 @@ type Props = {
 
 const ModelLocationMap = ({ sample }: Props) => {
   const model = sample;
-  const location = model.attrs.location || {};
-  const parentLocation = model.parent?.attrs.location;
+  const location = model.data.location || {};
+  const parentLocation = model.parent?.data.location;
 
   const setLocation = async (newLocation: any) => {
     if (!newLocation) return;
     if (model.isGPSRunning()) model.stopGPS();
 
-    model.attrs.location = { ...model.attrs.location, ...newLocation };
+    model.data.location = { ...model.data.location, ...newLocation };
   };
 
   const onManuallyTypedLocationChange = (e: any) =>
@@ -38,7 +38,7 @@ const ModelLocationMap = ({ sample }: Props) => {
   const onGPSClick = () => toggleGPS(model);
 
   const onLocationNameChange = ({ name }: any) => {
-    model.attrs.location.name = name;
+    model.data.location.name = name;
   };
 
   const [mapRef, setMapRef] = useState<MapRef>();

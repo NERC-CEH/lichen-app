@@ -83,8 +83,8 @@ const Trunk = ({ sample }: Props) => {
           <div className="rounded-list">
             <Block
               block={treeCircumferenceAttr}
-              record={sample.attrs}
-              isDisabled={sample.isDisabled()}
+              record={sample.data}
+              isDisabled={sample.isDisabled}
             />
           </div>
         </IonList>

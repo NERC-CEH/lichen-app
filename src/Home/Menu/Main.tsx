@@ -35,8 +35,8 @@ const MenuMain = ({
   sendAnalytics,
   onToggle,
 }: Props) => {
-  const isNotVerified = user.attrs.verified === false; // verified is undefined in old versions
-  const userEmail = user.attrs.email;
+  const isNotVerified = user.data.verified === false; // verified is undefined in old versions
+  const userEmail = user.data.email;
 
   const onSendAnalyticsToggle = (checked: boolean) =>
     onToggle('sendAnalytics', checked);
@@ -53,7 +53,7 @@ const MenuMain = ({
               <IonIcon icon={exitOutline} size="small" slot="start" />
               Logout
               {': '}
-              {user.attrs.firstName} {user.attrs.lastName}
+              {user.data.firstName} {user.data.lastName}
             </IonItem>
           )}
 

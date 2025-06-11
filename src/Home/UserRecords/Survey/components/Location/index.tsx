@@ -11,7 +11,7 @@ type Props = {
 };
 
 const Location: FC<Props> = ({ sample }) => {
-  const { location } = sample.attrs;
+  const { location } = sample.data;
   const locationName = location.name;
 
   return (

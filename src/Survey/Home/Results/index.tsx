@@ -20,7 +20,7 @@ const getPollutionMessage = function (naqi: number) {
 type Props = { sample: Sample };
 
 const Results = ({ sample }: Props) => {
-  const ref = useRef<any>();
+  const ref = useRef<any>(null);
 
   const trunkLIS: any = getLIS('trunk', sample);
   const branchLIS: any = getLIS('branch', sample);

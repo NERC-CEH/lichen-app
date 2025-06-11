@@ -35,7 +35,7 @@ const Species = ({ sample }: Props) => {
 
   const { treeBranchNumber, treeBranchPart } = match.params;
 
-  const isDisabled = sample.isDisabled();
+  const {isDisabled} = sample;
 
   const occurrences = sample.occurrences
     .filter(byTreeBranchNumber(treeBranchNumber))
@@ -57,9 +57,9 @@ const Species = ({ sample }: Props) => {
 
     if (op === 'remove') {
       const byTaxonIdAndPart = (occ: Occurrence) =>
-        occ.attrs.taxon.id === taxon.id &&
-        occ.attrs.treeBranchNumber === treeBranchNumber &&
-        occ.attrs.treeBranchPart === treeBranchPart;
+        occ.data.taxon.id === taxon.id &&
+        occ.data.treeBranchNumber === treeBranchNumber &&
+        occ.data.treeBranchPart === treeBranchPart;
       const occToDelete = sample.occurrences.find(byTaxonIdAndPart);
       console.log(occToDelete);
 
@@ -67,7 +67,7 @@ const Species = ({ sample }: Props) => {
     }
   };
 
-  const getTaxon = (occ: Occurrence) => occ.attrs.taxon;
+  const getTaxon = (occ: Occurrence) => occ.data.taxon;
   const selectedSpecies = occurrences.map(getTaxon);
 
   const navigateNext = () =>

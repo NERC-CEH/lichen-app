@@ -91,7 +91,7 @@ const Home = ({ sample }: Props) => {
   const hasTrunkResults = Number.isFinite(trunkLIS);
   const hasBranchResults = Number.isFinite(branchLIS);
 
-  const isDisabled = sample.isDisabled();
+  const {isDisabled} = sample;
 
   const isSurveyComplete = hasTrunkResults || hasBranchResults;
 
@@ -121,7 +121,7 @@ const Home = ({ sample }: Props) => {
   };
 
   const recordAttrs = {
-    record: sample.attrs,
+    record: sample.data,
     isDisabled,
   };
 
@@ -135,7 +135,7 @@ const Home = ({ sample }: Props) => {
       <Main>
         {isDisabled && <UploadedRecordInfoMessage />}
 
-        <IonToolbar className=" [--background:transparent]">
+        <IonToolbar className="[--background:transparent]">
           <IonSegment onIonChange={onSegmentClick} value={segment}>
             <IonSegmentButton value="general">
               <IonLabel className="ion-text-wrap">General</IonLabel>
