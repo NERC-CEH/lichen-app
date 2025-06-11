@@ -16,6 +16,7 @@
     "test:eslint": "eslint src --quiet --ext .jsx --ext .ts --ext .tsx --ext .js && echo '\\033[37;42;1m PASS \\033[00m'"
   },
   "dependencies": {
+    "@capacitor-community/sqlite": "^7.0.0",
     "@capacitor/android": "7.3.0",
     "@capacitor/app": "^7.0.1",
     "@capacitor/camera": "^7.0.1",

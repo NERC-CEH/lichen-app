@@ -108,8 +108,7 @@ const getSurveys = (surveys: Sample[], showUploadAll?: boolean) => {
 const UserRecordsComponent = () => {
   const toast = useToast();
 
-  const initSegment = 'pending';
-  const [segment, setSegment] = useState(initSegment);
+  const [segment, setSegment] = useState('pending');
 
   const onSegmentClick = (e: any) => {
     const newSegment = e.detail.value;

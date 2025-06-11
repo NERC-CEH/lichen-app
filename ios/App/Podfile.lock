@@ -8,6 +8,10 @@ PODS:
     - GCDWebServer (~> 3.0)
   - CapacitorCamera (7.0.1):
     - Capacitor
+  - CapacitorCommunitySqlite (7.0.0):
+    - Capacitor
+    - SQLCipher
+    - ZIPFoundation
   - CapacitorCordova (7.3.0)
   - CapacitorDevice (7.0.1):
     - Capacitor
@@ -30,12 +34,19 @@ PODS:
   - GCDWebServer/Core (3.5.4)
   - IONFilesystemLib (1.0.0)
   - IONGeolocationLib (1.0.0)
+  - SQLCipher (4.6.1):
+    - SQLCipher/standard (= 4.6.1)
+  - SQLCipher/common (4.6.1)
+  - SQLCipher/standard (4.6.1):
+    - SQLCipher/common
+  - ZIPFoundation (0.9.19)
 
 DEPENDENCIES:
   - "Capacitor (from `../../node_modules/@capacitor/ios`)"
   - "CapacitorApp (from `../../node_modules/@capacitor/app`)"
   - CapacitorBlobWriter (from `../../node_modules/capacitor-blob-writer`)
   - "CapacitorCamera (from `../../node_modules/@capacitor/camera`)"
+  - "CapacitorCommunitySqlite (from `../../node_modules/@capacitor-community/sqlite`)"
   - "CapacitorCordova (from `../../node_modules/@capacitor/ios`)"
   - "CapacitorDevice (from `../../node_modules/@capacitor/device`)"
   - "CapacitorFilesystem (from `../../node_modules/@capacitor/filesystem`)"
@@ -50,6 +61,8 @@ SPEC REPOS:
     - GCDWebServer
     - IONFilesystemLib
     - IONGeolocationLib
+    - SQLCipher
+    - ZIPFoundation
 
 EXTERNAL SOURCES:
   Capacitor:
@@ -60,6 +73,8 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/capacitor-blob-writer"
   CapacitorCamera:
     :path: "../../node_modules/@capacitor/camera"
+  CapacitorCommunitySqlite:
+    :path: "../../node_modules/@capacitor-community/sqlite"
   CapacitorCordova:
     :path: "../../node_modules/@capacitor/ios"
   CapacitorDevice:
@@ -82,6 +97,7 @@ SPEC CHECKSUMS:
   CapacitorApp: d63334c052278caf5d81585d80b21905c6f93f39
   CapacitorBlobWriter: 110eeaf80611f19bf01a8a05ff3672149ed0baad
   CapacitorCamera: eb8687d8687fed853598ec9460d94bcd5e16babe
+  CapacitorCommunitySqlite: 6501e7349acf998346acf24ef757861bb3f6fc2b
   CapacitorCordova: 2685f5c43675793b5f06dfd66b3b26268f003b97
   CapacitorDevice: fe3f190e1d718f4607bdc6b73993433d1c84f409
   CapacitorFilesystem: 3acaa1d2b909a9dd904581a86f21782886e6bb38
@@ -93,7 +109,9 @@ SPEC CHECKSUMS:
   GCDWebServer: 2c156a56c8226e2d5c0c3f208a3621ccffbe3ce4
   IONFilesystemLib: ceacae793975039530458eabab0c495c70515a0d
   IONGeolocationLib: 81f33f88d025846946de2cf63b0c7628e7c6bc9d
+  SQLCipher: 77fbe633cd84db04b07876dd50766b4924b57d61
+  ZIPFoundation: b8c29ea7ae353b309bc810586181fd073cb3312c
 
-PODFILE CHECKSUM: e59e9c37f867bf1988eea7ad1a2cdc703bc9c44e
+PODFILE CHECKSUM: 4e4e7092a79586abe81ca988786977154691299e
 
 COCOAPODS: 1.10.1

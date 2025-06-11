@@ -4,9 +4,20 @@ const config: CapacitorConfig = {
   appId: 'uk.ac.ceh.lichens',
   appName: 'Lichen App',
   webDir: 'build',
-  server: {
-    androidScheme: 'https'
-  }
+  android: {
+    adjustMarginsForEdgeToEdge: 'force',
+  },
+  plugins: {
+    SplashScreen: {
+      launchShowDuration: 3000,
+      backgroundColor: '#fff2df',
+      androidSplashResourceName: 'splash',
+      androidScaleType: 'CENTER_CROP',
+      showSpinner: false,
+      splashFullScreen: true,
+      splashImmersive: true,
+    },
+  },
 };
 
 export default config;
