@@ -1,41 +1,65 @@
 PODS:
-  - Capacitor (5.6.0):
+  - Capacitor (7.3.0):
     - CapacitorCordova
-  - CapacitorApp (5.0.7):
+  - CapacitorApp (7.0.1):
     - Capacitor
-  - CapacitorCordova (5.6.0)
-  - CapacitorDevice (5.0.7):
+  - CapacitorBlobWriter (0.0.1):
     - Capacitor
-  - CapacitorFilesystem (5.2.1):
+    - GCDWebServer (~> 3.0)
+  - CapacitorCamera (7.0.1):
     - Capacitor
-  - CapacitorGeolocation (5.0.7):
+  - CapacitorCordova (7.3.0)
+  - CapacitorDevice (7.0.1):
     - Capacitor
-  - CapacitorNetwork (5.0.7):
+  - CapacitorFilesystem (7.1.1):
     - Capacitor
-  - CapacitorSplashScreen (5.0.7):
+    - IONFilesystemLib (~> 1.0)
+  - CapacitorGeolocation (7.1.2):
     - Capacitor
-  - CapacitorStatusBar (5.0.7):
+    - IONGeolocationLib (~> 1.0)
+  - CapacitorNetwork (7.0.1):
     - Capacitor
-  - CordovaPlugins (5.6.0):
-    - CapacitorCordova
+  - CapacitorShare (7.0.1):
+    - Capacitor
+  - CapacitorSplashScreen (7.0.1):
+    - Capacitor
+  - CapacitorStatusBar (7.0.1):
+    - Capacitor
+  - GCDWebServer (3.5.4):
+    - GCDWebServer/Core (= 3.5.4)
+  - GCDWebServer/Core (3.5.4)
+  - IONFilesystemLib (1.0.0)
+  - IONGeolocationLib (1.0.0)
 
 DEPENDENCIES:
   - "Capacitor (from `../../node_modules/@capacitor/ios`)"
   - "CapacitorApp (from `../../node_modules/@capacitor/app`)"
+  - CapacitorBlobWriter (from `../../node_modules/capacitor-blob-writer`)
+  - "CapacitorCamera (from `../../node_modules/@capacitor/camera`)"
   - "CapacitorCordova (from `../../node_modules/@capacitor/ios`)"
   - "CapacitorDevice (from `../../node_modules/@capacitor/device`)"
   - "CapacitorFilesystem (from `../../node_modules/@capacitor/filesystem`)"
   - "CapacitorGeolocation (from `../../node_modules/@capacitor/geolocation`)"
   - "CapacitorNetwork (from `../../node_modules/@capacitor/network`)"
+  - "CapacitorShare (from `../../node_modules/@capacitor/share`)"
   - "CapacitorSplashScreen (from `../../node_modules/@capacitor/splash-screen`)"
   - "CapacitorStatusBar (from `../../node_modules/@capacitor/status-bar`)"
-  - CordovaPlugins (from `../capacitor-cordova-ios-plugins`)
+
+SPEC REPOS:
+  trunk:
+    - GCDWebServer
+    - IONFilesystemLib
+    - IONGeolocationLib
 
 EXTERNAL SOURCES:
   Capacitor:
     :path: "../../node_modules/@capacitor/ios"
   CapacitorApp:
     :path: "../../node_modules/@capacitor/app"
+  CapacitorBlobWriter:
+    :path: "../../node_modules/capacitor-blob-writer"
+  CapacitorCamera:
+    :path: "../../node_modules/@capacitor/camera"
   CapacitorCordova:
     :path: "../../node_modules/@capacitor/ios"
   CapacitorDevice:
@@ -46,25 +70,30 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capacitor/geolocation"
   CapacitorNetwork:
     :path: "../../node_modules/@capacitor/network"
+  CapacitorShare:
+    :path: "../../node_modules/@capacitor/share"
   CapacitorSplashScreen:
     :path: "../../node_modules/@capacitor/splash-screen"
   CapacitorStatusBar:
     :path: "../../node_modules/@capacitor/status-bar"
-  CordovaPlugins:
-    :path: "../capacitor-cordova-ios-plugins"
 
 SPEC CHECKSUMS:
-  Capacitor: ebfc16cdb8116d04c101686b080342872da42d43
-  CapacitorApp: 17fecd0e6cb23feafac7eb0939417389038b0979
-  CapacitorCordova: 931b48fcdbc9bc985fc2f16cec9f77c794a27729
-  CapacitorDevice: fc91bdb484dc0e70755e9b621cd557afe642613a
-  CapacitorFilesystem: 9f3e3c7fea2fff12f46dd5b07a2914f2103e4cfc
-  CapacitorGeolocation: 918a292459542bcce98433f9e7c7909f8c72838a
-  CapacitorNetwork: 81ef9728aa7a65cac8c1181ce79e578162b57b57
-  CapacitorSplashScreen: dd3de3f3644710fa2a697cfb91ec262eece4d242
-  CapacitorStatusBar: f390fbb49b82ffb754ea4b3cf71dc8b048baf3e7
-  CordovaPlugins: d90ff6c0d855076db63ae8175753cceff7604556
+  Capacitor: fbd134fa28e503720559ecddb5ab6b41d69de347
+  CapacitorApp: d63334c052278caf5d81585d80b21905c6f93f39
+  CapacitorBlobWriter: 110eeaf80611f19bf01a8a05ff3672149ed0baad
+  CapacitorCamera: eb8687d8687fed853598ec9460d94bcd5e16babe
+  CapacitorCordova: 2685f5c43675793b5f06dfd66b3b26268f003b97
+  CapacitorDevice: fe3f190e1d718f4607bdc6b73993433d1c84f409
+  CapacitorFilesystem: 3acaa1d2b909a9dd904581a86f21782886e6bb38
+  CapacitorGeolocation: 8c86a3afea574c84447c17905da96f2356ad913e
+  CapacitorNetwork: 07ec4c69c1bb696f41c23e00d31bda1bbb221bba
+  CapacitorShare: 58d6c2da63b093e8693287b2d36db92435538435
+  CapacitorSplashScreen: 19cd3573e57507e02d6f34597a8c421e00931487
+  CapacitorStatusBar: 275cbf2f4dfc00388f519ef80c7ec22edda342c9
+  GCDWebServer: 2c156a56c8226e2d5c0c3f208a3621ccffbe3ce4
+  IONFilesystemLib: ceacae793975039530458eabab0c495c70515a0d
+  IONGeolocationLib: 81f33f88d025846946de2cf63b0c7628e7c6bc9d
 
-PODFILE CHECKSUM: d42f69eeba119270cadfcf84a5dfaeaad0681e62
+PODFILE CHECKSUM: e59e9c37f867bf1988eea7ad1a2cdc703bc9c44e
 
 COCOAPODS: 1.10.1
