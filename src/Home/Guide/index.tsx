@@ -79,13 +79,9 @@ const Guide = () => {
               <li>Look for availability / accessibility of branches.</li>
               <li>
                 Avoid sites on calcareous soils. Determine the calcium carbonate
-                (CaCO3) soil levels in your location at{' '}
-                <a
-                  href="http://maps.bgs.ac.uk/soilportal/wmsviewer.html"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  this website.
+                (CaCO3) soil levels in your location at the{' '}
+                <a href="https://www.ukso.org" target="_blank" rel="noreferrer">
+                  UK Soil Observatory.
                 </a>{' '}
               </li>
             </ol>

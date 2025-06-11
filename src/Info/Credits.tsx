@@ -22,7 +22,7 @@ export default () => (
           <br />
           <br />
           <a href="http://www.ceh.ac.uk" target="_blank" rel="noreferrer">
-            Centre for Ecology and Hydrology
+            UK Centre for Ecology and Hydrology
           </a>
           <br />
           <br />
@@ -40,18 +40,13 @@ export default () => (
           </a>
           <br />
           <br />
-          <a href="http://www.sniffer.org.uk" target="_blank" rel="noreferrer">
-            SNIFFER
-          </a>
-          <br />
-          <br />
           <a href="http://jncc.defra.gov.uk" target="_blank" rel="noreferrer">
             Joint Nature Conservation Committee
           </a>
           <br />
           <br />
           <a href="http://www.snh.gov.uk" target="_blank" rel="noreferrer">
-            Scottish Natural Heritage
+            Nature Scot
           </a>
           <br />
           <br />
@@ -60,7 +55,11 @@ export default () => (
           </a>
           <br />
           <br />
-          <a href="http://www.ehsni.gov.uk" target="_blank" rel="noreferrer">
+          <a
+            href="https://www.daera-ni.gov.uk/articles/northern-ireland-environment-agency"
+            target="_blank"
+            rel="noreferrer"
+          >
             Northern Ireland Environment Agency
           </a>
           <br />
