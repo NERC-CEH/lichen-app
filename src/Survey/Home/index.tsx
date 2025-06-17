@@ -20,7 +20,7 @@ import {
 import GridRefValue from 'common/Components/GridRefValue';
 import { useUserStatusCheck } from 'common/models/user';
 import Sample, { useValidateCheck } from 'models/sample';
-import { commentAttr, emailAttr, treeTypeAttr } from 'Survey/config';
+import { commentAttr, treeTypeAttr } from 'Survey/config';
 import { byTreeBranchNumber, byType, getLIS } from 'Survey/utils';
 import MenuDateAttr from './MenuDateAttr';
 import Results from './Results';
@@ -91,7 +91,7 @@ const Home = ({ sample }: Props) => {
   const hasTrunkResults = Number.isFinite(trunkLIS);
   const hasBranchResults = Number.isFinite(branchLIS);
 
-  const {isDisabled} = sample;
+  const { isDisabled } = sample;
 
   const isSurveyComplete = hasTrunkResults || hasBranchResults;
 
@@ -158,8 +158,6 @@ const Home = ({ sample }: Props) => {
         {segment === 'general' && (
           <IonList className="mt-3" lines="full">
             <div className="rounded-list">
-              <Block block={emailAttr} {...recordAttrs} />
-
               <MenuDateAttr model={sample} />
 
               <Block block={treeTypeAttr} {...recordAttrs} />

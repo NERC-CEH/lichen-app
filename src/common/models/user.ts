@@ -1,3 +1,4 @@
+import { useContext } from 'react';
 import { z, object } from 'zod';
 import {
   DrupalUserModel,
@@ -5,7 +6,10 @@ import {
   useToast,
   useLoader,
   device,
+  useAlert,
 } from '@flumens';
+import { NavContext } from '@ionic/react';
+import * as Sentry from '@sentry/browser';
 import CONFIG from 'common/config';
 import { mainStore } from './store';
 
@@ -51,6 +55,12 @@ export class UserModel extends DrupalUserModel<Attrs> {
     this.ready?.then(checkForValidation);
   }
 
+  async logIn(email: string, password: string) {
+    await super.logIn(email, password);
+
+    if (this.id) Sentry.setUser({ id: this.id });
+  }
+
   async checkActivation() {
     if (!this.isLoggedIn()) return false;
 
@@ -93,17 +103,19 @@ const userModel = new UserModel({
 });
 
 export const useUserStatusCheck = () => {
+  const { navigate } = useContext(NavContext);
   const toast = useToast();
   const loader = useLoader();
+  const alert = useAlert();
 
-  return async () => {
+  const check = async () => {
     if (!device.isOnline) {
-      toast.warn('Looks like you are offline!');
+      toast.warn("Sorry, looks like you're offline.");
       return false;
     }
 
     if (!userModel.isLoggedIn()) {
-      toast.warn('Please log in first.');
+      navigate(`/user/login`);
       return false;
     }
 
@@ -113,13 +125,44 @@ export const useUserStatusCheck = () => {
       loader.hide();
 
       if (!isVerified) {
-        toast.warn('The user has not been activated or is blocked.');
+        const resendVerificationEmail = async () => {
+          await loader.show('Please wait...');
+          try {
+            await userModel.resendVerificationEmail();
+            toast.success(
+              'A new verification email was successfully sent now. If you did not receive the email, then check your Spam or Junk email folders.'
+            );
+          } catch (err: any) {
+            toast.error(err);
+          }
+          loader.hide();
+        };
+
+        alert({
+          header: "Looks like your email hasn't been verified yet.",
+          message: 'Should we resend the verification email?',
+          buttons: [
+            {
+              text: 'Cancel',
+              role: 'cancel',
+              cssClass: 'secondary',
+            },
+            {
+              text: 'Resend',
+              cssClass: 'primary',
+              handler: resendVerificationEmail,
+            },
+          ],
+        });
+
         return false;
       }
     }
 
     return true;
   };
+
+  return check;
 };
 
 export default userModel;

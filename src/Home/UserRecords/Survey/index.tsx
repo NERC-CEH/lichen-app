@@ -64,10 +64,7 @@ const Survey: FC<Props> = ({ sample, style, uploadIsPrimary }) => {
 
   const deleteSurveyWrap = () => deleteSurvey();
 
-  const onUpload = async (e: any) => {
-    e.preventDefault();
-    e.stopPropagation();
-
+  const onUpload = async () => {
     const isUserOK = await checkUserStatus();
     if (!isUserOK) return;
 

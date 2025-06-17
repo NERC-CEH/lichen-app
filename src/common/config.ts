@@ -24,11 +24,13 @@ const CONFIG = {
     url: backendUrl,
     websiteUrl: backendUrl,
 
+    clientId: process.env.APP_BACKEND_CLIENT_ID as string,
+    clientPass: process.env.APP_BACKEND_CLIENT_PASS as string,
+
     mediaUrl: `${indiciaUrl}/upload/`,
 
     indicia: {
       url: indiciaUrl,
-      anonToken: process.env.APP_BACKEND_ANONYMOUS_TOKEN as string,
     },
   },
 

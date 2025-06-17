@@ -1,9 +1,9 @@
-import { mailOpenOutline } from 'ionicons/icons';
 import { z, object } from 'zod';
 import {
   PageProps,
   RemoteConfig,
   MenuAttrItemFromModelMenuProps,
+  dateFormat,
 } from '@flumens';
 import { IonIcon } from '@ionic/react';
 import AppOccurrence, { Taxon } from 'models/occurrence';
@@ -111,15 +111,6 @@ export interface Survey extends SampleConfig {
   }) => Promise<AppSample>;
 }
 
-const mailIcon = (<IonIcon src={mailOpenOutline} className="size-6" />) as any;
-
-export const emailAttr = {
-  id: 'smpAttr:623',
-  type: 'textInput',
-  prefix: mailIcon,
-  title: 'Email (optional)',
-} as const;
-
 const treeIcon = (<IonIcon src={tree} className="size-6" />) as any;
 
 export const treeTypeAttr = {
@@ -177,6 +168,10 @@ const survey: Survey = {
   label: 'Survey',
 
   attrs: {
+    date: {
+      remote: { values: (date: number) => dateFormat.format(new Date(date)) },
+    },
+
     location: {
       remote: {
         id: 'entered_sref',
