@@ -128,7 +128,7 @@
   {
     "id": "NHMSYS0001491749",
     "warehouse_id": 369234,
-    "type": "tolerant",
+    "type": "sensitive",
     "taxon": "Parmelia species",
     "description": "Lobes leaf-like; overlapping with a network of pale lines that become sorediate in P. sulcata while P. saxatilis has isidia on the upper surface.",
     "profile_pic": "Parmelia_species.jpg",
