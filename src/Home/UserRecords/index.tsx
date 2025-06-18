@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { observer } from 'mobx-react';
 import { Trans as T } from 'react-i18next';
-import { Page, Main, getRelativeDate, useToast } from '@flumens';
+import { Page, Main, getRelativeDate, useToast, VirtualList } from '@flumens';
 import {
   IonHeader,
   IonToolbar,
@@ -11,13 +11,11 @@ import {
   IonBadge,
   IonList,
   IonButton,
-  IonItemDivider,
 } from '@ionic/react';
 import InfoBackgroundMessage from 'common/Components/InfoBackgroundMessage';
 import savedSamples, { uploadAllSamples } from 'models/collections/samples';
 import Sample from 'models/sample';
 import Survey from './Survey';
-import VirtualList from './VirtualList';
 import './styles.scss';
 
 // https://stackoverflow.com/questions/47112393/getting-the-iphone-x-safe-area-using-javascript
@@ -70,10 +68,14 @@ const getSurveys = (surveys: Sample[], showUploadAll?: boolean) => {
       const { date, count } = groupedSurveys[index];
 
       return (
-        <IonItemDivider key={date} style={(itemProps as any).style} mode="ios">
-          <IonLabel color="dark">{getRelativeDate(date)}</IonLabel>
-          {count > 1 && <IonLabel slot="end">{count}</IonLabel>}
-        </IonItemDivider>
+        <div
+          key={date}
+          style={(itemProps as any).style}
+          className="list-divider rounded-md"
+        >
+          <span>{getRelativeDate(date)}</span>
+          {count > 1 && <span>{count}</span>}
+        </div>
       );
     }
 
@@ -205,6 +207,8 @@ const UserRecordsComponent = () => {
 
   const showingPending = segment === 'pending';
   const showingUploaded = segment === 'uploaded';
+
+  console.log('showingPending', showingPending);
 
   return (
     <Page id="home-user-surveys">

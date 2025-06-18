@@ -9,18 +9,53 @@ import {
   exitOutline,
   personAddOutline,
   personOutline,
+  cloudDownloadOutline,
+  cloudUploadOutline,
 } from 'ionicons/icons';
 import { Trans as T } from 'react-i18next';
-import { Main, InfoMessage, Toggle } from '@flumens';
-import { IonIcon, IonList, IonItem, IonButton } from '@ionic/react';
+import { Main, InfoMessage, Toggle, useAlert } from '@flumens';
+import { IonIcon, IonList, IonItem, IonButton, isPlatform } from '@ionic/react';
 import CONFIG from 'common/config';
 import { UserModel } from 'common/models/user';
+
+function useDatabaseExportDialog(exportFn: any) {
+  const alert = useAlert();
+
+  const showDatabaseExportDialog = () => {
+    alert({
+      header: 'Export',
+      message: (
+        <T>
+          Are you sure you want to export the data?
+          <p className="my-2 font-bold">
+            This feature is intended solely for technical support and is not a
+            supported method for exporting your data
+          </p>
+        </T>
+      ),
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+        {
+          text: 'Export',
+          handler: exportFn,
+        },
+      ],
+    });
+  };
+
+  return showDatabaseExportDialog;
+}
 
 type Props = {
   sendAnalytics: boolean;
   onToggle: (sendAnalytics: string, checked: boolean) => void;
   logOut: () => void;
   refreshAccount: any;
+  exportDatabase: any;
+  importDatabase: any;
   resendVerificationEmail: () => Promise<void>;
   isLoggedIn: boolean;
   user: UserModel;
@@ -34,9 +69,12 @@ const MenuMain = ({
   resendVerificationEmail,
   sendAnalytics,
   onToggle,
+  exportDatabase,
+  importDatabase,
 }: Props) => {
   const isNotVerified = user.data.verified === false; // verified is undefined in old versions
   const userEmail = user.data.email;
+  const showDatabaseExportDialog = useDatabaseExportDialog(exportDatabase);
 
   const onSendAnalyticsToggle = (checked: boolean) =>
     onToggle('sendAnalytics', checked);
@@ -130,6 +168,16 @@ const MenuMain = ({
           <InfoMessage inline>
             Share app crash data so we can make the app more reliable.
           </InfoMessage>
+          <IonItem onClick={showDatabaseExportDialog}>
+            <IonIcon icon={cloudDownloadOutline} size="small" slot="start" />
+            <T>Export database</T>
+          </IonItem>
+          {!isPlatform('hybrid') && (
+            <IonItem onClick={importDatabase}>
+              <IonIcon icon={cloudUploadOutline} size="small" slot="start" />
+              Import database
+            </IonItem>
+          )}
         </div>
 
         <div className="my-10 text-center opacity-50">

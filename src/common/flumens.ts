@@ -50,6 +50,7 @@ export { validateRemoteModel } from '@flumens/models/dist/Indicia/helpers';
 export { default as Toggle } from '@flumens/tailwind/dist/components/Switch';
 export { default as ModelValidationMessage } from '@flumens/ionic/dist/components/ModelValidationMessage';
 export { default as InfoBackgroundMessage } from '@flumens/tailwind/dist/components/InfoBackgroundMessage';
+export { default as VirtualList } from '@flumens/tailwind/dist/components/VirtualList';
 export {
   type Props as InfoMessageProps,
   default as InfoMessage,
