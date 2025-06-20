@@ -2,7 +2,7 @@ import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'uk.ac.ceh.lichens',
-  appName: 'Lichen App',
+  appName: 'LicheN',
   webDir: 'build',
   android: {
     adjustMarginsForEdgeToEdge: 'force',
