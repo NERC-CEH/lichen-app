@@ -45,7 +45,12 @@ const Guide = () => {
         </IonToolbar>
       </IonHeader>
 
-      <Main className={clsx(segment !== 'general' && 'hidden')}>
+      <Main
+        className={clsx(
+          '[--padding-top:calc(env(safe-area-inset-top)+50px)]',
+          segment !== 'general' && 'hidden'
+        )}
+      >
         <div>
           <Section>
             <H>Essential equipment to take with you</H>

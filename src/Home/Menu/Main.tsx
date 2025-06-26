@@ -81,7 +81,7 @@ const MenuMain = ({
 
   return (
     <Main className="[--padding-top:env(safe-area-inset-top)]">
-      <h1 className="text-center text-3xl font-semibold">Menu</h1>
+      <h1 className="my-6 text-center text-3xl font-semibold">Menu</h1>
 
       <IonList lines="full">
         <h2 className="list-title">Account</h2>

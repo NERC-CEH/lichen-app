@@ -1,14 +1,18 @@
 #home-user-surveys {
+  margin-top: 0; // to counter the ion-safe-area-top which is calculated in JS
+
   ion-header ion-toolbar {
+    padding: 0;
+    padding-top: env(safe-area-inset-top) !important;
     --background: transparent;
     position: fixed;
-    padding: 0;
 
     color: var(--ion-color-primary-contrast);
 
     ion-segment {
       z-index: 100000000;
       margin: 8px auto;
+
       box-shadow:
         -1px 2px 7px 0 #0000001a,
         0 2px 9px 0 #3e396b1a;
@@ -16,6 +20,11 @@
       background: var(--ion-color-light);
       width: calc(100% - 20px); // -20px to match the padding of the list below
       min-height: 40px;
+
+      ion-segment-button.md {
+        --padding-end: 5px;
+        --padding-start: 5px;
+      }
 
       ion-badge {
         display: inline;
@@ -62,6 +71,7 @@
   }
 
   ion-content {
+    --padding-top: env(safe-area-inset-top) !important;
     --overflow: hidden;
 
     ion-list {

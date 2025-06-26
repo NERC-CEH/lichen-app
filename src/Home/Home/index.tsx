@@ -7,7 +7,7 @@ import './styles.scss';
 const HomeController = () => {
   return (
     <Page id="home">
-      <Main className="no-padding">
+      <Main className="no-padding [--padding-top:env(safe-area-inset-top)]">
         <div className="h-full w-full bg-gradient-to-b from-white via-primary-50 to-primary-100 pt-3">
           <img src={appLogo} alt="" className="m-auto w-full max-w-[80%]" />
 
