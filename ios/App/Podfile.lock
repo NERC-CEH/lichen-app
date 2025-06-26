@@ -1,5 +1,5 @@
 PODS:
-  - Capacitor (7.3.0):
+  - Capacitor (7.4.0):
     - CapacitorCordova
   - CapacitorApp (7.0.1):
     - Capacitor
@@ -12,7 +12,7 @@ PODS:
     - Capacitor
     - SQLCipher
     - ZIPFoundation
-  - CapacitorCordova (7.3.0)
+  - CapacitorCordova (7.4.0)
   - CapacitorDevice (7.0.1):
     - Capacitor
   - CapacitorFilesystem (7.1.1):
@@ -93,12 +93,12 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capacitor/status-bar"
 
 SPEC CHECKSUMS:
-  Capacitor: fbd134fa28e503720559ecddb5ab6b41d69de347
+  Capacitor: a162db7c9c90f383740a78e8935dff4958158b6b
   CapacitorApp: d63334c052278caf5d81585d80b21905c6f93f39
   CapacitorBlobWriter: 110eeaf80611f19bf01a8a05ff3672149ed0baad
   CapacitorCamera: eb8687d8687fed853598ec9460d94bcd5e16babe
   CapacitorCommunitySqlite: 6501e7349acf998346acf24ef757861bb3f6fc2b
-  CapacitorCordova: 2685f5c43675793b5f06dfd66b3b26268f003b97
+  CapacitorCordova: 723e017d8a80ab2ede9959fbe37556c35ac860d5
   CapacitorDevice: fe3f190e1d718f4607bdc6b73993433d1c84f409
   CapacitorFilesystem: 3acaa1d2b909a9dd904581a86f21782886e6bb38
   CapacitorGeolocation: 8c86a3afea574c84447c17905da96f2356ad913e
@@ -114,4 +114,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 4e4e7092a79586abe81ca988786977154691299e
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.16.2
