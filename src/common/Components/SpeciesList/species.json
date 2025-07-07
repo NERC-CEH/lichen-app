@@ -60,7 +60,8 @@
     "taxon": "Ochrolechia androgyna",
     "description": "Thallus white to cream with soredia in conspicuous rounded clusters and occasional whitish fruiting bodies with a thick margin (thallus and sorediared)",
     "profile_pic": "Ochrolechia_androgyna.jpg",
-    "growth_form": "granular"
+    "growth_form": "granular",
+    "chemical_test": "thallus and soredia red"
   },
   {
     "id": "NBNSYS0000015513",
@@ -78,7 +79,8 @@
     "taxon": "Lecidella elaeochroma",
     "description": "Thallus grey with black margin, often forming a mosaic on smooth bark; fruiting bodies black (c. 1 mm diameter); disc-like, concave with distinct black margin (orange).",
     "profile_pic": "Lecidella_elaechroma.jpg",
-    "growth_form": "granular"
+    "growth_form": "granular",
+    "chemical_test": "orange"
   },
   {
     "id": "BMSSYS0000001357",
@@ -114,7 +116,8 @@
     "taxon": "Punctelia subrudecta",
     "description": "Lobes leaf-like, more or less appressed with soredia in white spots (red), lower surface pale tan.",
     "profile_pic": "Punctelia_subrudecta.jpg",
-    "growth_form": "leafy"
+    "growth_form": "leafy",
+    "chemical_test": "red"
   },
   {
     "id": "NBNSYS0000020585",

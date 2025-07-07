@@ -15,6 +15,7 @@ export type Taxon = {
   description: string;
   profile_pic: string;
   growth_form: 'granular' | 'bushy' | 'leafy';
+  chemical_test: string;
 };
 
 type Attrs = Omit<OccurrenceAttrs, 'taxon'> & {

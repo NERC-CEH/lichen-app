@@ -129,6 +129,15 @@ const GuideItemProfile = ({ item, onClose }: Props) => {
                 </Badge>
               )}
             </div>
+
+            {!!item.chemical_test && (
+              <div className="my-4">
+                <div className="heading inline text-base text-primary">
+                  Growth form:
+                </div>{' '}
+                <Badge className="capitalize">{item.chemical_test}</Badge>
+              </div>
+            )}
           </IonCardContent>
         </Main>
       </IonModal>
