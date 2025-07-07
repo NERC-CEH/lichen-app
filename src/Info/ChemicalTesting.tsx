@@ -15,6 +15,10 @@ const ChemicalTesting = () => {
             colour when a drop of bleach or caustic soda is applied.
           </P>
           <P>
+            Chemical test species: Punctelia subrudecta, Lecidella elaeochroma
+            and Ochrolechia androgyna.
+          </P>
+          <P>
             Watch for a pink to red colour change where you have applied bleach
             or caustic soda to the lichen medulla. This colour change may fade
             rapidly. If the colour changes this is called a + reaction.
