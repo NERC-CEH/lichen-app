@@ -7,6 +7,7 @@ import {
   IonSegment,
   IonSegmentButton,
   IonLabel,
+  IonItem,
 } from '@ionic/react';
 import branchImage from './branch.jpg';
 import naqiImage from './naqi.jpg';
@@ -53,6 +54,25 @@ const Guide = () => {
       >
         <div>
           <Section>
+            <H>Downloadable resources:</H>
+            <IonItem
+              href="https://www.apis.ac.uk/sites/default/files/2024-12/apis_Lichen_Online_Manual.pdf"
+              target="_blank"
+              className="my-2"
+            >
+              Full user manual for lichen identification with worked examples
+            </IonItem>
+
+            <IonItem
+              href="https://www.apis.ac.uk/sites/default/files/2024-12/apis_A4-Guidetothelichenbasednitrogenairqualityindex.pdf"
+              target="_blank"
+              className="my-2"
+            >
+              A4 pull-out field guide for using lichens for nitrogen air quality
+              index
+            </IonItem>
+          </Section>
+          <Section>
             <H>Essential equipment to take with you</H>
             <ol className="list-decimal p-3 pl-8 [&>li::marker]:font-bold [&>li]:my-3">
               <li>
@@ -72,14 +92,15 @@ const Guide = () => {
             <H>Establish suitability of site for survey</H>
             <ol className="list-decimal p-3 pl-8 [&>li::marker]:font-bold [&>li]:my-3">
               <li>
-                Identify five oak or five birch trees (not a mixture of the two)
-                growing under similar environmental conditions (not densely
-                planted or shaded).
+                Identify five oak or five birch trees (or a mixture of 3:2
+                between oak and birch) growing under similar environmental
+                conditions (not densely planted or shaded). Three trees is the
+                absolute minimum needed.
               </li>
               <li>Trees that are covered in ivy should not be used.</li>
               <li>
-                Trees should be single stemmed (standard) with a straight trunk,
-                less than 40 cm in girth.
+                Trees should be single stemmed (standard) with a straight trunk
+                greater than 40 cm in girth.
               </li>
               <li>Look for availability / accessibility of branches.</li>
               <li>
