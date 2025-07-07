@@ -52,7 +52,7 @@ export default () => (
           </a>
           <br />
           <br />
-          <a href="http://www.snh.gov.uk" target="_blank" rel="noreferrer">
+          <a href="https://www.nature.scot" target="_blank" rel="noreferrer">
             Nature Scot
           </a>
           <br />
