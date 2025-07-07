@@ -147,9 +147,11 @@ const Guide = () => {
               <li>For each trunk record the circumference.</li>
               <li>
                 For each aspect (East, West, South) select the lichens you can
-                identify. Use the ‘info’ button to help with identification.
-                Then click the next aspect (top right). Go through to ‘Finish’,
-                then start the next trunk (top right ‘Trunk 2’).
+                identify in the photo guide. Any lichens you can not identify or
+                are not certain about do not record them. Use the ‘info’ button
+                to help with identification. Then click the next aspect (top
+                right). Go through to ‘Finish’, then start the next trunk (top
+                right ‘Trunk 2’).
               </li>
               <li>Complete all 5 trunks then you can move to the branches.</li>
             </ol>
