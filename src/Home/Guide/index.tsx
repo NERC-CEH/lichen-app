@@ -54,6 +54,10 @@ const Guide = () => {
       >
         <div>
           <Section>
+            <IonItem routerLink="/info/about">About nitrogen</IonItem>
+          </Section>
+
+          <Section>
             <H>Downloadable resources:</H>
             <IonItem
               href="https://www.apis.ac.uk/sites/default/files/2024-12/apis_Lichen_Online_Manual.pdf"
