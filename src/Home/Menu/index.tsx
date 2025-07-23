@@ -1,15 +1,40 @@
+import { useContext } from 'react';
 import { observer } from 'mobx-react';
 import writeBlob from 'capacitor-blob-writer';
 import { Directory, Filesystem } from '@capacitor/filesystem';
 import { Share } from '@capacitor/share';
 import { Page, PickByType, useAlert, useLoader, useToast } from '@flumens';
-import { isPlatform } from '@ionic/react';
+import { isPlatform, NavContext } from '@ionic/react';
 import CONFIG from 'common/config';
 import savedSamples from 'common/models/collections/samples';
 import { db } from 'common/models/store';
 import userModel, { useUserStatusCheck } from 'common/models/user';
 import appModel, { Attrs as AppModelAttrs } from 'models/app';
 import Main from './Main';
+
+const useDeleteUser = () => {
+  const toast = useToast();
+  const loader = useLoader();
+  const { goBack } = useContext(NavContext);
+
+  const deleteUser = async () => {
+    console.log('Settings:Menu:Controller: deleting the user!');
+
+    await loader.show('Please wait...');
+
+    try {
+      await userModel.delete();
+      goBack();
+      toast.success('Done');
+    } catch (err: any) {
+      toast.error(err);
+    }
+
+    loader.hide();
+  };
+
+  return deleteUser;
+};
 
 const exportDatabase = async () => {
   const blob = await db.export();
@@ -100,6 +125,8 @@ const Controller = () => {
 
   const isLoggedIn = userModel.isLoggedIn();
 
+  const deleteUser = useDeleteUser();
+
   const resendVerificationEmail = async () => {
     if (!isLoggedIn) {
       toast.warn('Please log in first.');
@@ -141,6 +168,7 @@ const Controller = () => {
     <Page id="home-menu">
       <Main
         sendAnalytics={sendAnalytics}
+        deleteUser={deleteUser}
         onToggle={onToggleWrap}
         user={userModel}
         isLoggedIn={isLoggedIn}

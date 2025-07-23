@@ -11,12 +11,58 @@ import {
   personOutline,
   cloudDownloadOutline,
   cloudUploadOutline,
+  personRemoveOutline,
 } from 'ionicons/icons';
 import { Trans as T } from 'react-i18next';
 import { Main, InfoMessage, Toggle, useAlert } from '@flumens';
-import { IonIcon, IonList, IonItem, IonButton, isPlatform } from '@ionic/react';
+import {
+  IonIcon,
+  IonList,
+  IonItem,
+  IonButton,
+  isPlatform,
+  IonLabel,
+} from '@ionic/react';
 import CONFIG from 'common/config';
 import { UserModel } from 'common/models/user';
+
+function useUserDeleteDialog(deleteUser: any) {
+  const alert = useAlert();
+
+  const showUserDeleteDialog = () => {
+    alert({
+      header: 'Account delete',
+      message: (
+        <T>
+          Are you sure you want to delete your account?
+          <InfoMessage
+            color="danger"
+            prefix={<IonIcon src={warningOutline} />}
+            skipTranslation
+          >
+            This will remove your account on the{' '}
+            <b>{{ url: CONFIG.backend.url.replace('https://', '') } as any}</b>{' '}
+            website. You will lose access to any records that you have
+            previously submitted using the app or website.
+          </InfoMessage>
+        </T>
+      ),
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+        {
+          text: 'Delete',
+          role: 'destructive',
+          handler: deleteUser,
+        },
+      ],
+    });
+  };
+
+  return showUserDeleteDialog;
+}
 
 function useDatabaseExportDialog(exportFn: any) {
   const alert = useAlert();
@@ -56,6 +102,7 @@ type Props = {
   refreshAccount: any;
   exportDatabase: any;
   importDatabase: any;
+  deleteUser: any;
   resendVerificationEmail: () => Promise<void>;
   isLoggedIn: boolean;
   user: UserModel;
@@ -71,10 +118,12 @@ const MenuMain = ({
   onToggle,
   exportDatabase,
   importDatabase,
+  deleteUser,
 }: Props) => {
   const isNotVerified = user.data.verified === false; // verified is undefined in old versions
   const userEmail = user.data.email;
   const showDatabaseExportDialog = useDatabaseExportDialog(exportDatabase);
+  const showUserDeleteDialog = useUserDeleteDialog(deleteUser);
 
   const onSendAnalyticsToggle = (checked: boolean) =>
     onToggle('sendAnalytics', checked);
@@ -177,6 +226,22 @@ const MenuMain = ({
               <IonIcon icon={cloudUploadOutline} size="small" slot="start" />
               Import database
             </IonItem>
+          )}
+        </div>
+
+        <div className="rounded-list mt-4">
+          {isLoggedIn && (
+            <>
+              <IonItem onClick={showUserDeleteDialog} className="!text-danger">
+                <IonIcon icon={personRemoveOutline} size="small" slot="start" />
+                <IonLabel>
+                  <T>Delete account</T>
+                </IonLabel>
+              </IonItem>
+              <InfoMessage inline>
+                You can delete your user account from the system.
+              </InfoMessage>
+            </>
           )}
         </div>
 
