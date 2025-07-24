@@ -29,18 +29,25 @@
     </dict>
     <key>ITSAppUsesNonExemptEncryption</key>
     <false />
+    <key>NSCameraUsageDescription</key>
+    <string>Take photos to document and identify plant species in your records.</string>
     <key>NSLocationAlwaysUsageDescription</key>
-    <string>Allow geolocation so we can improve your records.</string>
+    <string>Automatically record location data to help identify species based on habitat and
+      geographic distribution.</string>
     <key>NSLocationWhenInUseUsageDescription</key>
-    <string>Allow geolocation so we can improve your records.</string>
+    <string>Automatically record location data to help identify species based on habitat and
+      geographic distribution.</string>
     <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-    <string>Allow geolocation so we can improve your records.</string>
+    <string>Automatically record location data to help identify species based on habitat and
+      geographic distribution.</string>
     <key>NSMicrophoneUsageDescription</key>
-    <string>To Record Audio With Video</string>
+    <string>Record audio with videos to capture environmental sounds that may assist with species
+      identification.</string>
     <key>NSPhotoLibraryAddUsageDescription</key>
-    <string>Store camera photos to camera</string>
+    <string>Save photos you take directly to your photo library for easy access and backup of your
+      species records.</string>
     <key>NSPhotoLibraryUsageDescription</key>
-    <string>This allows you to choose and attach your gallery photos to your records.</string>
+    <string>Select existing photos from your library to add to your records for identification.</string>
     <key>UILaunchStoryboardName</key>
     <string>LaunchScreen</string>
     <key>UIMainStoryboardFile</key>
